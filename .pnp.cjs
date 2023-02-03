@@ -33,6 +33,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/user-event", "virtual:34e00fec4dfc5a7d2e491ccf31edf784b9e135b59c225a54dfa7699c10eef53c0f4c1ef5be1122e3d6baa3ca596ba75e49f40a970d6c7cc16a33d65081e9a7f1#npm:13.5.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:34e00fec4dfc5a7d2e491ccf31edf784b9e135b59c225a54dfa7699c10eef53c0f4c1ef5be1122e3d6baa3ca596ba75e49f40a970d6c7cc16a33d65081e9a7f1#npm:18.2.0"],\
+            ["react-is", "npm:18.2.0"],\
             ["react-scripts", "virtual:34e00fec4dfc5a7d2e491ccf31edf784b9e135b59c225a54dfa7699c10eef53c0f4c1ef5be1122e3d6baa3ca596ba75e49f40a970d6c7cc16a33d65081e9a7f1#npm:5.0.1"],\
             ["styled-components", "virtual:34e00fec4dfc5a7d2e491ccf31edf784b9e135b59c225a54dfa7699c10eef53c0f4c1ef5be1122e3d6baa3ca596ba75e49f40a970d6c7cc16a33d65081e9a7f1#npm:5.3.6"],\
             ["web-vitals", "npm:2.1.4"]\
@@ -9934,6 +9935,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/user-event", "virtual:34e00fec4dfc5a7d2e491ccf31edf784b9e135b59c225a54dfa7699c10eef53c0f4c1ef5be1122e3d6baa3ca596ba75e49f40a970d6c7cc16a33d65081e9a7f1#npm:13.5.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:34e00fec4dfc5a7d2e491ccf31edf784b9e135b59c225a54dfa7699c10eef53c0f4c1ef5be1122e3d6baa3ca596ba75e49f40a970d6c7cc16a33d65081e9a7f1#npm:18.2.0"],\
+            ["react-is", "npm:18.2.0"],\
             ["react-scripts", "virtual:34e00fec4dfc5a7d2e491ccf31edf784b9e135b59c225a54dfa7699c10eef53c0f4c1ef5be1122e3d6baa3ca596ba75e49f40a970d6c7cc16a33d65081e9a7f1#npm:5.0.1"],\
             ["styled-components", "virtual:34e00fec4dfc5a7d2e491ccf31edf784b9e135b59c225a54dfa7699c10eef53c0f4c1ef5be1122e3d6baa3ca596ba75e49f40a970d6c7cc16a33d65081e9a7f1#npm:5.3.6"],\
             ["web-vitals", "npm:2.1.4"]\
@@ -16007,7 +16009,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["hoist-non-react-statics", "npm:3.3.2"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:34e00fec4dfc5a7d2e491ccf31edf784b9e135b59c225a54dfa7699c10eef53c0f4c1ef5be1122e3d6baa3ca596ba75e49f40a970d6c7cc16a33d65081e9a7f1#npm:18.2.0"],\
-            ["react-is", null],\
+            ["react-is", "npm:18.2.0"],\
             ["shallowequal", "npm:1.1.0"],\
             ["supports-color", "npm:5.5.0"]\
           ],\
