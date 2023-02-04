@@ -31,6 +31,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/jest-dom", "npm:5.16.5"],\
             ["@testing-library/react", "virtual:34e00fec4dfc5a7d2e491ccf31edf784b9e135b59c225a54dfa7699c10eef53c0f4c1ef5be1122e3d6baa3ca596ba75e49f40a970d6c7cc16a33d65081e9a7f1#npm:13.4.0"],\
             ["@testing-library/user-event", "virtual:34e00fec4dfc5a7d2e491ccf31edf784b9e135b59c225a54dfa7699c10eef53c0f4c1ef5be1122e3d6baa3ca596ba75e49f40a970d6c7cc16a33d65081e9a7f1#npm:13.5.0"],\
+            ["mobx", "npm:6.7.0"],\
+            ["mobx-react-lite", "virtual:34e00fec4dfc5a7d2e491ccf31edf784b9e135b59c225a54dfa7699c10eef53c0f4c1ef5be1122e3d6baa3ca596ba75e49f40a970d6c7cc16a33d65081e9a7f1#npm:3.4.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:34e00fec4dfc5a7d2e491ccf31edf784b9e135b59c225a54dfa7699c10eef53c0f4c1ef5be1122e3d6baa3ca596ba75e49f40a970d6c7cc16a33d65081e9a7f1#npm:18.2.0"],\
             ["react-is", "npm:18.2.0"],\
@@ -9933,6 +9935,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/jest-dom", "npm:5.16.5"],\
             ["@testing-library/react", "virtual:34e00fec4dfc5a7d2e491ccf31edf784b9e135b59c225a54dfa7699c10eef53c0f4c1ef5be1122e3d6baa3ca596ba75e49f40a970d6c7cc16a33d65081e9a7f1#npm:13.4.0"],\
             ["@testing-library/user-event", "virtual:34e00fec4dfc5a7d2e491ccf31edf784b9e135b59c225a54dfa7699c10eef53c0f4c1ef5be1122e3d6baa3ca596ba75e49f40a970d6c7cc16a33d65081e9a7f1#npm:13.5.0"],\
+            ["mobx", "npm:6.7.0"],\
+            ["mobx-react-lite", "virtual:34e00fec4dfc5a7d2e491ccf31edf784b9e135b59c225a54dfa7699c10eef53c0f4c1ef5be1122e3d6baa3ca596ba75e49f40a970d6c7cc16a33d65081e9a7f1#npm:3.4.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:34e00fec4dfc5a7d2e491ccf31edf784b9e135b59c225a54dfa7699c10eef53c0f4c1ef5be1122e3d6baa3ca596ba75e49f40a970d6c7cc16a33d65081e9a7f1#npm:18.2.0"],\
             ["react-is", "npm:18.2.0"],\
@@ -11922,6 +11926,49 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/mkdirp-npm-1.0.4-37f6ef56b9-a96865108c.zip/node_modules/mkdirp/",\
           "packageDependencies": [\
             ["mkdirp", "npm:1.0.4"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["mobx", [\
+        ["npm:6.7.0", {\
+          "packageLocation": "./.yarn/cache/mobx-npm-6.7.0-851e814a7a-895b46177b.zip/node_modules/mobx/",\
+          "packageDependencies": [\
+            ["mobx", "npm:6.7.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["mobx-react-lite", [\
+        ["npm:3.4.0", {\
+          "packageLocation": "./.yarn/cache/mobx-react-lite-npm-3.4.0-26d039ddfd-9294e127e2.zip/node_modules/mobx-react-lite/",\
+          "packageDependencies": [\
+            ["mobx-react-lite", "npm:3.4.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:34e00fec4dfc5a7d2e491ccf31edf784b9e135b59c225a54dfa7699c10eef53c0f4c1ef5be1122e3d6baa3ca596ba75e49f40a970d6c7cc16a33d65081e9a7f1#npm:3.4.0", {\
+          "packageLocation": "./.yarn/__virtual__/mobx-react-lite-virtual-a19c6abdda/0/cache/mobx-react-lite-npm-3.4.0-26d039ddfd-9294e127e2.zip/node_modules/mobx-react-lite/",\
+          "packageDependencies": [\
+            ["mobx-react-lite", "virtual:34e00fec4dfc5a7d2e491ccf31edf784b9e135b59c225a54dfa7699c10eef53c0f4c1ef5be1122e3d6baa3ca596ba75e49f40a970d6c7cc16a33d65081e9a7f1#npm:3.4.0"],\
+            ["@types/mobx", null],\
+            ["@types/react", null],\
+            ["@types/react-dom", null],\
+            ["@types/react-native", null],\
+            ["mobx", "npm:6.7.0"],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:34e00fec4dfc5a7d2e491ccf31edf784b9e135b59c225a54dfa7699c10eef53c0f4c1ef5be1122e3d6baa3ca596ba75e49f40a970d6c7cc16a33d65081e9a7f1#npm:18.2.0"],\
+            ["react-native", null]\
+          ],\
+          "packagePeers": [\
+            "@types/mobx",\
+            "@types/react-dom",\
+            "@types/react-native",\
+            "@types/react",\
+            "mobx",\
+            "react-dom",\
+            "react-native",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\

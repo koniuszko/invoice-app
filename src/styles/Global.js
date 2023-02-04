@@ -11,6 +11,8 @@ export const GlobalStyles = createGlobalStyle`
   box-sizing: border-box;}
 
   body {
+  min-height: 100vh;
+  background-color: ${({ theme }) => theme.colors.background};
   font-family: "League Spartan", sans-serif;
 }
 
@@ -54,5 +56,9 @@ h4 {
   font-size: 11px;
   line-height: 18px;
   letter-spacing: -0.23px;
+}
+button {
+  border: none;
+  background-color: transparent;
 }
 `;

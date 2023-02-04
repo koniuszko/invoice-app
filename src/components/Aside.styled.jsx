@@ -1,10 +1,19 @@
 import styled from "styled-components";
 import logo from "../assets/logo.svg";
+import sun from "../assets/icon-sun.svg";
+import moon from "../assets/icon-moon.svg";
+import user from "../assets/image-avatar.jpg";
+
+import { useStore } from "../context/context";
 
 const Aside = styled.aside`
+  position: fixed;
   width: 100%;
   height: 72px;
   background-color: #1e2139;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
 
   .bg {
     position: relative;
@@ -18,6 +27,7 @@ const Aside = styled.aside`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-right: auto;
   }
 
   .bg::after {
@@ -35,9 +45,28 @@ const Aside = styled.aside`
   img {
     z-index: 1;
   }
+
+  .switcher {
+    margin-right: 24px;
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+  }
+
+  .settings {
+    padding: 20px 24px;
+    border-left: 1px solid #494e6e;
+  }
+
+  .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+  }
 `;
 
 export function Menu() {
+  const { theme, themeSwitch } = useStore();
   return (
     <Aside>
       <div className="bg">
@@ -46,7 +75,25 @@ export function Menu() {
           alt="logo"
         />
       </div>
-      Menu
+      <div className="switcher">
+        <button onClick={() => themeSwitch()}>
+          <img
+            src={theme === "dark" ? sun : moon}
+            alt="theme-icon"
+          />
+        </button>
+      </div>
+      <div className="account">
+        <div className="settings">
+          <button>
+            <img
+              className="avatar"
+              src={user}
+              alt="user-portrait"
+            />
+          </button>
+        </div>
+      </div>
     </Aside>
   );
 }
