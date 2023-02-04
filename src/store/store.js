@@ -10,7 +10,6 @@ export function createStore() {
 
     themeSwitch() {
       this.theme === "dark" ? (this.theme = "light") : (this.theme = "dark");
-      console.log(this.counter);
     },
   };
 }

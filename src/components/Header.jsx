@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React from "react";
+import { Link } from "react-router-dom";
 
 import arrow from "../assets/icon-arrow-down.svg";
 import addIcon from "../assets/icon-plus.svg";
@@ -82,9 +83,7 @@ export default function Header() {
       <div className="title">
         <h1>Invoices</h1>
         <p>
-          {invoicesCount() > 0
-            ? `${invoicesCount().toString()} invoices`
-            : `No invoices`}
+          {invoicesCount() > 0 ? `${invoicesCount()} invoices` : `No invoices`}
         </p>
       </div>
       <div className="filters">
@@ -96,16 +95,18 @@ export default function Header() {
           />
         </button>
       </div>
-      <button className="new_btn">
-        <div>
-          <img
-            className="plus_icon"
-            src={addIcon}
-            alt="plus-icon"
-          />
-        </div>
-        New
-      </button>
+      <Link to={"/add"}>
+        <button className="new_btn">
+          <div>
+            <img
+              className="plus_icon"
+              src={addIcon}
+              alt="plus-icon"
+            />
+          </div>
+          New
+        </button>
+      </Link>
     </Wrapper>
   );
 }

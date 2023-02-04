@@ -64,9 +64,14 @@ h4 {
   line-height: 18px;
   letter-spacing: -0.23px;
 }
+
 button {
   border: none;
   background-color: transparent;
   cursor: pointer;
+}
+
+a {
+    text-decoration: none;
 }
 `;

@@ -1,16 +1,21 @@
 import styled from "styled-components";
+import { useStore } from "../context/context";
 
+import Header from "../components/Header";
 import Empty from "../components/Empty";
 
 const MainWrapper = styled.div`
-  width: 220px;
-  height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 function Main() {
+  const { invoicesCount } = useStore();
   return (
     <MainWrapper>
-      <Empty />
+      <Header />
+      {invoicesCount() > 0 ? <p>Placeholder</p> : <Empty />}
     </MainWrapper>
   );
 }

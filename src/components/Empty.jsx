@@ -3,11 +3,13 @@ import styled from "styled-components";
 import empty from "../assets/illustration-empty.svg";
 
 const EmptyWrapper = styled.div`
-  position: relative;
-  top: 50%;
+  width: 220px;
+  position: absolute;
+  top: 35%;
   text-align: center;
 
   img {
+    margin-left: -10px;
     margin-bottom: 40px;
   }
 

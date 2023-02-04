@@ -3,14 +3,15 @@ import { observer } from "mobx-react-lite";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import styled from "styled-components";
-
 import { GlobalStyles } from "./styles/Global";
-import { Menu } from "./components/Menu";
 import { ThemeProvider } from "styled-components";
 import { useStore } from "./context/context";
 import { light, dark } from "./styles/Theme";
-import Header from "./components/Header";
+
+import { Menu } from "./components/Menu";
+
 import Main from "./layout/Main";
+import Add from "./layout/Add";
 
 const Wrapper = styled.div`
   display: flex;
@@ -24,13 +25,17 @@ const App = observer(function App() {
     <ThemeProvider theme={theme === "dark" ? dark : light}>
       <Wrapper className="App">
         <GlobalStyles />
-        <Menu />
-        <Header />
         <Router>
+          <Menu />
           <Routes>
             <Route
               path={"/"}
               element={<Main />}
+              exact
+            />
+            <Route
+              path={"/add"}
+              element={<Add />}
             />
           </Routes>
         </Router>
