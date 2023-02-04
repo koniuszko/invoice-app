@@ -8,12 +8,19 @@ export const GlobalStyles = createGlobalStyle`
 *::after {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;}
+  box-sizing: border-box;
+  font-family: "League Spartan", sans-serif;}
+  
 
   body {
+  width: 100%;
   min-height: 100vh;
   background-color: ${({ theme }) => theme.colors.background};
-  font-family: "League Spartan", sans-serif;
+  color: ${({ theme }) => theme.colors.primaryText};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ 
 }
 
 h1 {
@@ -60,5 +67,6 @@ h4 {
 button {
   border: none;
   background-color: transparent;
+  cursor: pointer;
 }
 `;

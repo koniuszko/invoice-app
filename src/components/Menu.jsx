@@ -8,6 +8,8 @@ import { useStore } from "../context/context";
 
 const Aside = styled.aside`
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 72px;
   background-color: #1e2139;
