@@ -3,17 +3,20 @@ import styled from "styled-components";
 import arrow from "../assets/icon-arrow-left.svg";
 import NewForm from "../components/NewForm";
 
-const Wrapper = styled.div`
-  width: 330px;
+const AddWrapper = styled.div`
+  width: 100%;
   margin-top: 104px;
 
-  button {
+  .back_btn {
+    margin-left: 24px;
     color: ${({ theme }) => theme.colors.primaryText};
     font-size: 12px;
     line-height: 15px;
     font-weight: bold;
     letter-spacing: -0.25px;
+  }
 
+  button {
     img {
       margin-right: 24px;
     }
@@ -22,9 +25,9 @@ const Wrapper = styled.div`
 
 function Add() {
   return (
-    <Wrapper>
+    <AddWrapper>
       <Link to="/">
-        <button>
+        <button className="back_btn">
           <img
             src={arrow}
             alt="arrow-icon"
@@ -33,7 +36,7 @@ function Add() {
         </button>
       </Link>
       <NewForm />
-    </Wrapper>
+    </AddWrapper>
   );
 }
 
