@@ -15,6 +15,7 @@ export const light = {
     dateBox: "#FFFFFF",
     dateNextText: "#EBEBEC",
     active: "#9277FF",
+    itemListBtn: "#F9FAFE",
   },
 };
 
@@ -35,5 +36,6 @@ export const dark = {
     dateBox: "#252945",
     dateNextText: "#343854",
     active: "#7C5DFA",
+    itemListBtn: "#252945",
   },
 };

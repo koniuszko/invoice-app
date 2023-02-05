@@ -17,12 +17,27 @@ export function createStore() {
       invoice_date: new Date(),
       payment_date: new Date(),
       project_description: "",
+      item_list: [
+        {
+          item_name: "Banner Design",
+          quantity: 2,
+          price: 156,
+          total: 0,
+        },
+      ],
     },
     invoices: [],
 
     invoicesCount() {
       let counter = this.invoices.length;
       return counter;
+    },
+
+    totalPriceCounter() {
+      this.newInvoice.item_list.map((item) => {
+        let totalPrice = item.quantity * item.price;
+        item.total = totalPrice;
+      });
     },
 
     themeSwitch() {

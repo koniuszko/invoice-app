@@ -55,6 +55,12 @@ const FormWrapper = styled.div`
     outline: 1px solid ${({ theme }) => theme.colors.active};
   }
 
+  input:disabled {
+    border: none;
+    background-color: ${({ theme }) => theme.colors.background};
+    color: ${({ theme }) => theme.colors.inputText};
+  }
+
   .half {
     width: 152px;
   }
