@@ -14,7 +14,7 @@ export const light = {
     discardText: "#7E88C3",
     dateBox: "#FFFFFF",
     dateNextText: "#EBEBEC",
-    dateActive: "#9277FF",
+    active: "#9277FF",
   },
 };
 
@@ -34,6 +34,6 @@ export const dark = {
     discardText: "#DFE3FA",
     dateBox: "#252945",
     dateNextText: "#343854",
-    dateActive: "#7C5DFA",
+    active: "#7C5DFA",
   },
 };

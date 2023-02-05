@@ -34,6 +34,7 @@ export default function FromForm() {
         <input
           type="text"
           value={adress.street}
+          disabled
         />
       </label>
       <label className="city">
@@ -42,6 +43,7 @@ export default function FromForm() {
           className="half"
           type="text"
           value={adress.city}
+          disabled
         />
       </label>
       <label className="postcode">
@@ -50,6 +52,7 @@ export default function FromForm() {
           className="half"
           type="text"
           value={adress.postcode}
+          disabled
         />
       </label>
       <label className="country">
@@ -57,6 +60,7 @@ export default function FromForm() {
         <input
           type="text"
           value={adress.country}
+          disabled
         />
       </label>
     </FromFormWrapper>

@@ -40,16 +40,16 @@ const DateFormWrapper = styled.div`
       &:hover {
         border-radius: 50%;
         color: #fff;
-        background-color: ${({ theme }) => theme.colors.dateActive};
+        background-color: ${({ theme }) => theme.colors.active};
       }
 
       &--selected {
         background: none;
-        color: ${({ theme }) => theme.colors.dateActive};
+        color: ${({ theme }) => theme.colors.active};
       }
 
       &--keyboard-selected {
-        background-color: ${({ theme }) => theme.colors.dateActive};
+        background-color: ${({ theme }) => theme.colors.active};
         border-radius: 50%;
       }
 
@@ -78,8 +78,10 @@ const DateFormWrapper = styled.div`
     background-size: 20px 10px;
     background-repeat: no-repeat;
   }
-
-  .custom-select {
+  select:focus {
+    outline: 1px solid ${({ theme }) => theme.colors.active};
+  }
+  /* .custom-select {
     margin: 10px 0 24px;
     padding: 0 20px;
     height: 48px;
@@ -93,13 +95,13 @@ const DateFormWrapper = styled.div`
     font-weight: bold;
     letter-spacing: -0.25px;
     position: relative;
-  }
+  } */
 
   width: 330px;
 `;
 
 const DateForm = observer(function DateForm() {
-  const { newInvoice, dateSetHandler } = useStore();
+  const { newInvoice, dateSetHandler, formChangeHandler } = useStore();
   return (
     <DateFormWrapper>
       <label>Invoice Date</label>
@@ -125,7 +127,12 @@ const DateForm = observer(function DateForm() {
       </label>
       <label>
         Project Description
-        <input type="text" />
+        <input
+          id="project_description"
+          type="text"
+          value={newInvoice.project_description}
+          onChange={(e) => formChangeHandler(e.target.id, e.target.value)}
+        />
       </label>
     </DateFormWrapper>
   );

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useStore } from "../../context/context";
+import { observer } from "mobx-react-lite";
 
 const ToFormWrapper = styled.div`
   width: 330px;
@@ -33,54 +34,69 @@ const ToFormWrapper = styled.div`
     grid-area: country;
   }
 `;
-export default function ToForm() {
-  const { newInvoice } = useStore();
+
+const ToForm = observer(function ToForm() {
+  const { newInvoice, formChangeHandler } = useStore();
   return (
     <ToFormWrapper>
       <label className="name">
         Client's Name
         <input
+          id="client_name"
           type="text"
-          // value={store.adress.street}
+          value={newInvoice.client_name}
+          onChange={(e) => formChangeHandler(e.target.id, e.target.value)}
         />
       </label>
       <label className="email">
         Client's Email
         <input
+          id="client_email"
           type="email"
-          // value={store.adress.street}
+          value={newInvoice.client_email}
+          onChange={(e) => formChangeHandler(e.target.id, e.target.value)}
         />
       </label>
       <label className="street">
         Street Adress
         <input
+          id="client_street"
           type="text"
-          // value={store.adress.street}
+          value={newInvoice.client_street}
+          onChange={(e) => formChangeHandler(e.target.id, e.target.value)}
         />
       </label>
       <label className="city">
         City
         <input
+          id="client_city"
           className="half"
           type="text"
-          // value={store.adress.city}
+          value={newInvoice.client_city}
+          onChange={(e) => formChangeHandler(e.target.id, e.target.value)}
         />
       </label>
       <label className="postcode">
         Post Code
         <input
+          id="client_postcode"
           className="half"
           type="text"
-          // value={store.adress.postcode}
+          value={newInvoice.client_postcode}
+          onChange={(e) => formChangeHandler(e.target.id, e.target.value)}
         />
       </label>
       <label className="country">
         Country
         <input
+          id="client_country"
           type="text"
-          // value={store.adress.country}
+          value={newInvoice.client_country}
+          onChange={(e) => formChangeHandler(e.target.id, e.target.value)}
         />
       </label>
     </ToFormWrapper>
   );
-}
+});
+
+export default ToForm;

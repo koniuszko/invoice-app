@@ -51,6 +51,10 @@ const FormWrapper = styled.div`
     letter-spacing: -0.25px;
   }
 
+  input:focus {
+    outline: 1px solid ${({ theme }) => theme.colors.active};
+  }
+
   .half {
     width: 152px;
   }

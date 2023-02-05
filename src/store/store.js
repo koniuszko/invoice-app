@@ -16,6 +16,7 @@ export function createStore() {
       client_country: "United Kingdom",
       invoice_date: new Date(),
       payment_date: new Date(),
+      project_description: "",
     },
     invoices: [],
 
@@ -30,6 +31,10 @@ export function createStore() {
 
     dateSetHandler(data) {
       this.newInvoice.invoice_date = data;
+    },
+
+    formChangeHandler(id, value) {
+      this.newInvoice[id] = value;
     },
   };
 }
