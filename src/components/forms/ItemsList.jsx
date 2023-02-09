@@ -20,7 +20,7 @@ const ItemsListWrapper = styled.div`
     color: ${({ theme }) => theme.colors.inputText};
   }
 `;
-export default function FoItemsList() {
+export default function ItemsList() {
   const { newInvoice } = useStore();
 
   return (

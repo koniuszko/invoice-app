@@ -16,6 +16,7 @@ export const light = {
     dateNextText: "#EBEBEC",
     active: "#9277FF",
     itemListBtn: "#F9FAFE",
+    dropDownBorder: "#DFE3FA",
   },
 };
 
@@ -37,5 +38,6 @@ export const dark = {
     dateNextText: "#343854",
     active: "#7C5DFA",
     itemListBtn: "#252945",
+    dropDownBorder: "#1E2139",
   },
 };

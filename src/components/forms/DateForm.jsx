@@ -8,6 +8,7 @@ import { observer } from "mobx-react-lite";
 import arrowDown from "../../assets/icon-arrow-down.svg";
 import calendar from "../../assets/icon-calendar.svg";
 import { useStore } from "../../context/context";
+import { useState } from "react";
 
 const DateFormWrapper = styled.div`
   .react-datepicker {
@@ -58,6 +59,19 @@ const DateFormWrapper = styled.div`
       }
     }
   }
+  .container {
+    position: relative;
+    width: 330px;
+  }
+  .calendar {
+    width: 20px;
+    height: 20px;
+    background-image: url(${calendar});
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: 99;
+    transform: translate(290px, 24px);
+  }
 
   select {
     margin: 10px 0 24px;
@@ -81,10 +95,12 @@ const DateFormWrapper = styled.div`
   select:focus {
     outline: 1px solid ${({ theme }) => theme.colors.active};
   }
-  /* .custom-select {
+
+  .terms_list {
     margin: 10px 0 24px;
     padding: 0 20px;
     height: 48px;
+    width: 330px;
     border: 1px solid;
     border-color: ${({ theme }) => theme.colors.inputBorder};
     border-radius: 4px;
@@ -95,35 +111,124 @@ const DateFormWrapper = styled.div`
     font-weight: bold;
     letter-spacing: -0.25px;
     position: relative;
-  } */
+    display: flex;
+    align-items: center;
 
-  width: 330px;
+    &-value {
+      margin-right: auto;
+    }
+    &-icon {
+      transform: translateY(20%);
+      display: block;
+      width: 20px;
+      height: 20px;
+      background-image: url(${arrowDown});
+      background-size: 20px 10px;
+      background-repeat: no-repeat;
+    }
+
+    &-options {
+      background-color: ${({ theme }) => theme.colors.dropDownBorder};
+      box-shadow: 0 0 10px 2px rgb(0, 0, 0, 0.1);
+      list-style: none;
+      border-radius: 4px;
+      overflow: hidden;
+      position: absolute;
+      top: calc(100% + 5px);
+      left: 0;
+
+      .item {
+        margin: 0 0 1px;
+        padding: 15px 25px;
+        text-align: left;
+        height: 48px;
+        width: 330px;
+        background-color: ${({ theme }) => theme.colors.itemsBox};
+        color: ${({ theme }) => theme.colors.primaryText};
+        font-size: 12px;
+        line-height: 15px;
+        font-weight: bold;
+        letter-spacing: -0.25px;
+      }
+    }
+  }
 `;
 
 const DateForm = observer(function DateForm() {
   const { newInvoice, dateSetHandler, formChangeHandler } = useStore();
+
+  const [termValue, setTermValue] = useState("Net 1 Day");
+  const [term, setTerm] = useState(1);
+  const [menuActive, setMenuActive] = useState(false);
+
   return (
     <DateFormWrapper>
-      <label>Invoice Date</label>
+      <label className="date_label">Invoice Date</label>
+      <div className="containter">
+        <div className="calendar"></div>
+      </div>
       <DatePicker
         dateFormat={"dd MMM yyyy"}
         selected={newInvoice.invoice_date}
         onChange={(date) => dateSetHandler(date)}
-        shouldCloseOnSelect={true}
-        closeOnScroll={true}
-        showIcon
       />
+
       <label>
         Payment Terms
-        <select
-          name="terms"
-          id="terms"
-        >
-          <option value="1">Net 1 Day</option>
-          <option value="7">Net 7 Day</option>
-          <option value="14">Net 14 Day</option>
-          <option value="30">Net 30 Day</option>
-        </select>
+        <div className="terms_list">
+          <span className="terms_list-value">{termValue}</span>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              setMenuActive(!menuActive);
+              // something to scroll down if model is closed
+            }}
+            className="terms_list-icon"
+          ></button>
+          {menuActive ? (
+            <ul
+              id="options-list"
+              className="terms_list-options"
+            >
+              <li
+                onClick={() => {
+                  setTermValue("Net 1 Day");
+                  setTerm(1);
+                }}
+                className="item"
+              >
+                Net 1 Day
+              </li>
+              <li
+                onClick={() => {
+                  setTermValue("Net 7 Days");
+                  setTerm(7);
+                }}
+                className="item"
+              >
+                Net 7 Days
+              </li>
+              <li
+                onClick={() => {
+                  setTermValue("Net 14 Days");
+                  setTerm(14);
+                }}
+                className="item"
+              >
+                Net 14 Days
+              </li>
+              <li
+                onClick={() => {
+                  setTermValue("Net 30 Days");
+                  setTerm(30);
+                }}
+                className="item"
+              >
+                Net 30 Days
+              </li>
+            </ul>
+          ) : null}
+        </div>
       </label>
       <label>
         Project Description
