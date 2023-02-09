@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { useStore } from "../../context/context";
+import { observer } from "mobx-react-lite";
 import NewItem from "./NewItem";
 
 const ItemsListWrapper = styled.div`
   .item-list_title {
-    margin: 66px 0 24px;
+    margin: 48px 0 24px;
     font-size: 18px;
     font-weight: bold;
     line-height: 32px;
@@ -20,8 +21,8 @@ const ItemsListWrapper = styled.div`
     color: ${({ theme }) => theme.colors.inputText};
   }
 `;
-export default function ItemsList() {
-  const { newInvoice } = useStore();
+const ItemList = observer(function ItemsList() {
+  const { newInvoice, addingNewItem } = useStore();
 
   return (
     <ItemsListWrapper>
@@ -29,7 +30,8 @@ export default function ItemsList() {
       <div className="item-list_container">
         {newInvoice.item_list.map((item) => (
           <NewItem
-            key={item.item_name}
+            key={item.id}
+            id={item.id}
             name={item.item_name}
             qty={item.quantity}
             price={item.price}
@@ -37,7 +39,24 @@ export default function ItemsList() {
           />
         ))}
       </div>
-      <button className="item-list_button">+ Add New Item</button>
+      <button
+        className="item-list_button"
+        onClick={(e) => {
+          e.preventDefault();
+          addingNewItem({
+            id: newInvoice.item_list.length + 1,
+            item_name: "",
+            quantity: 0,
+            price: 0,
+            total: 0,
+          });
+          console.log(newInvoice.item_list);
+        }}
+      >
+        + Add New Item
+      </button>
     </ItemsListWrapper>
   );
-}
+});
+
+export default ItemList;

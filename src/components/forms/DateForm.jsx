@@ -69,7 +69,7 @@ const DateFormWrapper = styled.div`
     background-image: url(${calendar});
     background-repeat: no-repeat;
     position: absolute;
-    z-index: 99;
+    z-index: 20;
     transform: translate(290px, 24px);
   }
 

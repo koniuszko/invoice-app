@@ -16,6 +16,7 @@ const Aside = styled.aside`
   display: flex;
   align-items: center;
   overflow: hidden;
+  z-index: 99;
 
   .bg {
     position: relative;

@@ -19,6 +19,7 @@ export function createStore() {
       project_description: "",
       item_list: [
         {
+          id: 1,
           item_name: "Banner Design",
           quantity: 2,
           price: 156,
@@ -50,6 +51,14 @@ export function createStore() {
 
     formChangeHandler(id, value) {
       this.newInvoice[id] = value;
+    },
+
+    addingNewItem(item) {
+      this.newInvoice.item_list.push(item);
+    },
+
+    itemListChangeHandler(id, value) {
+      this.newInvoice.item_list[id] = value;
     },
   };
 }

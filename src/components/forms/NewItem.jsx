@@ -4,6 +4,7 @@ import { observer } from "mobx-react-lite";
 
 import deleteIcon from "../../assets/icon-delete.svg";
 import { useStore } from "../../context/context";
+import { useLayoutEffect, useState } from "react";
 
 const NewItemWrapper = styled.div`
   width: 330px;
@@ -25,25 +26,42 @@ const NewItemWrapper = styled.div`
 `;
 
 const NewItem = observer(function NewItem({ name, qty, price, total }) {
-  const { totalPriceCounter } = useStore();
-  totalPriceCounter();
+  const [item, setItem] = useState({
+    id: null,
+    item_name: "",
+    quantity: 1,
+    price: 2,
+    // total: quantity * price,
+  });
+
+  // useLayoutEffect;
+
+  const { totalPriceCounter, itemListChangeHandler } = useStore();
+  // totalPriceCounter();
   return (
     <NewItemWrapper>
       <label className="name">
         Item Name
         <input
-          id="client_name"
+          id="item_name"
           type="text"
           value={name}
+          // onChange={(e) => setItem({ ...item, item_name: e.target.value })}
         />
       </label>
       <label className="qty">
         Qty.
         <input
           className="smaller"
-          id="qty"
+          id="quantity"
           type="number"
           value={qty}
+          // onChange={(e) =>
+          //   setItem({
+          //     ...item,
+          //     quantity: e.target.value,
+          //   })
+          // }
         />
       </label>
       <label className="price">
@@ -53,6 +71,7 @@ const NewItem = observer(function NewItem({ name, qty, price, total }) {
           id="price"
           type="number"
           value={price}
+          // onChange={(e) => setItem({ ...item, price: e.target.value })}
         />
       </label>
       <label className="total">
@@ -65,7 +84,13 @@ const NewItem = observer(function NewItem({ name, qty, price, total }) {
           disabled
         />
       </label>
-      <button className="new-item-delete">
+      <button
+        className="new-item-delete"
+        onClick={(e) => {
+          e.preventDefault();
+          console.log(item);
+        }}
+      >
         <img
           src={deleteIcon}
           alt="delete-icon"
