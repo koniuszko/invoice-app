@@ -17,6 +17,8 @@ export const light = {
     active: "#9277FF",
     itemListBtn: "#F9FAFE",
     dropDownBorder: "#DFE3FA",
+    statusDraftBgc: "#F4F4F5",
+    statusDraftText: "#373B53",
   },
 };
 
@@ -39,5 +41,7 @@ export const dark = {
     active: "#7C5DFA",
     itemListBtn: "#252945",
     dropDownBorder: "#1E2139",
+    statusDraftBgc: "#2A2C44",
+    statusDraftText: "#DFE3FA",
   },
 };

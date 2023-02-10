@@ -77,14 +77,12 @@ const Wrapper = styled.header`
 `;
 
 export default function Header() {
-  const { invoicesCount } = useStore();
+  const { counter } = useStore();
   return (
     <Wrapper>
       <div className="title">
         <h1>Invoices</h1>
-        <p>
-          {invoicesCount() > 0 ? `${invoicesCount()} invoices` : `No invoices`}
-        </p>
+        <p>{counter > 0 ? `${counter} invoices` : `No invoices`}</p>
       </div>
       <div className="filters">
         <button>

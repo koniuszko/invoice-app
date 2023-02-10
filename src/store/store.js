@@ -28,10 +28,10 @@ export function createStore() {
       ],
     },
     invoices: [],
+    counter: null,
 
-    invoicesCount() {
-      let counter = this.invoices.length;
-      return counter;
+    counterUpdate(counter) {
+      this.counter = counter;
     },
 
     totalPriceCounter() {

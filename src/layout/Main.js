@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import { useStore } from "../context/context";
 
+import { observer } from "mobx-react-lite";
+
 import Header from "../components/Header";
 import Empty from "../components/Empty";
+import InvoicesList from "../components/InvoicesList";
 
 const MainWrapper = styled.div`
   display: flex;
@@ -10,14 +13,15 @@ const MainWrapper = styled.div`
   align-items: center;
 `;
 
-function Main() {
-  const { invoicesCount } = useStore();
+const Main = observer(function Main() {
+  const { counter } = useStore();
+
   return (
     <MainWrapper>
       <Header />
-      {invoicesCount() > 0 ? <p>Placeholder</p> : <Empty />}
+      {true ? <InvoicesList /> : <Empty />}
     </MainWrapper>
   );
-}
+});
 
 export default Main;
