@@ -28,10 +28,11 @@ export function createStore() {
       ],
     },
     invoices: [],
-    counter: null,
+    counter: 0,
 
     counterUpdate(counter) {
       this.counter = counter;
+      console.log(counter);
     },
 
     totalPriceCounter() {

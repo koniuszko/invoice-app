@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useStore } from "../context/context";
+import { useState } from "react";
 
 import { observer } from "mobx-react-lite";
 
@@ -14,12 +15,22 @@ const MainWrapper = styled.div`
 `;
 
 const Main = observer(function Main() {
-  const { counter } = useStore();
+  const [counter, setCounter] = useState(2);
 
   return (
     <MainWrapper>
-      <Header />
-      {true ? <InvoicesList /> : <Empty />}
+      <Header
+        counter={counter}
+        setCounter={setCounter}
+      />
+      {true ? (
+        <InvoicesList
+          counter={counter}
+          setCounter={setCounter}
+        />
+      ) : (
+        <Empty />
+      )}
     </MainWrapper>
   );
 });

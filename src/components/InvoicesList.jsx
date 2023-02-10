@@ -1,15 +1,21 @@
-import styled from "styled-components";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import styled from "styled-components";
+
+import { observer } from "mobx-react-lite";
+import { useStore } from "../context/context";
 
 import InvoiceItem from "./InvoiceItem";
-import { useStore } from "../context/context";
 
 const url = "http://localhost:3030";
 
 const InvoicesListWrapper = styled.ul`
   list-style: none;
   margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
   button {
     width: 100px;
     height: 50px;
@@ -18,20 +24,19 @@ const InvoicesListWrapper = styled.ul`
   }
 `;
 
-function InvoicesList() {
+const InvoicesList = observer(function InvoicesList({ counter, setCounter }) {
   const [invoices, setInvoices] = useState([]);
-  const [counter, setCounter] = useState();
-  const { counterUpdate } = useStore();
+
   useEffect(() => {
     axios
       .get(`${url}/invoices/`)
       .then((response) => {
         setInvoices(response.data);
-        setCounter(invoices.length);
       })
-      .then(counterUpdate(counter))
       .catch((error) => console.log(error));
   }, []);
+
+  useEffect(() => setCounter(invoices.length));
 
   return (
     <InvoicesListWrapper>
@@ -45,9 +50,9 @@ function InvoicesList() {
           status={item.status}
         />
       ))}
-      {/* <button onClick={() => console.log(invoices, counter)}>test</button> */}
+      <button onClick={() => console.log(invoices, counter)}>test</button>
     </InvoicesListWrapper>
   );
-}
+});
 
 export default InvoicesList;

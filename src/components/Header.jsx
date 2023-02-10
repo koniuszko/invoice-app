@@ -2,6 +2,8 @@ import styled from "styled-components";
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { observer } from "mobx-react-lite";
+
 import arrow from "../assets/icon-arrow-down.svg";
 import addIcon from "../assets/icon-plus.svg";
 import { useStore } from "../context/context";
@@ -76,8 +78,8 @@ const Wrapper = styled.header`
   }
 `;
 
-export default function Header() {
-  const { counter } = useStore();
+const Header = observer(function Header({ counter }) {
+  // const { counter } = useStore();
   return (
     <Wrapper>
       <div className="title">
@@ -107,4 +109,6 @@ export default function Header() {
       </Link>
     </Wrapper>
   );
-}
+});
+
+export default Header;

@@ -101,8 +101,7 @@ function InvoiceItem({ id, client, date, list, status }) {
     list.map((item) => {
       summary = summary + item.total;
     });
-    Math.round(summary * 100) / 100;
-    return summary;
+    return summary.toFixed(2);
   };
 
   return (
