@@ -23,7 +23,7 @@ const PreviewButtonsWrapper = styled.div`
     letter-spacing: 0.25px;
   }
 
-  .Edit_btn {
+  .edit_btn {
     width: 73px;
     background-color: ${({ theme }) => theme.colors.discardBtn};
     color: ${({ theme }) => theme.colors.discardText};
@@ -44,13 +44,13 @@ const PreviewButtonsWrapper = styled.div`
 export default function PreviewButtons({ id }) {
   return (
     <PreviewButtonsWrapper>
-      <Link to={`/edit/${id}`}>
-        <button className="Edit_btn">Edit</button>
+      <Link to={`/invoices/edit/${id}`}>
+        <button className="edit_btn">Edit</button>
       </Link>
-      <Link to={`/usun/${id}`}>
+      <Link to={`/invoices/usun/${id}`}>
         <button className="delete_btn">Delete</button>
       </Link>
-      <Link to={`/paid/${id}`}>
+      <Link to={`/invoices/paid/${id}`}>
         <button className="paid_btn">Mark as Paid</button>
       </Link>
     </PreviewButtonsWrapper>

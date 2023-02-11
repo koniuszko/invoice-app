@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useStore } from "../../context/context";
+import { useState } from "react";
 
 const FromFormWrapper = styled.div`
   width: 330px;
@@ -25,15 +25,20 @@ const FromFormWrapper = styled.div`
     grid-area: country;
   }
 `;
-export default function FromForm() {
-  const { adress } = useStore();
+export default function FromForm({ invoice }) {
+  const [street, setStreet] = useState(invoice.street);
+  const [city, setCity] = useState(invoice.city);
+  const [postcode, setPostcode] = useState(invoice.postcode);
+  const [country, setCountry] = useState(invoice.country);
+
   return (
     <FromFormWrapper>
       <label className="street">
         Street Adress
         <input
           type="text"
-          value={adress.street}
+          value={street}
+          onChange={(e) => setStreet(e.target.value)}
         />
       </label>
       <label className="city">
@@ -41,7 +46,8 @@ export default function FromForm() {
         <input
           className="half"
           type="text"
-          value={adress.city}
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
         />
       </label>
       <label className="postcode">
@@ -49,16 +55,26 @@ export default function FromForm() {
         <input
           className="half"
           type="text"
-          value={adress.postcode}
+          value={postcode}
+          onChange={(e) => setPostcode(e.target.value)}
         />
       </label>
       <label className="country">
         Country
         <input
           type="text"
-          value={adress.country}
+          value={country}
+          onChange={(e) => setCountry(e.target.value)}
         />
       </label>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          console.log(invoice);
+        }}
+      >
+        TEST
+      </button>
     </FromFormWrapper>
   );
 }
