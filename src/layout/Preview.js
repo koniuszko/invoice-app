@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
+import PreviewButtons from "../components/PreviewButtons";
 import BackButton from "../components/BackButton";
 import StatusBar from "../components/StatusBar";
-import { useParams } from "react-router-dom";
+import PreviewInvoice from "../components/PreviewInvoice";
 
 const url = "http://localhost:3030";
 
@@ -30,7 +32,15 @@ function Preview() {
   return (
     <PreviewWrapper>
       <BackButton />
-      {isLoading ? <p>Loading</p> : <StatusBar status={invoice.status} />}
+      {isLoading ? (
+        <p>Loading</p>
+      ) : (
+        <>
+          <StatusBar status={invoice.status} />
+          <PreviewInvoice invoice={invoice} />
+          <PreviewButtons id={invoice._id} />
+        </>
+      )}
     </PreviewWrapper>
   );
 }

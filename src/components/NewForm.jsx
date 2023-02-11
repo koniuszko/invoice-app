@@ -7,7 +7,7 @@ import FromForm from "./forms/FromForm";
 import ItemsList from "./forms/ItemsList";
 
 const FormWrapper = styled.div`
-  margin: 24px;
+  margin-top: 24px;
 
   h1 {
     font-size: 24px;

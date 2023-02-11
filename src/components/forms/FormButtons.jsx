@@ -21,16 +21,19 @@ const FormButtonsWrapper = styled.div`
     line-height: 15px;
     letter-spacing: -0.25px;
   }
+
   .discard_btn {
     width: 84px;
     background-color: ${({ theme }) => theme.colors.discardBtn};
     color: ${({ theme }) => theme.colors.discardText};
   }
+
   .draft_btn {
     width: 117px;
     background-color: #373b53;
     color: ${({ theme }) => theme.colors.secondaryText};
   }
+
   .send_btn {
     width: 112px;
     background-color: #7c5dfa;

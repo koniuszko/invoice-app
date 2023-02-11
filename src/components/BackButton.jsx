@@ -4,7 +4,6 @@ import arrow from "../assets/icon-arrow-left.svg";
 
 const BackButtonWrapper = styled.div`
   .back_btn {
-    margin-left: 24px;
     color: ${({ theme }) => theme.colors.primaryText};
     font-size: 12px;
     line-height: 15px;
