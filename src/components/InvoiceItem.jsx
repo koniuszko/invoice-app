@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import DraftBar from "../components/status/Draft";
-import PaidBar from "../components/status/Paid";
-import PendingBar from "../components/status/Pending";
+import { Link } from "react-router-dom";
+
+import statusIcon from "./status/StatusIcon";
 
 const InvoiceItemWrapper = styled.li`
   padding: 24px;
@@ -70,21 +70,6 @@ const InvoiceItemWrapper = styled.li`
 `;
 
 function InvoiceItem({ id, client, date, list, status }) {
-  const statusRender = () => {
-    switch (status) {
-      case "draft":
-        return <DraftBar />;
-        break;
-      case "pending":
-        return <PendingBar />;
-        break;
-
-      case "paid":
-        return <PaidBar />;
-        break;
-    }
-  };
-
   const dateString = () => {
     const tempDate = new Date(date);
     let newDate =
@@ -105,22 +90,24 @@ function InvoiceItem({ id, client, date, list, status }) {
   };
 
   return (
-    <InvoiceItemWrapper>
-      <p className="item-id">
-        <span className="purple">#</span>
-        {id.slice(-6)}
-      </p>
-      <p className="item-name">{client}</p>
-      <p className="item-date">
-        <span>Due </span>
-        {dateString()}
-      </p>
-      <p className="item-total">
-        <span>$ </span>
-        {totalSummary()}
-      </p>
-      <div className="item-status">{statusRender()}</div>
-    </InvoiceItemWrapper>
+    <Link to={`/invoices/preview/${id}`}>
+      <InvoiceItemWrapper>
+        <p className="item-id">
+          <span className="purple">#</span>
+          {id.slice(-6)}
+        </p>
+        <p className="item-name">{client}</p>
+        <p className="item-date">
+          <span>Due </span>
+          {dateString()}
+        </p>
+        <p className="item-total">
+          <span>$ </span>
+          {totalSummary()}
+        </p>
+        <div className="item-status">{statusIcon(status)}</div>
+      </InvoiceItemWrapper>
+    </Link>
   );
 }
 

@@ -12,6 +12,7 @@ import { Menu } from "./components/Menu";
 
 import Main from "./layout/Main";
 import Add from "./layout/Add";
+import Preview from "./layout/Preview";
 
 const Wrapper = styled.div`
   display: flex;
@@ -36,6 +37,11 @@ const App = observer(function App() {
             <Route
               path={"/add"}
               element={<Add />}
+            />
+            <Route
+              path={"/invoices/preview/:id"}
+              element={<Preview />}
+              exact
             />
           </Routes>
         </Router>

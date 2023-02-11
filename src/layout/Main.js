@@ -1,12 +1,14 @@
 import styled from "styled-components";
-import { useStore } from "../context/context";
-import { useState } from "react";
 
-import { observer } from "mobx-react-lite";
+import axios from "axios";
+
+import { useState, useEffect } from "react";
 
 import Header from "../components/Header";
 import Empty from "../components/Empty";
 import InvoicesList from "../components/InvoicesList";
+
+const url = "http://localhost:3030";
 
 const MainWrapper = styled.div`
   display: flex;
@@ -14,18 +16,27 @@ const MainWrapper = styled.div`
   align-items: center;
 `;
 
-const Main = observer(function Main() {
-  const [counter, setCounter] = useState(2);
+function Main() {
+  const [counter, setCounter] = useState(0);
+  const [invoices, setInvoices] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${url}/invoices/`)
+      .then((response) => {
+        setInvoices(response.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  useEffect(() => setCounter(invoices.length));
 
   return (
     <MainWrapper>
-      <Header
-        counter={counter}
-        setCounter={setCounter}
-      />
+      <Header counter={counter} />
       {true ? (
         <InvoicesList
-          counter={counter}
+          invoices={invoices}
           setCounter={setCounter}
         />
       ) : (
@@ -33,6 +44,6 @@ const Main = observer(function Main() {
       )}
     </MainWrapper>
   );
-});
+}
 
 export default Main;
