@@ -8,13 +8,6 @@ const InvoicesListWrapper = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 16px;
-
-  button {
-    width: 100px;
-    height: 50px;
-    color: red;
-    background-color: blue;
-  }
 `;
 
 function InvoicesList({ invoices }) {
@@ -30,7 +23,6 @@ function InvoicesList({ invoices }) {
           status={item.status}
         />
       ))}
-      <button onClick={() => console.log(invoices)}>test</button>
     </InvoicesListWrapper>
   );
 }
