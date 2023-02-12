@@ -2,6 +2,8 @@ import { nanoid } from "nanoid";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 
+import ObjectID from "bson-objectid";
+
 import NewItem from "./NewItem";
 
 const ItemsListWrapper = styled.div`
@@ -33,7 +35,12 @@ function ItemsList({ invoice, setInvoice }) {
   const addNewItem = () => {
     setTempItemList([
       ...tempItemList,
-      { _id: nanoid(), item_name: "", quantity: 0, price: 0, total: 0 },
+      {
+        _id: ObjectID(),
+        quantity: 0,
+        price: 0,
+        total: 0,
+      },
     ]);
   };
 

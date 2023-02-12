@@ -111,7 +111,7 @@ function EditForm() {
         console.log(response.data);
       })
       .catch((error) => console.log(error));
-    window.location = `/invoices/preview/${params.id}`;
+    // window.location = `/invoices/preview/${params.id}`;
     console.log("saved");
   };
 

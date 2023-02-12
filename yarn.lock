@@ -4235,6 +4235,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bson-objectid@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "bson-objectid@npm:2.0.4"
+  checksum: 511a442cf8fb3691279911e53cf9476f9ecbe8f50e5c4887bf251160c48c86d4f1b140f1dfe890bbf9a2b7ce39732ed7caedfee1d1058e83741cef2d0e95082e
+  languageName: node
+  linkType: hard
+
 "buffer-from@npm:^1.0.0":
   version: 1.1.2
   resolution: "buffer-from@npm:1.1.2"
@@ -7290,6 +7297,7 @@ __metadata:
     "@testing-library/react": ^13.0.0
     "@testing-library/user-event": ^13.2.1
     axios: ^1.3.2
+    bson-objectid: ^2.0.4
     date-fns: ^2.29.3
     mobx: ^6.7.0
     mobx-react-lite: ^3.4.0
