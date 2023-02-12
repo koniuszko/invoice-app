@@ -12,7 +12,8 @@ import ToForm from "./forms/ToForm";
 import FromForm from "./forms/FromForm";
 import ItemsList from "./forms/ItemsList";
 
-const url = "http://localhost:3030";
+// const url = "http://localhost:3030";
+const url = "https://invoice-backend.azurewebsites.net";
 
 const EditFormWrapper = styled.div`
   margin-top: 24px;
@@ -111,7 +112,7 @@ function EditForm() {
         console.log(response.data);
       })
       .catch((error) => console.log(error));
-    // window.location = `/invoices/preview/${params.id}`;
+    window.location = `/invoices/preview/${params.id}`;
     console.log("saved");
   };
 

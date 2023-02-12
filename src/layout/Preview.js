@@ -8,7 +8,8 @@ import BackButton from "../components/BackButton";
 import StatusBar from "../components/StatusBar";
 import PreviewInvoice from "../components/PreviewInvoice";
 
-const url = "http://localhost:3030";
+// const url = "http://localhost:3030";
+const url = "https://invoice-backend.azurewebsites.net";
 
 const PreviewWrapper = styled.div`
   width: 100%;

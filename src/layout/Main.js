@@ -8,7 +8,8 @@ import Header from "../components/Header";
 import Empty from "../components/Empty";
 import InvoicesList from "../components/InvoicesList";
 
-const url = "http://localhost:3030";
+// const url = "http://localhost:3030";
+const url = "https://invoice-backend.azurewebsites.net";
 
 const MainWrapper = styled.div`
   display: flex;
