@@ -1,10 +1,7 @@
 import styled from "styled-components";
 
-import { observer } from "mobx-react-lite";
-
 import deleteIcon from "../../assets/icon-delete.svg";
-import { useStore } from "../../context/context";
-import { useLayoutEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
 const NewItemWrapper = styled.div`
   width: 330px;
@@ -25,19 +22,52 @@ const NewItemWrapper = styled.div`
   }
 `;
 
-const NewItem = observer(function NewItem({ name, qty, price, total }) {
-  const [item, setItem] = useState({
-    id: null,
-    item_name: "",
-    quantity: 1,
-    price: 2,
-    // total: quantity * price,
+function NewItem({
+  _id,
+  name,
+  quantity,
+  price,
+  total,
+  tempItemList,
+  setTempItemList,
+}) {
+  const [tempItem, setTempItem] = useState({
+    _id: _id,
+    item_name: name,
+    quantity: quantity,
+    price: price,
+    total: total,
   });
 
-  // useLayoutEffect;
+  const totalCounter = () => {
+    let summary = tempItem.price * tempItem.quantity;
+    summary.toFixed(2);
+    setTempItem({ ...tempItem, total: summary });
+  };
 
-  const { totalPriceCounter, itemListChangeHandler } = useStore();
-  // totalPriceCounter();
+  useEffect(() => {
+    totalCounter();
+  }, [tempItem.price, tempItem.quantity]);
+
+  // const updateItem = () => {
+  //   const updatedTempItemList = tempItemList;
+
+  //   let index = updatedTempItemList.findIndex(
+  //     (item) => item._id == tempItem._id
+  //   );
+  //   updatedTempItemList[index] = tempItem;
+  //   setTempItemList(updatedTempItemList);
+  // };
+
+  useEffect(() => {
+    const updatedTempItemList = tempItemList;
+    let index = updatedTempItemList.findIndex(
+      (item) => item._id == tempItem._id
+    );
+    updatedTempItemList[index] = tempItem;
+    setTempItemList(updatedTempItemList);
+  }, [tempItem]);
+
   return (
     <NewItemWrapper>
       <label className="name">
@@ -45,8 +75,10 @@ const NewItem = observer(function NewItem({ name, qty, price, total }) {
         <input
           id="item_name"
           type="text"
-          value={name}
-          // onChange={(e) => setItem({ ...item, item_name: e.target.value })}
+          value={tempItem.item_name}
+          onChange={(e) =>
+            setTempItem({ ...tempItem, item_name: e.target.value })
+          }
         />
       </label>
       <label className="qty">
@@ -55,13 +87,13 @@ const NewItem = observer(function NewItem({ name, qty, price, total }) {
           className="smaller"
           id="quantity"
           type="number"
-          value={qty}
-          // onChange={(e) =>
-          //   setItem({
-          //     ...item,
-          //     quantity: e.target.value,
-          //   })
-          // }
+          value={tempItem.quantity}
+          onChange={(e) => {
+            setTempItem({
+              ...tempItem,
+              quantity: parseFloat(e.target.value),
+            });
+          }}
         />
       </label>
       <label className="price">
@@ -70,8 +102,13 @@ const NewItem = observer(function NewItem({ name, qty, price, total }) {
           className="small"
           id="price"
           type="number"
-          value={price}
-          // onChange={(e) => setItem({ ...item, price: e.target.value })}
+          value={tempItem.price}
+          onChange={(e) => {
+            setTempItem({
+              ...tempItem,
+              price: parseFloat(e.target.value),
+            });
+          }}
         />
       </label>
       <label className="total">
@@ -80,7 +117,7 @@ const NewItem = observer(function NewItem({ name, qty, price, total }) {
           id="total"
           className="small"
           type="number"
-          value={total}
+          value={tempItem.total.toFixed(2)}
           disabled
         />
       </label>
@@ -88,7 +125,10 @@ const NewItem = observer(function NewItem({ name, qty, price, total }) {
         className="new-item-delete"
         onClick={(e) => {
           e.preventDefault();
-          console.log(item);
+          console.log(tempItem);
+          console.log(tempItemList);
+          updateItem();
+          console.log(tempItemList);
         }}
       >
         <img
@@ -98,6 +138,6 @@ const NewItem = observer(function NewItem({ name, qty, price, total }) {
       </button>
     </NewItemWrapper>
   );
-});
+}
 
 export default NewItem;

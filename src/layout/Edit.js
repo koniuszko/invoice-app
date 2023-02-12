@@ -3,6 +3,7 @@ import styled from "styled-components";
 import EditForm from "../components/EditForm";
 
 import BackButton from "../components/BackButton";
+import { useParams } from "react-router-dom";
 
 const EditWrapper = styled.div`
   width: 100%;
@@ -10,9 +11,10 @@ const EditWrapper = styled.div`
 `;
 
 function Edit() {
+  const params = useParams();
   return (
     <EditWrapper>
-      <BackButton />
+      <BackButton path={`/invoices/preview/${params.id}`} />
       <EditForm />
     </EditWrapper>
   );

@@ -18,10 +18,10 @@ const BackButtonWrapper = styled.div`
   }
 `;
 
-function BackButton() {
+function BackButton({ path }) {
   return (
     <BackButtonWrapper>
-      <Link to="/">
+      <Link to={path}>
         <button className="back_btn">
           <img
             src={arrow}

@@ -77,16 +77,29 @@ const FormWrapper = styled.div`
 `;
 
 function NewForm() {
-  return (
+  const [invoice, setInvoice] = useState();
+  reutrn(
     <FormWrapper>
       <h1>New Invoice</h1>
       <form>
         <p className="purple">Bill From</p>
-        <FromForm />
+        <FromForm
+          invoice={invoice}
+          setInvoice={setInvoice}
+        />
         <p className="purple">Bill To</p>
-        <ToForm />
-        <DateForm />
-        <ItemsList />
+        <ToForm
+          invoice={invoice}
+          setInvoice={setInvoice}
+        />
+        <DateForm
+          invoice={invoice}
+          setInvoice={setInvoice}
+        />
+        <ItemsList
+          invoice={invoice}
+          setInvoice={setInvoice}
+        />
         <NewFormButtons />
       </form>
       <div className="gradient"></div>

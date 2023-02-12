@@ -29,18 +29,12 @@ function Preview() {
       })
       .catch((error) => console.log(error));
   }, []);
-  return (
+  return isLoading ? null : (
     <PreviewWrapper>
-      <BackButton />
-      {isLoading ? (
-        <p>Loading</p>
-      ) : (
-        <>
-          <StatusBar status={invoice.status} />
-          <PreviewInvoice invoice={invoice} />
-          <PreviewButtons id={invoice._id} />
-        </>
-      )}
+      <BackButton path={"/"} />
+      <StatusBar status={invoice.status} />
+      <PreviewInvoice invoice={invoice} />
+      <PreviewButtons id={invoice._id} />
     </PreviewWrapper>
   );
 }

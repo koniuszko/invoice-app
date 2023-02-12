@@ -1,3 +1,5 @@
+import { Link, useParams } from "react-router-dom";
+
 import styled from "styled-components";
 
 const EditFormButtonsWrapper = styled.div`
@@ -35,18 +37,23 @@ const EditFormButtonsWrapper = styled.div`
   }
 `;
 export default function EditFormButtons({ saveChanges }) {
+  const params = useParams();
   return (
     <EditFormButtonsWrapper>
-      <button className="cancel_btn">Cancel</button>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          saveChanges();
-        }}
-        className="send_btn"
-      >
-        Save Changes
-      </button>
+      <Link to={`/invoices/preview/${params.id}`}>
+        <button className="cancel_btn">Cancel</button>
+      </Link>
+      <Link to={`/`}>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            saveChanges();
+          }}
+          className="send_btn"
+        >
+          Save Changes
+        </button>
+      </Link>
     </EditFormButtonsWrapper>
   );
 }
