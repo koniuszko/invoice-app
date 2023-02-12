@@ -30,6 +30,7 @@ function NewItem({
   total,
   tempItemList,
   setTempItemList,
+  deleteItem,
 }) {
   const [tempItem, setTempItem] = useState({
     _id: _id,
@@ -49,20 +50,10 @@ function NewItem({
     totalCounter();
   }, [tempItem.price, tempItem.quantity]);
 
-  // const updateItem = () => {
-  //   const updatedTempItemList = tempItemList;
-
-  //   let index = updatedTempItemList.findIndex(
-  //     (item) => item._id == tempItem._id
-  //   );
-  //   updatedTempItemList[index] = tempItem;
-  //   setTempItemList(updatedTempItemList);
-  // };
-
   useEffect(() => {
     const updatedTempItemList = tempItemList;
     let index = updatedTempItemList.findIndex(
-      (item) => item._id == tempItem._id
+      (item) => item._id === tempItem._id
     );
     updatedTempItemList[index] = tempItem;
     setTempItemList(updatedTempItemList);
@@ -125,10 +116,7 @@ function NewItem({
         className="new-item-delete"
         onClick={(e) => {
           e.preventDefault();
-          console.log(tempItem);
-          console.log(tempItemList);
-          updateItem();
-          console.log(tempItemList);
+          deleteItem(tempItem._id);
         }}
       >
         <img

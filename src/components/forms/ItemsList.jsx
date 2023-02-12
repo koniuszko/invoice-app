@@ -37,6 +37,11 @@ function ItemsList({ invoice, setInvoice }) {
     ]);
   };
 
+  const deleteItem = (id) => {
+    const updatedTempItemList = tempItemList.filter((item) => item._id !== id);
+    setTempItemList(updatedTempItemList);
+  };
+
   useEffect(() => {
     setInvoice({ ...invoice, item_list: tempItemList });
   }, [tempItemList]);
@@ -55,6 +60,7 @@ function ItemsList({ invoice, setInvoice }) {
             total={item.total}
             setTempItemList={setTempItemList}
             tempItemList={tempItemList}
+            deleteItem={deleteItem}
           />
         ))}
       </div>

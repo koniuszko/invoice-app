@@ -105,8 +105,14 @@ function EditForm() {
   }, []);
 
   const saveChanges = () => {
+    axios
+      .put(`${url}/invoices/edit/${params.id}`, invoice)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => console.log(error));
+    window.location = `/invoices/preview/${params.id}`;
     console.log("saved");
-    console.log(invoice);
   };
 
   return isLoading ? null : (
