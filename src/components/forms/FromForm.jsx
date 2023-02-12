@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useState } from "react";
 
 const FromFormWrapper = styled.div`
   width: 330px;
@@ -25,20 +24,15 @@ const FromFormWrapper = styled.div`
     grid-area: country;
   }
 `;
-export default function FromForm({ invoice }) {
-  const [street, setStreet] = useState(invoice.street);
-  const [city, setCity] = useState(invoice.city);
-  const [postcode, setPostcode] = useState(invoice.postcode);
-  const [country, setCountry] = useState(invoice.country);
-
+export default function FromForm({ invoice, setInvoice }) {
   return (
     <FromFormWrapper>
       <label className="street">
         Street Adress
         <input
           type="text"
-          value={street}
-          onChange={(e) => setStreet(e.target.value)}
+          value={invoice.street}
+          onChange={(e) => setInvoice({ ...invoice, street: e.target.value })}
         />
       </label>
       <label className="city">
@@ -46,8 +40,8 @@ export default function FromForm({ invoice }) {
         <input
           className="half"
           type="text"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
+          value={invoice.city}
+          onChange={(e) => setInvoice({ ...invoice, city: e.target.value })}
         />
       </label>
       <label className="postcode">
@@ -55,26 +49,18 @@ export default function FromForm({ invoice }) {
         <input
           className="half"
           type="text"
-          value={postcode}
-          onChange={(e) => setPostcode(e.target.value)}
+          value={invoice.postcode}
+          onChange={(e) => setInvoice({ ...invoice, postcode: e.target.value })}
         />
       </label>
       <label className="country">
         Country
         <input
           type="text"
-          value={country}
-          onChange={(e) => setCountry(e.target.value)}
+          value={invoice.country}
+          onChange={(e) => setInvoice({ ...invoice, country: e.target.value })}
         />
       </label>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          console.log(invoice);
-        }}
-      >
-        TEST
-      </button>
     </FromFormWrapper>
   );
 }

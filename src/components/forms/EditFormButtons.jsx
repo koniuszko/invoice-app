@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const FormButtonsWrapper = styled.div`
+const EditFormButtonsWrapper = styled.div`
   width: 100%;
   height: 91px;
   padding: 22px 24px;
@@ -9,7 +9,7 @@ const FormButtonsWrapper = styled.div`
   left: 0;
   background-color: ${({ theme }) => theme.colors.box};
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 7px;
 
   button {
@@ -22,30 +22,31 @@ const FormButtonsWrapper = styled.div`
     letter-spacing: -0.25px;
   }
 
-  .discard_btn {
-    width: 84px;
+  .cancel_btn {
+    width: 96px;
     background-color: ${({ theme }) => theme.colors.discardBtn};
     color: ${({ theme }) => theme.colors.discardText};
   }
 
-  .draft_btn {
-    width: 117px;
-    background-color: #373b53;
-    color: ${({ theme }) => theme.colors.secondaryText};
-  }
-
   .send_btn {
-    width: 112px;
+    width: 138px;
     background-color: #7c5dfa;
     color: #fff;
   }
 `;
-export default function FormButton() {
+export default function EditFormButtons({ saveChanges }) {
   return (
-    <FormButtonsWrapper>
-      <button className="discard_btn">Discard</button>
-      <button className="draft_btn">Save as Draft</button>
-      <button className="send_btn">Save & Send</button>
-    </FormButtonsWrapper>
+    <EditFormButtonsWrapper>
+      <button className="cancel_btn">Cancel</button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          saveChanges();
+        }}
+        className="send_btn"
+      >
+        Save Changes
+      </button>
+    </EditFormButtonsWrapper>
   );
 }

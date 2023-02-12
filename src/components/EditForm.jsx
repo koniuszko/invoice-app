@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 import { useParams } from "react-router-dom";
 
-import FormButton from "./forms/FormButtons";
+import EditFormButtons from "./forms/EditFormButtons";
 import DateForm from "./forms/DateForm";
 import ToForm from "./forms/ToForm";
 import FromForm from "./forms/FromForm";
@@ -104,19 +104,16 @@ function EditForm() {
       .catch((error) => console.log(error));
   }, []);
 
+  const saveChanges = () => {
+    console.log("saved");
+    console.log(invoice);
+  };
+
   return isLoading ? null : (
     <EditFormWrapper>
       <h1>
         Edit <span className="id-purple">#</span>
         {invoice._id.slice(-6)}
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            console.log(invoice);
-          }}
-        >
-          TEST
-        </button>
       </h1>
       <form>
         <p className="purple">Bill From</p>
@@ -137,7 +134,7 @@ function EditForm() {
           invoice={invoice}
           setInvoice={setInvoice}
         />
-        <FormButton />
+        <EditFormButtons saveChanges={saveChanges} />
       </form>
       <div className="gradient"></div>
     </EditFormWrapper>

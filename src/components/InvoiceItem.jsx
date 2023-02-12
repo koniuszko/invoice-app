@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import statusIcon from "./status/StatusIcon";
 
+import format from "date-fns/format";
+
 const InvoiceItemWrapper = styled.li`
   padding: 24px;
   width: 330px;
@@ -70,17 +72,6 @@ const InvoiceItemWrapper = styled.li`
 `;
 
 function InvoiceItem({ id, client, date, list, status }) {
-  const dateString = () => {
-    const tempDate = new Date(date);
-    let newDate =
-      tempDate.toString().substring(8, 10) +
-      " " +
-      tempDate.toString().substring(4, 7) +
-      " " +
-      tempDate.toString().substring(10, 15);
-    return newDate;
-  };
-
   const totalSummary = () => {
     let summary = 0;
     list.map((item) => {
@@ -99,7 +90,7 @@ function InvoiceItem({ id, client, date, list, status }) {
         <p className="item-name">{client}</p>
         <p className="item-date">
           <span>Due </span>
-          {dateString()}
+          {format(new Date(date), "dd MMM yyy")}
         </p>
         <p className="item-total">
           <span>$ </span>

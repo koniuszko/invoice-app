@@ -3,11 +3,12 @@ import styled from "styled-components";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import { observer } from "mobx-react-lite";
-
 import arrowDown from "../../assets/icon-arrow-down.svg";
 import calendar from "../../assets/icon-calendar.svg";
-import { useStore } from "../../context/context";
+
+import addDays from "date-fns/addDays";
+import formatISO from "date-fns/formatISO";
+
 import { useState } from "react";
 
 const DateFormWrapper = styled.div`
@@ -154,12 +155,19 @@ const DateFormWrapper = styled.div`
   }
 `;
 
-const DateForm = observer(function DateForm() {
-  const { newInvoice, dateSetHandler, formChangeHandler } = useStore();
-
+function DateForm({ invoice, setInvoice }) {
   const [termValue, setTermValue] = useState("Net 1 Day");
   const [term, setTerm] = useState(1);
   const [menuActive, setMenuActive] = useState(false);
+
+  const paymentDateHandler = (days) => {
+    setTermValue(`Net ${days} Day${days === 1 ? "" : "s"}`);
+    setTerm(days);
+    setInvoice({
+      ...invoice,
+      payment_date: formatISO(addDays(new Date(invoice.invoice_date), term)),
+    });
+  };
 
   return (
     <DateFormWrapper>
@@ -169,10 +177,11 @@ const DateForm = observer(function DateForm() {
       </div>
       <DatePicker
         dateFormat={"dd MMM yyyy"}
-        selected={newInvoice.invoice_date}
-        onChange={(date) => dateSetHandler(date)}
+        selected={Date.parse(invoice.invoice_date)}
+        onChange={(date) =>
+          setInvoice({ ...invoice, invoice_date: formatISO(date) })
+        }
       />
-
       <label>
         Payment Terms
         <div className="terms_list">
@@ -181,7 +190,6 @@ const DateForm = observer(function DateForm() {
             onClick={(e) => {
               e.preventDefault();
               setMenuActive(!menuActive);
-              // something to scroll down if model is closed
             }}
             className="terms_list-icon"
           ></button>
@@ -192,8 +200,7 @@ const DateForm = observer(function DateForm() {
             >
               <li
                 onClick={() => {
-                  setTermValue("Net 1 Day");
-                  setTerm(1);
+                  paymentDateHandler(1);
                 }}
                 className="item"
               >
@@ -201,8 +208,7 @@ const DateForm = observer(function DateForm() {
               </li>
               <li
                 onClick={() => {
-                  setTermValue("Net 7 Days");
-                  setTerm(7);
+                  paymentDateHandler(7);
                 }}
                 className="item"
               >
@@ -210,8 +216,7 @@ const DateForm = observer(function DateForm() {
               </li>
               <li
                 onClick={() => {
-                  setTermValue("Net 14 Days");
-                  setTerm(14);
+                  paymentDateHandler(14);
                 }}
                 className="item"
               >
@@ -219,8 +224,7 @@ const DateForm = observer(function DateForm() {
               </li>
               <li
                 onClick={() => {
-                  setTermValue("Net 30 Days");
-                  setTerm(30);
+                  paymentDateHandler(30);
                 }}
                 className="item"
               >
@@ -235,12 +239,14 @@ const DateForm = observer(function DateForm() {
         <input
           id="project_description"
           type="text"
-          value={newInvoice.project_description}
-          onChange={(e) => formChangeHandler(e.target.id, e.target.value)}
+          value={invoice.project_description}
+          onChange={(e) =>
+            setInvoice({ ...invoice, project_description: e.target.value })
+          }
         />
       </label>
     </DateFormWrapper>
   );
-});
+}
 
 export default DateForm;

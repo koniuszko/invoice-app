@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-import FormButton from "./forms/FormButtons";
 import DateForm from "./forms/DateForm";
 import ToForm from "./forms/ToForm";
 import FromForm from "./forms/FromForm";
 import ItemsList from "./forms/ItemsList";
+import NewFormButtons from "./forms/NewFormButtons";
 
 const FormWrapper = styled.div`
   margin-top: 24px;
@@ -87,7 +87,7 @@ function NewForm() {
         <ToForm />
         <DateForm />
         <ItemsList />
-        <FormButton />
+        <NewFormButtons />
       </form>
       <div className="gradient"></div>
     </FormWrapper>

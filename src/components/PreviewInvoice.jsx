@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
+import format from "date-fns/format";
+
 const PreviewInvoiceWrapper = styled.div`
   width: 330px;
   padding: 24px;
-  margin-top: 32px;
+  margin: 32px 0 145px;
   background-color: ${({ theme }) => theme.colors.box};
   border-radius: 8px;
   display: grid;
@@ -117,16 +119,6 @@ const PreviewInvoiceWrapper = styled.div`
 `;
 
 function PreviewInvoice({ invoice }) {
-  const dateString = (date) => {
-    const tempDate = new Date(date);
-    let newDate =
-      tempDate.toString().substring(8, 10) +
-      " " +
-      tempDate.toString().substring(4, 7) +
-      " " +
-      tempDate.toString().substring(10, 15);
-    return newDate;
-  };
   const totalSummary = (list) => {
     let summary = 0;
     list.map((item) => {
@@ -152,11 +144,11 @@ function PreviewInvoice({ invoice }) {
       <div className="invoice-date">
         <div className="invoice-date-create">
           <p>Invoice Date</p>
-          <h3>{dateString(invoice.invoice_date)}</h3>
+          <h3>{format(new Date(invoice.invoice_date), "dd MMM yyyy")}</h3>
         </div>
         <div className="invoice-date-payment">
           <p>Payment Due</p>
-          <h3>{dateString(invoice.payment_date)}</h3>
+          <h3>{format(new Date(invoice.payment_date), "dd MMM yyyy")}</h3>
         </div>
       </div>
       <div className="invoice-client">
