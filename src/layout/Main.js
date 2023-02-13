@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Empty from "../components/Empty";
 import InvoicesList from "../components/InvoicesList";
+import Loader from "../components/Loader";
 
 // const url = "http://localhost:3030";
 const url = "https://invoice-backend.azurewebsites.net";
@@ -18,6 +19,7 @@ const MainWrapper = styled.div`
 `;
 
 function Main() {
+  const [isLoading, setIsLoading] = useState(true);
   const [counter, setCounter] = useState(0);
   const [invoices, setInvoices] = useState([]);
 
@@ -26,13 +28,16 @@ function Main() {
       .get(`${url}/invoices/`)
       .then((response) => {
         setInvoices(response.data);
+        setIsLoading(false);
       })
       .catch((error) => console.log(error));
   }, []);
 
   useEffect(() => setCounter(invoices.length));
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <MainWrapper>
       <Header counter={counter} />
       {true ? (

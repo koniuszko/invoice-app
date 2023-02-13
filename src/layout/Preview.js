@@ -7,6 +7,7 @@ import PreviewButtons from "../components/PreviewButtons";
 import BackButton from "../components/BackButton";
 import StatusBar from "../components/StatusBar";
 import PreviewInvoice from "../components/PreviewInvoice";
+import Loader from "../components/Loader";
 
 // const url = "http://localhost:3030";
 const url = "https://invoice-backend.azurewebsites.net";
@@ -30,7 +31,9 @@ function Preview() {
       })
       .catch((error) => console.log(error));
   }, []);
-  return isLoading ? null : (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <PreviewWrapper>
       <BackButton path={"/"} />
       <StatusBar status={invoice.status} />

@@ -11,6 +11,7 @@ import DateForm from "./forms/DateForm";
 import ToForm from "./forms/ToForm";
 import FromForm from "./forms/FromForm";
 import ItemsList from "./forms/ItemsList";
+import Loader from "./Loader";
 
 // const url = "http://localhost:3030";
 const url = "https://invoice-backend.azurewebsites.net";
@@ -110,13 +111,16 @@ function EditForm() {
       .put(`${url}/invoices/edit/${params.id}`, invoice)
       .then((response) => {
         console.log(response.data);
+        window.location = `/invoices/preview/${params.id}`;
       })
       .catch((error) => console.log(error));
-    window.location = `/invoices/preview/${params.id}`;
+
     console.log("saved");
   };
 
-  return isLoading ? null : (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <EditFormWrapper>
       <h1>
         Edit <span className="id-purple">#</span>
