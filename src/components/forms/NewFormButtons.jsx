@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { Link } from "react-router-dom";
+
 const NewFormButtonsWrapper = styled.div`
   width: 100%;
   height: 91px;
@@ -40,12 +42,32 @@ const NewFormButtonsWrapper = styled.div`
     color: #fff;
   }
 `;
-export default function NewFormButtons() {
+export default function NewFormButtons({ saveInvoice, saveAsDraft }) {
   return (
     <NewFormButtonsWrapper>
-      <button className="discard_btn">Discard</button>
-      <button className="draft_btn">Save as Draft</button>
-      <button className="send_btn">Save & Send</button>
+      <Link to={"/"}>
+        <button className="discard_btn">Discard</button>
+      </Link>
+      <Link to={"/"}>
+        <button
+          onClick={(e) => {
+            saveAsDraft();
+          }}
+          className="draft_btn"
+        >
+          Save as Draft
+        </button>
+      </Link>
+      <Link to={"/"}>
+        <button
+          onClick={(e) => {
+            saveInvoice("pending");
+          }}
+          className="send_btn"
+        >
+          Save & Send
+        </button>
+      </Link>
     </NewFormButtonsWrapper>
   );
 }

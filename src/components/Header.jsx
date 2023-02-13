@@ -91,7 +91,7 @@ function Header({ counter }) {
           />
         </button>
       </div>
-      <Link to={"/add"}>
+      <Link to={"/invoices/add"}>
         <button className="new_btn">
           <div>
             <img

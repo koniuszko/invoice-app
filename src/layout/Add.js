@@ -11,7 +11,7 @@ const AddWrapper = styled.div`
 function Add() {
   return (
     <AddWrapper>
-      <BackButton />
+      <BackButton path={"/"} />
       <NewForm />
     </AddWrapper>
   );

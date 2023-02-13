@@ -4,8 +4,8 @@ const LoaderWrapper = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  width: 330px;
 
   .circle {
     display: inline-block;
@@ -17,6 +17,7 @@ const LoaderWrapper = styled.div`
 
   .container {
     height: 15px;
+    text-align: center;
   }
 
   .ball-1 {

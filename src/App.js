@@ -36,7 +36,7 @@ const App = observer(function App() {
               exact
             />
             <Route
-              path={"/add"}
+              path={"/invoices/add"}
               element={<Add />}
             />
             <Route

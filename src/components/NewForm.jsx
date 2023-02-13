@@ -1,10 +1,18 @@
 import styled from "styled-components";
 
+import { useState, useEffect } from "react";
+
+import axios from "axios";
+
 import DateForm from "./forms/DateForm";
 import ToForm from "./forms/ToForm";
 import FromForm from "./forms/FromForm";
 import ItemsList from "./forms/ItemsList";
 import NewFormButtons from "./forms/NewFormButtons";
+import Loader from "./Loader";
+
+const url = "http://localhost:3030";
+// const url = "https://invoice-backend.azurewebsites.net";
 
 const FormWrapper = styled.div`
   margin-top: 24px;
@@ -77,15 +85,64 @@ const FormWrapper = styled.div`
 `;
 
 function NewForm() {
-  const [invoice, setInvoice] = useState();
-  reutrn(
+  const [isLoading, setIsLoading] = useState(true);
+  const [invoice, setInvoice] = useState({
+    client_name: "",
+    client_email: "",
+    client_street: "",
+    client_city: "",
+    client_postcode: "",
+    client_country: "",
+    invoice_date: new Date(),
+    payment_date: new Date(),
+    project_description: "",
+    item_list: [],
+  });
+  const [adress, setAdress] = useState();
+
+  useEffect(() => {
+    axios
+      .get(`${url}/adress/`)
+      .then((response) => {
+        setAdress(response.data[0]);
+        setIsLoading(false);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  const saveInvoice = (status) => {
+    axios
+      .post(`${url}/invoices/add/${status}`, invoice)
+      .then((response) => {
+        console.log(response.data);
+        // window.location = `/invoices/preview/${params.id}`;
+      })
+      .catch((error) => console.log(error));
+
+    console.log("saved");
+  };
+
+  const saveAsDraft = () => {
+    setInvoice({
+      ...invoice,
+      status: "draft",
+      street: adress.street,
+      city: adress.city,
+      country: adress.country,
+      postcode: adress.postcode,
+    });
+    console.log(invoice);
+  };
+  return isLoading ? (
+    <Loader />
+  ) : (
     <FormWrapper>
       <h1>New Invoice</h1>
       <form>
         <p className="purple">Bill From</p>
         <FromForm
-          invoice={invoice}
-          setInvoice={setInvoice}
+          invoice={adress}
+          setInvoice={setAdress}
         />
         <p className="purple">Bill To</p>
         <ToForm
@@ -100,7 +157,10 @@ function NewForm() {
           invoice={invoice}
           setInvoice={setInvoice}
         />
-        <NewFormButtons />
+        <NewFormButtons
+          saveInvoice={saveInvoice}
+          saveAsDraft={saveAsDraft}
+        />
       </form>
       <div className="gradient"></div>
     </FormWrapper>
