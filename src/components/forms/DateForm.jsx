@@ -8,8 +8,10 @@ import calendar from "../../assets/icon-calendar.svg";
 
 import addDays from "date-fns/addDays";
 import formatISO from "date-fns/formatISO";
+import differenceInCalendarDays from "date-fns/differenceInCalendarDays";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { parseISO } from "date-fns";
 
 const DateFormWrapper = styled.div`
   .react-datepicker {
@@ -156,18 +158,28 @@ const DateFormWrapper = styled.div`
 `;
 
 function DateForm({ invoice, setInvoice }) {
-  const [termValue, setTermValue] = useState("Net 1 Day");
-  const [term, setTerm] = useState(1);
+  const [term, setTerm] = useState(
+    invoice.client_name
+      ? differenceInCalendarDays(
+          parseISO(invoice.payment_date),
+          parseISO(invoice.invoice_date)
+        )
+      : 1
+  );
+  const [termValue, setTermValue] = useState("Net " + term + " Day");
   const [menuActive, setMenuActive] = useState(false);
 
   const paymentDateHandler = (days) => {
-    setTermValue(`Net ${days} Day${days === 1 ? "" : "s"}`);
     setTerm(days);
+    setTermValue(`Net ${days} Day${days === 1 ? "" : "s"}`);
+  };
+
+  useEffect(() => {
     setInvoice({
       ...invoice,
       payment_date: formatISO(addDays(new Date(invoice.invoice_date), term)),
     });
-  };
+  }, [term]);
 
   return (
     <DateFormWrapper>

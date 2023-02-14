@@ -92,7 +92,7 @@ const EditFormWrapper = styled.div`
 
 function EditForm() {
   const [isLoading, setIsLoading] = useState(true);
-  const [invoice, setInvoice] = useState({});
+  const [invoice, setInvoice] = useState();
 
   const params = useParams();
 
