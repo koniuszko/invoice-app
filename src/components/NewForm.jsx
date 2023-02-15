@@ -104,7 +104,12 @@ function NewForm() {
     axios
       .get(`${url}/adress/`)
       .then((response) => {
-        setAdress(response.data[0]);
+        setAdress({
+          city: response.data[0].city,
+          street: response.data[0].street,
+          postcode: response.data[0].postcode,
+          country: response.data[0].country,
+        });
         setIsLoading(false);
       })
       .catch((error) => console.log(error));
@@ -112,7 +117,7 @@ function NewForm() {
 
   const saveInvoice = (status) => {
     axios
-      .post(`${url}/invoices/add/${status}`, invoice)
+      .post(`${url}/invoices/add/${status}`, { ...invoice, ...adress })
       .then((response) => {
         console.log(response.data);
         // window.location = `/invoices/preview/${params.id}`;
