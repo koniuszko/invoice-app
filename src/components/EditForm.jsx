@@ -12,6 +12,7 @@ import ToForm from "./forms/ToForm";
 import FromForm from "./forms/FromForm";
 import ItemsList from "./forms/ItemsList";
 import Loader from "./Loader";
+import DeleteModal from "./DeleteModal";
 
 // const url = "http://localhost:3030";
 const url = "https://invoice-backend.azurewebsites.net";
@@ -93,6 +94,7 @@ const EditFormWrapper = styled.div`
 function EditForm() {
   const [isLoading, setIsLoading] = useState(true);
   const [invoice, setInvoice] = useState();
+  const [modalOpen, setModalOpen] = useState(false);
 
   const params = useParams();
 
@@ -121,7 +123,7 @@ function EditForm() {
   return isLoading ? (
     <Loader />
   ) : (
-    <EditFormWrapper>
+    <EditFormWrapper className={modalOpen ? "disabled" : ""}>
       <h1>
         Edit <span className="id-purple">#</span>
         {invoice._id.slice(-6)}

@@ -11,6 +11,8 @@ import ItemsList from "./forms/ItemsList";
 import NewFormButtons from "./forms/NewFormButtons";
 import Loader from "./Loader";
 
+import addDays from "date-fns/addDays";
+
 const url = "http://localhost:3030";
 // const url = "https://invoice-backend.azurewebsites.net";
 
@@ -94,7 +96,7 @@ function NewForm() {
     client_postcode: "",
     client_country: "",
     invoice_date: new Date(),
-    payment_date: new Date(),
+    payment_date: addDays(new Date(), 1),
     project_description: "",
     item_list: [],
   });
@@ -115,12 +117,12 @@ function NewForm() {
       .catch((error) => console.log(error));
   }, []);
 
-  const saveInvoice = (status) => {
+  const saveInvoice = () => {
     axios
-      .post(`${url}/invoices/add/${status}`, { ...invoice, ...adress })
+      .post(`${url}/invoices/add/pending`, { ...invoice, ...adress })
       .then((response) => {
         console.log(response.data);
-        // window.location = `/invoices/preview/${params.id}`;
+        window.location = `/invoices/preview/${params.id}`;
       })
       .catch((error) => console.log(error));
 
@@ -128,15 +130,15 @@ function NewForm() {
   };
 
   const saveAsDraft = () => {
-    setInvoice({
-      ...invoice,
-      status: "draft",
-      street: adress.street,
-      city: adress.city,
-      country: adress.country,
-      postcode: adress.postcode,
-    });
-    console.log(invoice);
+    axios
+      .post(`${url}/invoices/add/draft`, { ...invoice, ...adress })
+      .then((response) => {
+        console.log(response.data);
+        window.location = `/invoices/preview/${params.id}`;
+      })
+      .catch((error) => console.log(error));
+
+    console.log("saved");
   };
   return isLoading ? (
     <Loader />

@@ -61,7 +61,7 @@ export default function NewFormButtons({ saveInvoice, saveAsDraft }) {
       <Link to={"/"}>
         <button
           onClick={(e) => {
-            saveInvoice("pending");
+            saveInvoice();
           }}
           className="send_btn"
         >

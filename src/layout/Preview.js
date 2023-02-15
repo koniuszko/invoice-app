@@ -8,6 +8,7 @@ import BackButton from "../components/BackButton";
 import StatusBar from "../components/StatusBar";
 import PreviewInvoice from "../components/PreviewInvoice";
 import Loader from "../components/Loader";
+import DeleteModal from "../components/DeleteModal";
 
 // const url = "http://localhost:3030";
 const url = "https://invoice-backend.azurewebsites.net";
@@ -21,6 +22,8 @@ function Preview() {
   const [isLoading, setIsLoading] = useState(true);
   const [invoice, setInvoice] = useState();
 
+  const [modalOpen, setModalOpen] = useState(false);
+
   const params = useParams();
   useEffect(() => {
     axios
@@ -31,6 +34,21 @@ function Preview() {
       })
       .catch((error) => console.log(error));
   }, []);
+
+  useEffect(() => {
+    {
+      modalOpen
+        ? (document.body.style.height = "100vh")
+        : (document.body.style.height = "auto");
+      modalOpen
+        ? (document.body.style.overflow = " hidden")
+        : (document.body.style.overflow = " auto");
+    }
+  }, [modalOpen]);
+
+  // {
+  //   modalOpen ? disableScroll() : null;
+  // }
   return isLoading ? (
     <Loader />
   ) : (
@@ -38,7 +56,11 @@ function Preview() {
       <BackButton path={"/"} />
       <StatusBar status={invoice.status} />
       <PreviewInvoice invoice={invoice} />
-      <PreviewButtons id={invoice._id} />
+      <PreviewButtons
+        setModalOpen={setModalOpen}
+        id={invoice._id}
+      />
+      {modalOpen ? <DeleteModal setModalOpen={setModalOpen} /> : null}
     </PreviewWrapper>
   );
 }

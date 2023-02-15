@@ -41,15 +41,18 @@ const PreviewButtonsWrapper = styled.div`
     color: #fff;
   }
 `;
-export default function PreviewButtons({ id }) {
+export default function PreviewButtons({ id, setModalOpen }) {
   return (
     <PreviewButtonsWrapper>
       <Link to={`/invoices/edit/${id}`}>
         <button className="edit_btn">Edit</button>
       </Link>
-      <Link to={`/invoices/usun/${id}`}>
-        <button className="delete_btn">Delete</button>
-      </Link>
+      <button
+        onClick={() => setModalOpen(true)}
+        className="delete_btn"
+      >
+        Delete
+      </button>
       <Link to={`/invoices/paid/${id}`}>
         <button className="paid_btn">Mark as Paid</button>
       </Link>
