@@ -46,9 +46,6 @@ function Preview() {
     }
   }, [modalOpen]);
 
-  // {
-  //   modalOpen ? disableScroll() : null;
-  // }
   return isLoading ? (
     <Loader />
   ) : (

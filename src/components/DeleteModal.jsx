@@ -1,6 +1,9 @@
+import axios from "axios";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+
+const url = "http://localhost:3030";
+// const url = "https://invoice-backend.azurewebsites.net";
 
 const DeleteModalWrapper = styled.div`
   position: fixed;
@@ -69,6 +72,14 @@ const DeleteModalWrapper = styled.div`
 `;
 
 function DeleteModal({ setModalOpen }) {
+  const param = useParams();
+
+  const deleteInvoice = () => {
+    axios
+      .delete(`${url}/invoices/preview/${param.id}`)
+      .then(() => (window.location = `/`));
+  };
+
   const params = useParams();
   return (
     <DeleteModalWrapper>
@@ -85,9 +96,12 @@ function DeleteModal({ setModalOpen }) {
           >
             Cancel
           </button>
-          <Link to={`/invoices/usun/${params.id}`}>
-            <button className="delete_btn">Delete</button>
-          </Link>
+          <button
+            onClick={() => deleteInvoice()}
+            className="delete_btn"
+          >
+            Delete
+          </button>
         </div>
       </div>
     </DeleteModalWrapper>
