@@ -1,6 +1,11 @@
+import { useState } from "react";
 import styled from "styled-components";
 
+import { useStore } from "../context/context";
+import { observer } from "mobx-react-lite";
+
 import arrow from "../assets/icon-arrow-down.svg";
+import check from "../assets/icon-check.svg";
 
 const FiltersWrapper = styled.div`
   margin-right: 8px;
@@ -14,6 +19,7 @@ const FiltersWrapper = styled.div`
 
     img {
       margin-left: 12px;
+      transition: 120ms ease-in-out;
     }
   }
 
@@ -45,20 +51,30 @@ const FiltersWrapper = styled.div`
         appearance: none;
         width: 16px;
         height: 16px;
-        border: solid 1px transparent;
+        border: solid 2px transparent;
         border-radius: 2px;
         background-color: ${({ theme }) => theme.colors.checkbox};
-        display: grid;
-        place-content: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         overflow: hidden;
 
         &::before {
           content: "";
-          width: 100%;
-          height: 100%;
+          width: 1em;
+          height: 1em;
+          border-radius: 1px;
           transform: scale(0);
           transition: 120ms transform ease-in-out;
-          box-shadow: inset 1em 1em #7c5dfa;
+          background: url(${check});
+          background-size: contain;
+          background-position: 50% 50%;
+          background-repeat: no-repeat;
+          background-color: #7c5dfa;
+        }
+
+        &:checked {
+          border-color: #7c5dfa;
         }
 
         &:checked::before {
@@ -66,44 +82,65 @@ const FiltersWrapper = styled.div`
         }
 
         &:hover {
-          border: solid 1px #7c5dfa;
+          border: solid 2px #7c5dfa;
         }
       }
     }
   }
 `;
 
-function Filters() {
+const arrowRotate = {
+  transform: "rotate(180deg)",
+};
+
+const Filters = observer(function Filters() {
+  const [filtersOpen, setFiltersOpen] = useState(false);
+  const { filters, filtersChange } = useStore();
   return (
     <FiltersWrapper>
       <button
         onClick={(e) => {
           e.preventDefault();
-          console.log("ok");
+          setFiltersOpen(!filtersOpen);
         }}
       >
         Filter
         <img
           src={arrow}
           alt="arrow-icon"
+          style={filtersOpen ? arrowRotate : null}
         />
       </button>
-      <div className="filters">
-        <label>
-          <input type="checkbox" />
-          Draft
-        </label>
-        <label>
-          <input type="checkbox" />
-          Pending
-        </label>
-        <label>
-          <input type="checkbox" />
-          Paid
-        </label>
-      </div>
+      {filtersOpen ? (
+        <div className="filters">
+          <label>
+            <input
+              type="checkbox"
+              checked={filters.draft}
+              onChange={() => filtersChange("draft")}
+            />
+            Draft
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={filters.pending}
+              onChange={() => filtersChange("pending")}
+            />
+            Pending
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={filters.paid}
+              onChange={() => filtersChange("paid")}
+            />
+            Paid
+          </label>
+        </div>
+      ) : null}
     </FiltersWrapper>
   );
-}
+});
 
 export default Filters;

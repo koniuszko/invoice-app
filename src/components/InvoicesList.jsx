@@ -1,5 +1,8 @@
 import styled from "styled-components";
 
+import { useStore } from "../context/context";
+import { observer } from "mobx-react-lite";
+
 import InvoiceItem from "./InvoiceItem";
 
 const InvoicesListWrapper = styled.ul`
@@ -10,7 +13,8 @@ const InvoicesListWrapper = styled.ul`
   gap: 16px;
 `;
 
-function InvoicesList({ invoices }) {
+const InvoicesList = observer(function InvoicesList({ invoices }) {
+  const { filters } = useStore();
   return (
     <InvoicesListWrapper>
       {invoices.map((item) => (
@@ -25,6 +29,6 @@ function InvoicesList({ invoices }) {
       ))}
     </InvoicesListWrapper>
   );
-}
+});
 
 export default InvoicesList;
