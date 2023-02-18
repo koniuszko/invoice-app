@@ -20,6 +20,8 @@ export const light = {
     statusDraftBgc: "#F4F4F5",
     statusDraftText: "#373B53",
     previewText: "#858BB2",
+    checkboxBox: "#DFE3FA",
+    checkbox: "#DFE3FA",
   },
 };
 
@@ -45,5 +47,7 @@ export const dark = {
     statusDraftBgc: "#2A2C44",
     statusDraftText: "#DFE3FA",
     previewText: "#DFE3FA",
+    checkboxBox: "#252945",
+    checkbox: "#1E2139",
   },
 };

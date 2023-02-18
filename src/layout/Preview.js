@@ -10,8 +10,8 @@ import PreviewInvoice from "../components/PreviewInvoice";
 import Loader from "../components/Loader";
 import DeleteModal from "../components/DeleteModal";
 
-// const url = "http://localhost:3030";
-const url = "https://invoice-backend.azurewebsites.net";
+const url = "http://localhost:3030";
+// const url = "https://invoice-backend.azurewebsites.net";
 
 const PreviewWrapper = styled.div`
   width: 100%;
@@ -56,6 +56,7 @@ function Preview() {
       <PreviewButtons
         setModalOpen={setModalOpen}
         id={invoice._id}
+        status={invoice.status}
       />
       {modalOpen ? <DeleteModal setModalOpen={setModalOpen} /> : null}
     </PreviewWrapper>

@@ -13,6 +13,7 @@ const PreviewInvoiceWrapper = styled.div`
   grid-template-rows: 34px 75px 126px 47px 1fr;
   grid-template-areas: "title title" "adress adress" "date client" "email email" "items items";
   gap: 30px 0;
+  box-shadow: 0 4px 8px 2px rgb(0, 0, 0, 0.15);
 
   p {
     font-size: 12px;

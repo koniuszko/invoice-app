@@ -2,7 +2,8 @@ import styled from "styled-components";
 import React from "react";
 import { Link } from "react-router-dom";
 
-import arrow from "../assets/icon-arrow-down.svg";
+import Filters from "./Filters";
+
 import addIcon from "../assets/icon-plus.svg";
 
 const Wrapper = styled.header`
@@ -25,21 +26,6 @@ const Wrapper = styled.header`
       font-size: 12px;
       line-height: 15px;
       letter-spacing: -0.25px;
-    }
-  }
-
-  .filters {
-    margin-right: 8px;
-
-    button {
-      color: ${({ theme }) => theme.colors.primaryText};
-      font-weight: bold;
-      font-size: 12px;
-      letter-spacing: -0.25px;
-
-      img {
-        margin-left: 12px;
-      }
     }
   }
 
@@ -82,15 +68,7 @@ function Header({ counter }) {
         <h1>Invoices</h1>
         <p>{counter > 0 ? `${counter} invoices` : `No invoices`}</p>
       </div>
-      <div className="filters">
-        <button>
-          Filter
-          <img
-            src={arrow}
-            alt="arrow-icon"
-          />
-        </button>
-      </div>
+      <Filters />
       <Link to={"/invoices/add"}>
         <button className="new_btn">
           <div>

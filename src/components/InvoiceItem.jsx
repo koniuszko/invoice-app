@@ -12,6 +12,7 @@ const InvoiceItemWrapper = styled.li`
   height: 134px;
   background-color: ${({ theme }) => theme.colors.box};
   border-radius: 8px;
+  box-shadow: 0 4px 8px 2px rgb(0, 0, 0, 0.25);
 
   position: relative;
 

@@ -10,6 +10,7 @@ const StatusBarWrapper = styled.div`
   border-radius: 8px;
   display: flex;
   align-items: center;
+  box-shadow: 0 4px 8px 2px rgb(0, 0, 0, 0.15);
 
   .status-title {
     margin-right: auto;

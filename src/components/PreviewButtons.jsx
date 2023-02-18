@@ -40,9 +40,15 @@ const PreviewButtonsWrapper = styled.div`
     background-color: #7c5dfa;
     color: #fff;
   }
+
+  .send_btn {
+    width: 112px;
+    background-color: #7c5dfa;
+    color: #fff;
+  }
 `;
-export default function PreviewButtons({ id, setModalOpen }) {
-  return (
+export default function PreviewButtons({ id, status, setModalOpen }) {
+  return status === "paid" ? null : (
     <PreviewButtonsWrapper>
       <Link to={`/invoices/edit/${id}`}>
         <button className="edit_btn">Edit</button>
@@ -53,9 +59,22 @@ export default function PreviewButtons({ id, setModalOpen }) {
       >
         Delete
       </button>
-      <Link to={`/invoices/paid/${id}`}>
-        <button className="paid_btn">Mark as Paid</button>
-      </Link>
+      {status === "pending" ? (
+        <Link to={"/"}>
+          <button className="paid_btn">Mark as Paid</button>
+        </Link>
+      ) : (
+        <Link to={"/"}>
+          <button
+            onClick={(e) => {
+              saveInvoice();
+            }}
+            className="send_btn"
+          >
+            Save & Send
+          </button>
+        </Link>
+      )}
     </PreviewButtonsWrapper>
   );
 }

@@ -135,6 +135,7 @@ function NewForm() {
       .then((response) => {
         console.log(response.data);
         window.location = `/invoices/preview/${params.id}`;
+        console.log();
       })
       .catch((error) => console.log(error));
 

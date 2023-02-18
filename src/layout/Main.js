@@ -9,8 +9,8 @@ import Empty from "../components/Empty";
 import InvoicesList from "../components/InvoicesList";
 import Loader from "../components/Loader";
 
-// const url = "http://localhost:3030";
-const url = "https://invoice-backend.azurewebsites.net";
+const url = "http://localhost:3030";
+// const url = "https://invoice-backend.azurewebsites.net";
 
 const MainWrapper = styled.div`
   display: flex;
