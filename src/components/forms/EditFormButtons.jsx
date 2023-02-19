@@ -11,8 +11,14 @@ const EditFormButtonsWrapper = styled.div`
   left: 0;
   background-color: ${({ theme }) => theme.colors.box};
   display: flex;
-  justify-content: flex-end;
-  gap: 7px;
+  justify-content: center;
+
+  .buttons {
+    width: 330px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 7px;
+  }
 
   button {
     height: 48px;
@@ -40,20 +46,22 @@ export default function EditFormButtons({ saveChanges }) {
   const params = useParams();
   return (
     <EditFormButtonsWrapper>
-      <Link to={`/invoices/preview/${params.id}`}>
-        <button className="cancel_btn">Cancel</button>
-      </Link>
-      <Link to={`/`}>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            saveChanges();
-          }}
-          className="send_btn"
-        >
-          Save Changes
-        </button>
-      </Link>
+      <div className="buttons">
+        <Link to={`/invoices/preview/${params.id}`}>
+          <button className="cancel_btn">Cancel</button>
+        </Link>
+        <Link to={`/`}>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              saveChanges();
+            }}
+            className="send_btn"
+          >
+            Save Changes
+          </button>
+        </Link>
+      </div>
     </EditFormButtonsWrapper>
   );
 }

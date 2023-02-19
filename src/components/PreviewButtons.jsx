@@ -13,6 +13,13 @@ const PreviewButtonsWrapper = styled.div`
   justify-content: center;
   gap: 7px;
 
+  .buttons {
+    width: 330px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 7px;
+  }
+
   button {
     height: 48px;
     border-radius: 24px;
@@ -47,34 +54,38 @@ const PreviewButtonsWrapper = styled.div`
     color: #fff;
   }
 `;
-export default function PreviewButtons({ id, status, setModalOpen }) {
+export default function PreviewButtons({
+  id,
+  status,
+  setModalOpen,
+  markAsPaid,
+}) {
   return status === "paid" ? null : (
     <PreviewButtonsWrapper>
-      <Link to={`/invoices/edit/${id}`}>
-        <button className="edit_btn">Edit</button>
-      </Link>
-      <button
-        onClick={() => setModalOpen(true)}
-        className="delete_btn"
-      >
-        Delete
-      </button>
-      {status === "pending" ? (
-        <Link to={"/"}>
-          <button className="paid_btn">Mark as Paid</button>
+      <div className="buttons">
+        <Link to={`/invoices/edit/${id}`}>
+          <button className="edit_btn">Edit</button>
         </Link>
-      ) : (
-        <Link to={"/"}>
-          <button
-            onClick={(e) => {
-              saveInvoice();
-            }}
-            className="send_btn"
-          >
-            Save & Send
-          </button>
-        </Link>
-      )}
+        <button
+          onClick={() => setModalOpen(true)}
+          className="delete_btn"
+        >
+          Delete
+        </button>
+        {status === "pending" ? (
+          <Link to={"/"}>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                markAsPaid();
+              }}
+              className="paid_btn"
+            >
+              Mark as Paid
+            </button>
+          </Link>
+        ) : null}
+      </div>
     </PreviewButtonsWrapper>
   );
 }

@@ -14,8 +14,8 @@ import ItemsList from "./forms/ItemsList";
 import Loader from "./Loader";
 import DeleteModal from "./DeleteModal";
 
-// const url = "http://localhost:3030";
-const url = "https://invoice-backend.azurewebsites.net";
+const url = "http://localhost:3030";
+// const url = "https://invoice-backend.azurewebsites.net";
 
 const EditFormWrapper = styled.div`
   margin-top: 24px;
@@ -116,7 +116,6 @@ function EditForm() {
         window.location = `/invoices/preview/${params.id}`;
       })
       .catch((error) => console.log(error));
-
     console.log("saved");
   };
 

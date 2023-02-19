@@ -20,7 +20,7 @@ export const light = {
     statusDraftBgc: "#F4F4F5",
     statusDraftText: "#373B53",
     previewText: "#858BB2",
-    checkboxBox: "#DFE3FA",
+    checkboxBox: "#FFFFFF",
     checkbox: "#DFE3FA",
   },
 };

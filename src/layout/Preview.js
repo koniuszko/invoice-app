@@ -46,6 +46,16 @@ function Preview() {
     }
   }, [modalOpen]);
 
+  const markAsPaid = () => {
+    axios
+      .put(`${url}/invoices/paid/${params.id}`)
+      .then((response) => {
+        console.log(response.data);
+        window.location = `/`;
+      })
+      .catch((error) => console.log(error));
+  };
+
   return isLoading ? (
     <Loader />
   ) : (
@@ -57,6 +67,7 @@ function Preview() {
         setModalOpen={setModalOpen}
         id={invoice._id}
         status={invoice.status}
+        markAsPaid={markAsPaid}
       />
       {modalOpen ? <DeleteModal setModalOpen={setModalOpen} /> : null}
     </PreviewWrapper>

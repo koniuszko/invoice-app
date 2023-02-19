@@ -107,6 +107,7 @@ const PreviewInvoiceWrapper = styled.div`
         font-weight: normal;
         line-height: 18px;
         letter-spacing: 0.23px;
+        color: #fff;
       }
 
       h2 {
@@ -114,6 +115,7 @@ const PreviewInvoiceWrapper = styled.div`
         font-weight: bold;
         line-height: 32px;
         letter-spacing: 0.42px;
+        color: #fff;
       }
     }
   }
