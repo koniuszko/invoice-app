@@ -15,20 +15,26 @@ const InvoicesListWrapper = styled.ul`
 
 const InvoicesList = observer(function InvoicesList({ invoices }) {
   const { filters } = useStore();
-  return (
-    <InvoicesListWrapper>
-      {invoices.map((item) => (
-        <InvoiceItem
-          key={item._id}
-          id={item._id}
-          client={item.client_name}
-          date={item.payment_date}
-          list={item.item_list}
-          status={item.status}
-        />
-      ))}
-    </InvoicesListWrapper>
+
+  const checkedFilters = Object.entries(filters)
+    .filter((filter) => filter[1])
+    .map((filter) => filter[0]);
+  const filteredInvoices = invoices.filter(({ status }) =>
+    checkedFilters.includes(status)
   );
+
+  const renderItems = filteredInvoices.map((item) => (
+    <InvoiceItem
+      key={item._id}
+      id={item._id}
+      client={item.client_name}
+      date={item.payment_date}
+      list={item.item_list}
+      status={item.status}
+    />
+  ));
+
+  return <InvoicesListWrapper>{renderItems}</InvoicesListWrapper>;
 });
 
 export default InvoicesList;

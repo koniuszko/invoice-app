@@ -95,7 +95,9 @@ const arrowRotate = {
 
 const Filters = observer(function Filters() {
   const [filtersOpen, setFiltersOpen] = useState(false);
+
   const { filters, filtersChange } = useStore();
+
   return (
     <FiltersWrapper>
       <button
