@@ -48,26 +48,23 @@ export default function NewFormButtons({ saveInvoice, saveAsDraft }) {
       <Link to={"/"}>
         <button className="discard_btn">Discard</button>
       </Link>
-      <Link to={"/"}>
-        <button
-          onClick={(e) => {
-            saveAsDraft();
-          }}
-          className="draft_btn"
-        >
-          Save as Draft
-        </button>
-      </Link>
-      <Link to={"/"}>
-        <button
-          onClick={(e) => {
-            saveInvoice();
-          }}
-          className="send_btn"
-        >
-          Save & Send
-        </button>
-      </Link>
+      <button
+        onClick={(e) => {
+          saveAsDraft();
+        }}
+        className="draft_btn"
+      >
+        Save as Draft
+      </button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          saveInvoice();
+        }}
+        className="send_btn"
+      >
+        Save & Send
+      </button>
     </NewFormButtonsWrapper>
   );
 }

@@ -22,6 +22,7 @@ export const light = {
     previewText: "#858BB2",
     checkboxBox: "#FFFFFF",
     checkbox: "#DFE3FA",
+    errorRed: "#EC5757",
   },
 };
 
@@ -49,5 +50,6 @@ export const dark = {
     previewText: "#DFE3FA",
     checkboxBox: "#252945",
     checkbox: "#1E2139",
+    errorRed: "#EC5757",
   },
 };

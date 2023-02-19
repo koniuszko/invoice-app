@@ -12,6 +12,7 @@ import NewFormButtons from "./forms/NewFormButtons";
 import Loader from "./Loader";
 
 import addDays from "date-fns/addDays";
+import Errors from "./forms/Errors";
 
 const url = "http://localhost:3030";
 // const url = "https://invoice-backend.azurewebsites.net";
@@ -43,6 +44,20 @@ const FormWrapper = styled.div`
     letter-spacing: -0.25px;
     display: flex;
     flex-direction: column;
+
+    .label-name {
+      &--error {
+        display: flex;
+        justify-content: space-between;
+        color: ${({ theme }) => theme.colors.errorRed};
+      }
+    }
+
+    .error-message {
+      font-size: 10px;
+      line-height: 15px;
+      letter-spacing: -0.21px;
+    }
   }
 
   input {
@@ -65,10 +80,8 @@ const FormWrapper = styled.div`
     outline: 1px solid ${({ theme }) => theme.colors.active};
   }
 
-  input:disabled {
-    border: none;
-    background-color: ${({ theme }) => theme.colors.background};
-    color: ${({ theme }) => theme.colors.inputText};
+  input.error {
+    outline: 1px solid ${({ theme }) => theme.colors.errorRed};
   }
 
   .half {
@@ -87,6 +100,13 @@ const FormWrapper = styled.div`
 `;
 
 function NewForm() {
+  const [isNewFormValid, setIsNewFormValid] = useState(false);
+
+  const [fromFormIsValid, setFromFormIsValid] = useState(true);
+
+  const [fieldsValid, setFieldsValid] = useState(true);
+  const [itemsValid, setItemsValid] = useState(true);
+
   const [isLoading, setIsLoading] = useState(true);
   const [invoice, setInvoice] = useState({
     client_name: "",
@@ -101,6 +121,20 @@ function NewForm() {
     item_list: [],
   });
   const [adress, setAdress] = useState();
+
+  // const formValidCheck = () => {
+  //   console.log("form check");
+  //   console.log("ok");
+  //   if()
+  // };
+
+  useEffect(() => {
+    if (!fromFormIsValid) {
+      setIsNewFormValid(false);
+    } else {
+      setIsNewFormValid(true);
+    }
+  }, [fromFormIsValid]);
 
   useEffect(() => {
     axios
@@ -118,15 +152,20 @@ function NewForm() {
   }, []);
 
   const saveInvoice = () => {
-    axios
-      .post(`${url}/invoices/add/pending`, { ...invoice, ...adress })
-      .then((response) => {
-        console.log(response.data);
-        window.location = `/invoices/preview/${params.id}`;
-      })
-      .catch((error) => console.log(error));
+    if (isFormValid) {
+      axios
+        .post(`${url}/invoices/add/pending`, { ...invoice, ...adress })
+        .then((response) => {
+          console.log(response.data);
+          window.location = `/invoices/preview/${params.id}`;
+        })
+        .catch((error) => console.log(error));
 
-    console.log("saved");
+      console.log("saved");
+    }
+    setFieldsValid(false);
+    setItemsValid(false);
+    console.log("form is not valid");
   };
 
   const saveAsDraft = () => {
@@ -141,16 +180,27 @@ function NewForm() {
 
     console.log("saved");
   };
+
   return isLoading ? (
     <Loader />
   ) : (
     <FormWrapper>
       <h1>New Invoice</h1>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          formValidCheck();
+          console.log("button");
+        }}
+      >
+        TEST
+      </button>
       <form>
         <p className="purple">Bill From</p>
         <FromForm
           invoice={adress}
           setInvoice={setAdress}
+          setFromFormIsValid={setFromFormIsValid}
         />
         <p className="purple">Bill To</p>
         <ToForm
@@ -170,6 +220,10 @@ function NewForm() {
           saveAsDraft={saveAsDraft}
         />
       </form>
+      <Errors
+        fieldsValid={fieldsValid}
+        itemsValid={itemsValid}
+      />
       <div className="gradient"></div>
     </FormWrapper>
   );
