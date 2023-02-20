@@ -101,8 +101,10 @@ const FormWrapper = styled.div`
 
 function NewForm() {
   const [isNewFormValid, setIsNewFormValid] = useState(false);
+  const [isChecking, setIsChecking] = useState(false);
 
   const [fromFormIsValid, setFromFormIsValid] = useState(true);
+  const [toFormIsValid, setToFormIsValid] = useState(false);
 
   const [fieldsValid, setFieldsValid] = useState(true);
   const [itemsValid, setItemsValid] = useState(true);
@@ -129,12 +131,20 @@ function NewForm() {
   // };
 
   useEffect(() => {
-    if (!fromFormIsValid) {
+    if (!fromFormIsValid || !toFormIsValid) {
+      setFieldsValid(false);
+    } else {
+      setFieldsValid(true);
+    }
+  }, [fromFormIsValid, toFormIsValid]);
+
+  useEffect(() => {
+    if (!fromFormIsValid && !toFormIsValid) {
       setIsNewFormValid(false);
     } else {
       setIsNewFormValid(true);
     }
-  }, [fromFormIsValid]);
+  }, [fromFormIsValid, toFormIsValid]);
 
   useEffect(() => {
     axios
@@ -152,17 +162,18 @@ function NewForm() {
   }, []);
 
   const saveInvoice = () => {
-    if (isFormValid) {
-      axios
-        .post(`${url}/invoices/add/pending`, { ...invoice, ...adress })
-        .then((response) => {
-          console.log(response.data);
-          window.location = `/invoices/preview/${params.id}`;
-        })
-        .catch((error) => console.log(error));
+    if (isNewFormValid) {
+      axios;
+      // .post(`${url}/invoices/add/pending`, { ...invoice, ...adress })
+      // .then((response) => {
+      //   console.log(response.data);
+      //   window.location = `/invoices/preview/${params.id}`;
+      // })
+      // .catch((error) => console.log(error));
 
       console.log("saved");
     }
+    setIsChecking(true);
     setFieldsValid(false);
     setItemsValid(false);
     console.log("form is not valid");
@@ -206,6 +217,9 @@ function NewForm() {
         <ToForm
           invoice={invoice}
           setInvoice={setInvoice}
+          toFormIsValid={toFormIsValid}
+          setToFormIsValid={setToFormIsValid}
+          isChecking={isChecking}
         />
         <DateForm
           invoice={invoice}

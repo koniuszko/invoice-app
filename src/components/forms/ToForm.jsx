@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { useState, useEffect } from "react";
+
 const ToFormWrapper = styled.div`
   width: 330px;
   display: grid;
@@ -33,12 +35,70 @@ const ToFormWrapper = styled.div`
   }
 `;
 
-function ToForm({ invoice, setInvoice }) {
+function ToForm({ invoice, setInvoice, setToFormIsValid, isChecking }) {
+  const [clientNameError, setClientNameError] = useState(false);
+  const [clientEmailError, setClientEmailError] = useState(false);
+  const [clientStreetError, setClientStreetError] = useState(false);
+  const [clientCityError, setClientCityError] = useState(false);
+  const [clientPostcodeError, setClientPostcodeError] = useState(false);
+  const [clientCountryError, setClientCountryError] = useState(false);
+
+  useEffect(() => {
+    if (isChecking) {
+      invoice.client_name === ""
+        ? setClientNameError(true)
+        : setClientNameError(false);
+      invoice.client_email === ""
+        ? setClientEmailError(true)
+        : setClientEmailError(false);
+      invoice.client_street === ""
+        ? setClientStreetError(true)
+        : setClientStreetError(false);
+      invoice.client_city === ""
+        ? setClientCityError(true)
+        : setClientCityError(false);
+      invoice.client_postcode === ""
+        ? setClientPostcodeError(true)
+        : setClientPostcodeError(false);
+      invoice.client_country === ""
+        ? setClientCountryError(true)
+        : setClientCountryError(false);
+    }
+  }, [invoice, isChecking]);
+
+  useEffect(() => {
+    if (
+      !clientNameError &&
+      !clientEmailError &&
+      !clientStreetError &&
+      !clientCityError &&
+      !clientPostcodeError &&
+      !clientCountryError
+    ) {
+      setToFormIsValid(true);
+    } else {
+      setToFormIsValid(false);
+    }
+  }, [
+    clientNameError,
+    clientEmailError,
+    clientStreetError,
+    clientCityError,
+    clientPostcodeError,
+    clientCountryError,
+  ]);
   return (
     <ToFormWrapper>
       <label className="name">
-        Client's Name
+        <p className={clientNameError ? "label-name--error" : "label-name"}>
+          Client's Name
+          {clientNameError ? (
+            <span className="error-message">can't be empty</span>
+          ) : null}
+        </p>
+
         <input
+          className={clientNameError ? "error" : ""}
           type="text"
           value={invoice.client_name}
           onChange={(e) =>
@@ -47,8 +107,15 @@ function ToForm({ invoice, setInvoice }) {
         />
       </label>
       <label className="email">
-        Client's Email
+        <p className={clientEmailError ? "label-name--error" : "label-name"}>
+          Client's Email
+          {clientNameError ? (
+            <span className="error-message">can't be empty</span>
+          ) : null}
+        </p>
+
         <input
+          className={clientEmailError ? "error" : ""}
           type="email"
           value={invoice.client_email}
           onChange={(e) =>
@@ -57,8 +124,15 @@ function ToForm({ invoice, setInvoice }) {
         />
       </label>
       <label className="street">
-        Street Adress
+        <p className={clientStreetError ? "label-name--error" : "label-name"}>
+          Street Adress
+          {clientStreetError ? (
+            <span className="error-message">can't be empty</span>
+          ) : null}
+        </p>
+
         <input
+          className={clientStreetError ? "error" : ""}
           type="text"
           value={invoice.client_street}
           onChange={(e) =>
@@ -66,10 +140,16 @@ function ToForm({ invoice, setInvoice }) {
           }
         />
       </label>
-      <label className="city">
-        City
+      <label className="city half">
+        <p className={clientCityError ? "label-name--error" : "label-name"}>
+          City
+          {clientCityError ? (
+            <span className="error-message">can't be empty</span>
+          ) : null}
+        </p>
+
         <input
-          className="half"
+          className={clientCityError ? "error half" : "half"}
           type="text"
           value={invoice.client_city}
           onChange={(e) =>
@@ -77,10 +157,15 @@ function ToForm({ invoice, setInvoice }) {
           }
         />
       </label>
-      <label className="postcode">
-        Post Code
+      <label className="postcode half">
+        <p className={clientPostcodeError ? "label-name--error" : "label-name"}>
+          Post Code
+          {clientPostcodeError ? (
+            <span className="error-message">can't be empty</span>
+          ) : null}
+        </p>
         <input
-          className="half"
+          className={clientPostcodeError ? "error half" : "half"}
           type="text"
           value={invoice.client_postcode}
           onChange={(e) =>
@@ -89,8 +174,14 @@ function ToForm({ invoice, setInvoice }) {
         />
       </label>
       <label className="country">
-        Country
+        <p className={clientCountryError ? "label-name--error" : "label-name"}>
+          Country
+          {clientCountryError ? (
+            <span className="error-message">can't be empty</span>
+          ) : null}
+        </p>
         <input
+          className={clientCountryError ? "error" : ""}
           type="text"
           value={invoice.client_country}
           onChange={(e) =>
