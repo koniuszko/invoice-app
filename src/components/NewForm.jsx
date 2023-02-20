@@ -105,6 +105,7 @@ function NewForm() {
 
   const [fromFormIsValid, setFromFormIsValid] = useState(true);
   const [toFormIsValid, setToFormIsValid] = useState(false);
+  const [dateFormIsValid, setDateFormIsValid] = useState(false);
 
   const [fieldsValid, setFieldsValid] = useState(true);
   const [itemsValid, setItemsValid] = useState(true);
@@ -131,10 +132,10 @@ function NewForm() {
   // };
 
   useEffect(() => {
-    if (!fromFormIsValid || !toFormIsValid) {
-      setFieldsValid(false);
-    } else {
+    if (fromFormIsValid && toFormIsValid) {
       setFieldsValid(true);
+    } else {
+      setFieldsValid(false);
     }
   }, [fromFormIsValid, toFormIsValid]);
 
@@ -217,13 +218,14 @@ function NewForm() {
         <ToForm
           invoice={invoice}
           setInvoice={setInvoice}
-          toFormIsValid={toFormIsValid}
           setToFormIsValid={setToFormIsValid}
           isChecking={isChecking}
         />
         <DateForm
           invoice={invoice}
           setInvoice={setInvoice}
+          setDateFormIsValid={setToFormIsValid}
+          isChecking={isChecking}
         />
         <ItemsList
           invoice={invoice}

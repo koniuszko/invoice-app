@@ -157,7 +157,9 @@ const DateFormWrapper = styled.div`
   }
 `;
 
-function DateForm({ invoice, setInvoice }) {
+function DateForm({ invoice, setInvoice, setDateFormIsValid, isChecking }) {
+  const [projectDescriptionError, setProjectDescriptionError] = useState(false);
+
   const [term, setTerm] = useState(
     invoice.client_name
       ? differenceInCalendarDays(
@@ -168,6 +170,22 @@ function DateForm({ invoice, setInvoice }) {
   );
   const [termValue, setTermValue] = useState("Net " + term + " Day");
   const [menuActive, setMenuActive] = useState(false);
+
+  useEffect(() => {
+    if (isChecking) {
+      invoice.project_description === ""
+        ? setProjectDescriptionError(true)
+        : setProjectDescriptionError(false);
+    }
+  }, [invoice, isChecking]);
+
+  useEffect(() => {
+    if (!projectDescriptionError) {
+      setDateFormIsValid(true);
+    } else {
+      setDateFormIsValid(false);
+    }
+  }, [projectDescriptionError]);
 
   const paymentDateHandler = (days) => {
     setTerm(days);
@@ -247,8 +265,19 @@ function DateForm({ invoice, setInvoice }) {
         </div>
       </label>
       <label>
-        Project Description
+        <p
+          className={
+            projectDescriptionError ? "label-name--error" : "label-name"
+          }
+        >
+          Project Description
+          {projectDescriptionError ? (
+            <span className="error-message">can't be empty</span>
+          ) : null}
+        </p>
+
         <input
+          className={projectDescriptionError ? "error" : ""}
           id="project_description"
           type="text"
           value={invoice.project_description}

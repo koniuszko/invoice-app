@@ -109,7 +109,7 @@ function ToForm({ invoice, setInvoice, setToFormIsValid, isChecking }) {
       <label className="email">
         <p className={clientEmailError ? "label-name--error" : "label-name"}>
           Client's Email
-          {clientNameError ? (
+          {clientEmailError ? (
             <span className="error-message">can't be empty</span>
           ) : null}
         </p>
