@@ -31,6 +31,9 @@ function NewItem({
   tempItemList,
   setTempItemList,
   deleteItem,
+  itemListError,
+  setNewItemError,
+  isChecking,
 }) {
   const [tempItem, setTempItem] = useState({
     _id: _id,
@@ -39,6 +42,10 @@ function NewItem({
     price: price,
     total: total,
   });
+
+  const [itemNameError, setItemNameError] = useState(false);
+  const [qtyError, setQtyError] = useState(false);
+  const [priceError, setPriceError] = useState(false);
 
   const totalCounter = () => {
     let summary = tempItem.price * tempItem.quantity;
@@ -59,11 +66,32 @@ function NewItem({
     setTempItemList(updatedTempItemList);
   }, [tempItem]);
 
+  useEffect(() => {
+    if (isChecking) {
+      tempItem.item_name === ""
+        ? setItemNameError(true)
+        : setItemNameError(false);
+      tempItem.quantity === 0 ? setQtyError(true) : setQtyError(false);
+      tempItem.price === 0 ? setPriceError(true) : setPriceError(false);
+    }
+  }, [tempItem, isChecking]);
+
+  // useEffect(() => {
+  //   if (isChecking) {
+  //     itemNameError || qtyError || priceError
+  //       ? setNewItemError(true)
+  //       : setNewItemError(false);
+  //   }
+  // }, [isChecking]);
+
   return (
     <NewItemWrapper>
       <label className="name">
-        Item Name
+        <p className={itemNameError ? "label-name--error" : "label-name"}>
+          Item Name
+        </p>
         <input
+          className={itemNameError ? "error" : ""}
           id="item_name"
           type="text"
           value={tempItem.item_name}
@@ -73,9 +101,10 @@ function NewItem({
         />
       </label>
       <label className="qty">
-        Qty.
+        <p className={qtyError ? "label-name--error" : "label-name"}>Qty.</p>
+
         <input
-          className="smaller"
+          className={qtyError ? "error smaller" : "smaller"}
           id="quantity"
           type="number"
           value={tempItem.quantity}
@@ -88,9 +117,10 @@ function NewItem({
         />
       </label>
       <label className="price">
-        Price
+        <p className={priceError ? "label-name--error" : "label-name"}>Price</p>
+
         <input
-          className="small"
+          className={priceError ? "error small" : "small"}
           id="price"
           type="number"
           value={tempItem.price}

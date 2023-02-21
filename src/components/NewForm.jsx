@@ -106,6 +106,7 @@ function NewForm() {
   const [fromFormIsValid, setFromFormIsValid] = useState(true);
   const [toFormIsValid, setToFormIsValid] = useState(false);
   const [dateFormIsValid, setDateFormIsValid] = useState(false);
+  const [itemListIsValid, setItemListIsValid] = useState(false);
 
   const [fieldsValid, setFieldsValid] = useState(true);
   const [itemsValid, setItemsValid] = useState(true);
@@ -132,20 +133,32 @@ function NewForm() {
   // };
 
   useEffect(() => {
-    if (fromFormIsValid && toFormIsValid) {
-      setFieldsValid(true);
-    } else {
-      setFieldsValid(false);
+    if (isChecking) {
+      if (fromFormIsValid && toFormIsValid && dateFormIsValid) {
+        setFieldsValid(true);
+      } else {
+        setFieldsValid(false);
+      }
     }
-  }, [fromFormIsValid, toFormIsValid]);
+  }, [fromFormIsValid, toFormIsValid, dateFormIsValid]);
 
   useEffect(() => {
-    if (!fromFormIsValid && !toFormIsValid) {
+    if (isChecking) {
+      if (itemListIsValid) {
+        setItemListIsValid(true);
+      } else {
+        setItemListIsValid(false);
+      }
+    }
+  }, [itemListIsValid]);
+
+  useEffect(() => {
+    if (!fromFormIsValid && !toFormIsValid && !dateFormIsValid) {
       setIsNewFormValid(false);
     } else {
       setIsNewFormValid(true);
     }
-  }, [fromFormIsValid, toFormIsValid]);
+  }, [fromFormIsValid, toFormIsValid, dateFormIsValid]);
 
   useEffect(() => {
     axios
@@ -230,6 +243,8 @@ function NewForm() {
         <ItemsList
           invoice={invoice}
           setInvoice={setInvoice}
+          setItemListIsValid={setItemListIsValid}
+          isChecking={isChecking}
         />
         <NewFormButtons
           saveInvoice={saveInvoice}
