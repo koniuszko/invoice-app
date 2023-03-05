@@ -45,7 +45,7 @@ function Empty() {
       <h1>There is nothing here</h1>
       <p>
         Create an invoice by clicking the <span className="bold">New </span>
-        buttton and fet started.
+        button and fet started.
       </p>
     </EmptyWrapper>
   );

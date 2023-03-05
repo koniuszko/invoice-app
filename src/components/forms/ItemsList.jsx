@@ -54,7 +54,6 @@ const ItemsListWrapper = styled.div`
 function ItemsList({ invoice, setInvoice, setItemListIsValid, isChecking }) {
   const [tempItemList, setTempItemList] = useState(invoice.item_list);
   const [itemListError, setItemListError] = useState(false);
-  const [newItemError, setNewItemError] = useState(true);
 
   const addNewItem = () => {
     setTempItemList([
@@ -78,17 +77,21 @@ function ItemsList({ invoice, setInvoice, setItemListIsValid, isChecking }) {
     if (isChecking) {
       if (tempItemList.length < 1) {
         setItemListError(true);
+          setItemListIsValid(false);
+      } else {
+          setItemListError(false);
+          setItemListIsValid(true);
       }
     }
   }, [tempItemList, isChecking]);
 
-  useEffect(() => {
-    tempItemList.forEach((item) => {
-      if (item.price > 0) {
-        console.log("ok");
-      }
-    });
-  }, [isChecking]);
+  // useEffect(() => {
+  //   tempItemList.forEach((item) => {
+  //     if (item.price > 0) {
+  //       console.log("ok");
+  //     }
+  //   });
+  // }, [isChecking]);
 
   useEffect(() => {
     setInvoice({ ...invoice, item_list: tempItemList });
@@ -96,15 +99,7 @@ function ItemsList({ invoice, setInvoice, setItemListIsValid, isChecking }) {
 
   return (
     <ItemsListWrapper>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          console.log(tempItemList, newItemError);
-        }}
-      >
-        TEST
-      </button>
-      <h2
+        <h2
         className={itemListError ? "item-list_title--error" : "item-list_title"}
       >
         Item List
@@ -125,7 +120,7 @@ function ItemsList({ invoice, setInvoice, setItemListIsValid, isChecking }) {
             tempItemList={tempItemList}
             deleteItem={deleteItem}
             itemListError={itemListError}
-            setNewItemError={setNewItemError}
+            setItemListError={setItemListError}
             isChecking={isChecking}
           />
         ))}

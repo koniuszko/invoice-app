@@ -145,9 +145,9 @@ function NewForm() {
   useEffect(() => {
     if (isChecking) {
       if (itemListIsValid) {
-        setItemListIsValid(true);
+        setItemsValid(true);
       } else {
-        setItemListIsValid(false);
+        setItemsValid(false);
       }
     }
   }, [itemListIsValid]);
@@ -177,20 +177,17 @@ function NewForm() {
 
   const saveInvoice = () => {
     if (isNewFormValid) {
-      axios;
-      // .post(`${url}/invoices/add/pending`, { ...invoice, ...adress })
-      // .then((response) => {
-      //   console.log(response.data);
-      //   window.location = `/invoices/preview/${params.id}`;
-      // })
-      // .catch((error) => console.log(error));
+      axios
+      .post(`${url}/invoices/add/pending`, { ...invoice, ...adress })
+      .then((response) => {
+        console.log(response.data);
+        window.location = `/invoices/preview/${params.id}`;
+      })
+      .catch((error) => console.log(error));
 
       console.log("saved");
     }
     setIsChecking(true);
-    setFieldsValid(false);
-    setItemsValid(false);
-    console.log("form is not valid");
   };
 
   const saveAsDraft = () => {
@@ -237,7 +234,7 @@ function NewForm() {
         <DateForm
           invoice={invoice}
           setInvoice={setInvoice}
-          setDateFormIsValid={setToFormIsValid}
+          setDateFormIsValid={setDateFormIsValid}
           isChecking={isChecking}
         />
         <ItemsList
