@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 
 import axios from "axios";
 
@@ -37,7 +37,7 @@ const FormWrapper = styled.div`
   }
 
   label {
-    color: ${({ theme }) => theme.colors.inputText};
+    color: ${({theme}) => theme.colors.inputText};
     font-size: 12px;
     font-weight: normal;
     line-height: 15px;
@@ -49,7 +49,7 @@ const FormWrapper = styled.div`
       &--error {
         display: flex;
         justify-content: space-between;
-        color: ${({ theme }) => theme.colors.errorRed};
+        color: ${({theme}) => theme.colors.errorRed};
       }
     }
 
@@ -66,10 +66,10 @@ const FormWrapper = styled.div`
     height: 48px;
     width: 330px;
     border: 1px solid;
-    border-color: ${({ theme }) => theme.colors.inputBorder};
+    border-color: ${({theme}) => theme.colors.inputBorder};
     border-radius: 4px;
-    background-color: ${({ theme }) => theme.colors.itemsBox};
-    color: ${({ theme }) => theme.colors.primaryText};
+    background-color: ${({theme}) => theme.colors.itemsBox};
+    color: ${({theme}) => theme.colors.primaryText};
     font-size: 12px;
     line-height: 15px;
     font-weight: bold;
@@ -77,11 +77,11 @@ const FormWrapper = styled.div`
   }
 
   input:focus {
-    outline: 1px solid ${({ theme }) => theme.colors.active};
+    outline: 1px solid ${({theme}) => theme.colors.active};
   }
 
   input.error {
-    outline: 1px solid ${({ theme }) => theme.colors.errorRed};
+    outline: 1px solid ${({theme}) => theme.colors.errorRed};
   }
 
   .half {
@@ -100,161 +100,143 @@ const FormWrapper = styled.div`
 `;
 
 function NewForm() {
-  const [isNewFormValid, setIsNewFormValid] = useState(false);
-  const [isChecking, setIsChecking] = useState(false);
+    const [isNewFormValid, setIsNewFormValid] = useState(false);
+    const [isChecking, setIsChecking] = useState(false);
 
-  const [fromFormIsValid, setFromFormIsValid] = useState(true);
-  const [toFormIsValid, setToFormIsValid] = useState(false);
-  const [dateFormIsValid, setDateFormIsValid] = useState(false);
-  const [itemListIsValid, setItemListIsValid] = useState(false);
+    const [fromFormIsValid, setFromFormIsValid] = useState(true);
+    const [toFormIsValid, setToFormIsValid] = useState(false);
+    const [dateFormIsValid, setDateFormIsValid] = useState(false);
+    const [itemListIsValid, setItemListIsValid] = useState(false);
 
-  const [fieldsValid, setFieldsValid] = useState(true);
-  const [itemsValid, setItemsValid] = useState(true);
+    const [fieldsValid, setFieldsValid] = useState(true);
+    const [itemsValid, setItemsValid] = useState(true);
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [invoice, setInvoice] = useState({
-    client_name: "",
-    client_email: "",
-    client_street: "",
-    client_city: "",
-    client_postcode: "",
-    client_country: "",
-    invoice_date: new Date(),
-    payment_date: addDays(new Date(), 1),
-    project_description: "",
-    item_list: [],
-  });
-  const [adress, setAdress] = useState();
+    const [isLoading, setIsLoading] = useState(true);
+    const [invoice, setInvoice] = useState({
+        client_name: "",
+        client_email: "",
+        client_street: "",
+        client_city: "",
+        client_postcode: "",
+        client_country: "",
+        invoice_date: new Date(),
+        payment_date: addDays(new Date(), 1),
+        project_description: "",
+        item_list: [],
+    });
+    const [adress, setAdress] = useState();
 
-  // const formValidCheck = () => {
-  //   console.log("form check");
-  //   console.log("ok");
-  //   if()
-  // };
+    useEffect(() => {
+        if (isChecking) {
+            if (fromFormIsValid && toFormIsValid && dateFormIsValid) {
+                setFieldsValid(true);
+            } else {
+                setFieldsValid(false);
+            }
+        }
+    }, [fromFormIsValid, toFormIsValid, dateFormIsValid]);
 
-  useEffect(() => {
-    if (isChecking) {
-      if (fromFormIsValid && toFormIsValid && dateFormIsValid) {
-        setFieldsValid(true);
-      } else {
-        setFieldsValid(false);
-      }
-    }
-  }, [fromFormIsValid, toFormIsValid, dateFormIsValid]);
+    useEffect(() => {
+        if (isChecking) {
+            if (itemListIsValid) {
+                setItemsValid(true);
+            } else {
+                setItemsValid(false);
+            }
+        }
+    }, [itemListIsValid]);
 
-  useEffect(() => {
-    if (isChecking) {
-      if (itemListIsValid) {
-        setItemsValid(true);
-      } else {
-        setItemsValid(false);
-      }
-    }
-  }, [itemListIsValid]);
+    useEffect(() => {
+        if (!fromFormIsValid && !toFormIsValid && !dateFormIsValid) {
+            setIsNewFormValid(false);
+        } else {
+            setIsNewFormValid(true);
+        }
+    }, [fromFormIsValid, toFormIsValid, dateFormIsValid]);
 
-  useEffect(() => {
-    if (!fromFormIsValid && !toFormIsValid && !dateFormIsValid) {
-      setIsNewFormValid(false);
-    } else {
-      setIsNewFormValid(true);
-    }
-  }, [fromFormIsValid, toFormIsValid, dateFormIsValid]);
+    useEffect(() => {
+        axios
+            .get(`${url}/adress/`)
+            .then((response) => {
+                setAdress({
+                    city: response.data[0].city,
+                    street: response.data[0].street,
+                    postcode: response.data[0].postcode,
+                    country: response.data[0].country,
+                });
+                setIsLoading(false);
+            })
+            .catch((error) => console.log(error));
+    }, []);
 
-  useEffect(() => {
-    axios
-      .get(`${url}/adress/`)
-      .then((response) => {
-        setAdress({
-          city: response.data[0].city,
-          street: response.data[0].street,
-          postcode: response.data[0].postcode,
-          country: response.data[0].country,
-        });
-        setIsLoading(false);
-      })
-      .catch((error) => console.log(error));
-  }, []);
+    const saveInvoice = () => {
+        if (isNewFormValid) {
+            axios
+                .post(`${url}/invoices/add/pending`, {...invoice, ...adress})
+                .then((response) => {
+                    console.log(response.data);
+                    window.location = '/';
+                })
+                .catch((error) => console.log(error));
 
-  const saveInvoice = () => {
-    if (isNewFormValid) {
-      axios
-      .post(`${url}/invoices/add/pending`, { ...invoice, ...adress })
-      .then((response) => {
-        console.log(response.data);
-        window.location = `/invoices/preview/${params.id}`;
-      })
-      .catch((error) => console.log(error));
 
-      console.log("saved");
-    }
-    setIsChecking(true);
-  };
+        }
+        setIsChecking(true);
+    };
 
-  const saveAsDraft = () => {
-    axios
-      .post(`${url}/invoices/add/draft`, { ...invoice, ...adress })
-      .then((response) => {
-        console.log(response.data);
-        window.location = `/invoices/preview/${params.id}`;
-        console.log();
-      })
-      .catch((error) => console.log(error));
+    const saveAsDraft = () => {
+        axios
+            .post(`${url}/invoices/add/draft`, {...invoice, ...adress})
+            .then((response) => {
+                console.log(response.data);
+                window.location = "/"
+            })
+            .catch((error) => console.log(error));
+    };
 
-    console.log("saved");
-  };
-
-  return isLoading ? (
-    <Loader />
-  ) : (
-    <FormWrapper>
-      <h1>New Invoice</h1>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          formValidCheck();
-          console.log("button");
-        }}
-      >
-        TEST
-      </button>
-      <form>
-        <p className="purple">Bill From</p>
-        <FromForm
-          invoice={adress}
-          setInvoice={setAdress}
-          setFromFormIsValid={setFromFormIsValid}
-        />
-        <p className="purple">Bill To</p>
-        <ToForm
-          invoice={invoice}
-          setInvoice={setInvoice}
-          setToFormIsValid={setToFormIsValid}
-          isChecking={isChecking}
-        />
-        <DateForm
-          invoice={invoice}
-          setInvoice={setInvoice}
-          setDateFormIsValid={setDateFormIsValid}
-          isChecking={isChecking}
-        />
-        <ItemsList
-          invoice={invoice}
-          setInvoice={setInvoice}
-          setItemListIsValid={setItemListIsValid}
-          isChecking={isChecking}
-        />
-        <NewFormButtons
-          saveInvoice={saveInvoice}
-          saveAsDraft={saveAsDraft}
-        />
-      </form>
-      <Errors
-        fieldsValid={fieldsValid}
-        itemsValid={itemsValid}
-      />
-      <div className="gradient"></div>
-    </FormWrapper>
-  );
+    return isLoading ? (
+        <Loader/>
+    ) : (
+        <FormWrapper>
+            <h1>New Invoice</h1>
+            <form>
+                <p className="purple">Bill From</p>
+                <FromForm
+                    invoice={adress}
+                    setInvoice={setAdress}
+                    setFromFormIsValid={setFromFormIsValid}
+                />
+                <p className="purple">Bill To</p>
+                <ToForm
+                    invoice={invoice}
+                    setInvoice={setInvoice}
+                    setToFormIsValid={setToFormIsValid}
+                    isChecking={isChecking}
+                />
+                <DateForm
+                    invoice={invoice}
+                    setInvoice={setInvoice}
+                    setDateFormIsValid={setDateFormIsValid}
+                    isChecking={isChecking}
+                />
+                <ItemsList
+                    invoice={invoice}
+                    setInvoice={setInvoice}
+                    setItemListIsValid={setItemListIsValid}
+                    isChecking={isChecking}
+                />
+                <NewFormButtons
+                    saveInvoice={saveInvoice}
+                    saveAsDraft={saveAsDraft}
+                />
+            </form>
+            <Errors
+                fieldsValid={fieldsValid}
+                itemsValid={itemsValid}
+            />
+            <div className="gradient"></div>
+        </FormWrapper>
+    );
 }
 
 export default NewForm;

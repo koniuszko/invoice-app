@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const NewFormButtonsWrapper = styled.div`
   width: 100%;
@@ -9,7 +9,7 @@ const NewFormButtonsWrapper = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
-  background-color: ${({ theme }) => theme.colors.box};
+  background-color: ${({theme}) => theme.colors.box};
   display: flex;
   justify-content: center;
   gap: 7px;
@@ -26,14 +26,14 @@ const NewFormButtonsWrapper = styled.div`
 
   .discard_btn {
     width: 84px;
-    background-color: ${({ theme }) => theme.colors.discardBtn};
-    color: ${({ theme }) => theme.colors.discardText};
+    background-color: ${({theme}) => theme.colors.discardBtn};
+    color: ${({theme}) => theme.colors.discardText};
   }
 
   .draft_btn {
     width: 117px;
     background-color: #373b53;
-    color: ${({ theme }) => theme.colors.secondaryText};
+    color: ${({theme}) => theme.colors.secondaryText};
   }
 
   .send_btn {
@@ -42,29 +42,30 @@ const NewFormButtonsWrapper = styled.div`
     color: #fff;
   }
 `;
-export default function NewFormButtons({ saveInvoice, saveAsDraft }) {
-  return (
-    <NewFormButtonsWrapper>
-      <Link to={"/"}>
-        <button className="discard_btn">Discard</button>
-      </Link>
-      <button
-        onClick={(e) => {
-          saveAsDraft();
-        }}
-        className="draft_btn"
-      >
-        Save as Draft
-      </button>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          saveInvoice();
-        }}
-        className="send_btn"
-      >
-        Save & Send
-      </button>
-    </NewFormButtonsWrapper>
-  );
+export default function NewFormButtons({saveInvoice, saveAsDraft}) {
+    return (
+        <NewFormButtonsWrapper>
+            <Link to={"/"}>
+                <button className="discard_btn">Discard</button>
+            </Link>
+            <button
+                onClick={(e) => {
+                    e.preventDefault();
+                    saveAsDraft();
+                }}
+                className="draft_btn"
+            >
+                Save as Draft
+            </button>
+            <button
+                onClick={(e) => {
+                    e.preventDefault();
+                    saveInvoice();
+                }}
+                className="send_btn"
+            >
+                Save & Send
+            </button>
+        </NewFormButtonsWrapper>
+    );
 }

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import axios from "axios";
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import {useState, useEffect} from "react";
+import {useParams} from "react-router-dom";
 
 import PreviewButtons from "../components/PreviewButtons";
 import BackButton from "../components/BackButton";
@@ -19,59 +19,59 @@ const PreviewWrapper = styled.div`
 `;
 
 function Preview() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [invoice, setInvoice] = useState();
+    const [isLoading, setIsLoading] = useState(true);
+    const [invoice, setInvoice] = useState();
 
-  const [modalOpen, setModalOpen] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
 
-  const params = useParams();
-  useEffect(() => {
-    axios
-      .get(`${url}/invoices/preview/${params.id}`)
-      .then((response) => {
-        setInvoice(response.data);
-        setIsLoading(false);
-      })
-      .catch((error) => console.log(error));
-  }, []);
+    const params = useParams();
+    useEffect(() => {
+        axios
+            .get(`${url}/invoices/preview/${params.id}`)
+            .then((response) => {
+                setInvoice(response.data);
+                setIsLoading(false);
+            })
+            .catch((error) => console.log(error));
+    }, []);
 
-  useEffect(() => {
-    {
-      modalOpen
-        ? (document.body.style.height = "100vh")
-        : (document.body.style.height = "auto");
-      modalOpen
-        ? (document.body.style.overflow = " hidden")
-        : (document.body.style.overflow = " auto");
-    }
-  }, [modalOpen]);
+    useEffect(() => {
+        {
+            modalOpen
+                ? (document.body.style.height = "100vh")
+                : (document.body.style.height = "auto");
+            modalOpen
+                ? (document.body.style.overflow = " hidden")
+                : (document.body.style.overflow = " auto");
+        }
+    }, [modalOpen]);
 
-  const markAsPaid = () => {
-    axios
-      .put(`${url}/invoices/paid/${params.id}`)
-      .then((response) => {
-        console.log(response.data);
-        window.location = `/`;
-      })
-      .catch((error) => console.log(error));
-  };
+    const markAsPaid = () => {
+        axios
+            .put(`${url}/invoices/paid/${params.id}`)
+            .then((response) => {
+                console.log(response.data);
+                window.location = `/`;
+            })
+            .catch((error) => console.log(error));
+    };
 
-  return isLoading ? (
-    <Loader />
-  ) : (
-    <PreviewWrapper>
-      <BackButton path={"/"} />
-      <StatusBar status={invoice.status} />
-      <PreviewInvoice invoice={invoice} />
-      <PreviewButtons
-        setModalOpen={setModalOpen}
-        id={invoice._id}
-        status={invoice.status}
-        markAsPaid={markAsPaid}
-      />
-      {modalOpen ? <DeleteModal setModalOpen={setModalOpen} /> : null}
-    </PreviewWrapper>
-  );
+    return isLoading ? (
+        <Loader/>
+    ) : (
+        <PreviewWrapper>
+            <BackButton path={"/"}/>
+            <StatusBar status={invoice.status}/>
+            <PreviewInvoice invoice={invoice}/>
+            <PreviewButtons
+                setModalOpen={setModalOpen}
+                id={invoice._id}
+                status={invoice.status}
+                markAsPaid={markAsPaid}
+            />
+            {modalOpen ? <DeleteModal setModalOpen={setModalOpen}/> : null}
+        </PreviewWrapper>
+    );
 }
 
 export default Preview;
