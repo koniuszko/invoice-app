@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, {createGlobalStyle} from "styled-components";
 
 import {useState, useEffect} from "react";
 
@@ -147,12 +147,12 @@ function NewForm() {
     }, [itemListIsValid]);
 
     useEffect(() => {
-        if (!fromFormIsValid && !toFormIsValid && !dateFormIsValid) {
-            setIsNewFormValid(false);
-        } else {
+        if (fromFormIsValid && toFormIsValid && dateFormIsValid && itemListIsValid) {
             setIsNewFormValid(true);
+        } else {
+            setIsNewFormValid(false);
         }
-    }, [fromFormIsValid, toFormIsValid, dateFormIsValid]);
+    }, [fromFormIsValid, toFormIsValid, dateFormIsValid, itemListIsValid]);
 
     useEffect(() => {
         axios
@@ -170,6 +170,7 @@ function NewForm() {
     }, []);
 
     const saveInvoice = () => {
+        setIsChecking(true);
         if (isNewFormValid) {
             axios
                 .post(`${url}/invoices/add/pending`, {...invoice, ...adress})
@@ -178,10 +179,7 @@ function NewForm() {
                     window.location = '/';
                 })
                 .catch((error) => console.log(error));
-
-
         }
-        setIsChecking(true);
     };
 
     const saveAsDraft = () => {
