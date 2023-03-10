@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import axios from "axios";
 
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 
 import Header from "../components/Header";
 import Empty from "../components/Empty";
@@ -19,37 +19,37 @@ const MainWrapper = styled.div`
 `;
 
 function Main() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [counter, setCounter] = useState(0);
-  const [invoices, setInvoices] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [counter, setCounter] = useState(0);
+    const [invoices, setInvoices] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get(`${url}/invoices/`)
-      .then((response) => {
-        setInvoices(response.data);
-        setIsLoading(false);
-      })
-      .catch((error) => console.log(error));
-  }, []);
+    useEffect(() => {
+        axios
+            .get(`${url}/invoices/`)
+            .then((response) => {
+                setInvoices(response.data);
+                setIsLoading(false);
+            })
+            .catch((error) => console.log(error));
+    }, []);
 
-  useEffect(() => setCounter(invoices.length));
+    useEffect(() => setCounter(invoices.length));
 
-  return isLoading ? (
-    <Loader />
-  ) : (
-    <MainWrapper>
-      <Header counter={counter} />
-      {true ? (
-        <InvoicesList
-          invoices={invoices}
-          setCounter={setCounter}
-        />
-      ) : (
-        <Empty />
-      )}
-    </MainWrapper>
-  );
+    return isLoading ? (
+        <Loader/>
+    ) : (
+        <MainWrapper>
+            <Header counter={counter}/>
+            {true ? (
+                <InvoicesList
+                    invoices={invoices}
+                    setCounter={setCounter}
+                />
+            ) : (
+                <Empty/>
+            )}
+        </MainWrapper>
+    );
 }
 
 export default Main;

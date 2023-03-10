@@ -1,4 +1,4 @@
-import styled, {createGlobalStyle} from "styled-components";
+import styled from "styled-components";
 
 import {useState, useEffect} from "react";
 
@@ -65,8 +65,7 @@ const FormWrapper = styled.div`
     padding: 0 20px;
     height: 48px;
     width: 330px;
-    border: 1px solid;
-    border-color: ${({theme}) => theme.colors.inputBorder};
+    border: 1px solid ${({theme}) => theme.colors.inputBorder};
     border-radius: 4px;
     background-color: ${({theme}) => theme.colors.itemsBox};
     color: ${({theme}) => theme.colors.primaryText};

@@ -180,10 +180,6 @@ function EditForm() {
         }
     };
 
-    useEffect(() => {
-        setIsChecking(true)
-    }, [invoice])
-
     return isLoading ? (
         <Loader/>
     ) : (
