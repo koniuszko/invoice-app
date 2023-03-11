@@ -1,6 +1,7 @@
-import { Link, useParams } from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
 import styled from "styled-components";
+import {useStore} from "../../context/context";
 
 const EditFormButtonsWrapper = styled.div`
   width: 100%;
@@ -9,7 +10,7 @@ const EditFormButtonsWrapper = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
-  background-color: ${({ theme }) => theme.colors.box};
+  background-color: ${({theme}) => theme.colors.box};
   display: flex;
   justify-content: center;
 
@@ -32,8 +33,8 @@ const EditFormButtonsWrapper = styled.div`
 
   .cancel_btn {
     width: 96px;
-    background-color: ${({ theme }) => theme.colors.discardBtn};
-    color: ${({ theme }) => theme.colors.discardText};
+    background-color: ${({theme}) => theme.colors.discardBtn};
+    color: ${({theme}) => theme.colors.discardText};
   }
 
   .send_btn {
@@ -41,27 +42,49 @@ const EditFormButtonsWrapper = styled.div`
     background-color: #7c5dfa;
     color: #fff;
   }
+
+  @media (min-width: 768px) {
+    margin: 48px 0 24px;
+    width: 100%;
+    height: 48px;
+    padding: 0;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    background-color: transparent;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+
+  }
 `;
-export default function EditFormButtons({ saveChanges }) {
-  const params = useParams();
-  return (
-    <EditFormButtonsWrapper>
-      <div className="buttons">
-        <Link to={`/invoices/preview/${params.id}`}>
-          <button className="cancel_btn">Cancel</button>
-        </Link>
-        <Link to={`/`}>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              saveChanges();
-            }}
-            className="send_btn"
-          >
-            Save Changes
-          </button>
-        </Link>
-      </div>
-    </EditFormButtonsWrapper>
-  );
+export default function EditFormButtons({saveChanges}) {
+    const params = useParams();
+    const {setEditModalOpen} = useStore()
+    return (
+        <EditFormButtonsWrapper>
+            <div className="buttons">
+                {/*<Link to={`/invoices/preview/${params.id}`}>*/}
+                <button
+                    onClick={(e) => {
+                        e.preventDefault();
+                        setEditModalOpen(false);
+                    }}
+                    className="cancel_btn">Cancel
+                </button>
+                {/*</Link>*/}
+                <Link to={`/`}>
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            saveChanges();
+                        }}
+                        className="send_btn"
+                    >
+                        Save Changes
+                    </button>
+                </Link>
+            </div>
+        </EditFormButtonsWrapper>
+    );
 }

@@ -58,7 +58,16 @@ const NewFormButtonsWrapper = styled.div`
     gap: 8px;
 
     .discard_btn {
+      width: 96px;
       margin-right: auto;
+    }
+
+    .draft_btn {
+      width: 133px;
+    }
+
+    .send_btn {
+      width: 128px;
     }
   }
 `;

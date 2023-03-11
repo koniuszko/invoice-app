@@ -11,6 +11,8 @@ import Loader from "../components/Loader";
 import DeleteModal from "../components/DeleteModal";
 import {useWindowWidth} from "@react-hook/window-size";
 import Edit from "./Edit";
+import {useStore} from "../context/context";
+import {observer} from "mobx-react-lite";
 
 const url = "http://localhost:3030";
 // const url = "https://invoice-backend.azurewebsites.net";
@@ -24,15 +26,15 @@ const PreviewWrapper = styled.div`
   }
 `;
 
-function Preview() {
+const Preview = observer(function Preview() {
     const [isLoading, setIsLoading] = useState(true);
     const [invoice, setInvoice] = useState();
 
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-    const [editModalOpen, setEditModalOpen] = useState(false);
-
     const params = useParams();
     const width = useWindowWidth();
+
+    const {editModalOpen} = useStore();
     useEffect(() => {
         axios
             .get(`${url}/invoices/preview/${params.id}`)
@@ -45,12 +47,15 @@ function Preview() {
 
     useEffect(() => {
         {
-            deleteModalOpen || editModalOpen
+            deleteModalOpen
                 ? (document.body.style.height = "100vh")
                 : (document.body.style.height = "auto");
-            deleteModalOpen || editModalOpen
+            deleteModalOpen
                 ? (document.body.style.overflow = " hidden")
                 : (document.body.style.overflow = " auto");
+            editModalOpen
+                ? (document.body.style.overflowX = " hidden")
+                : (document.body.style.overflowX = " auto");
         }
     }, [deleteModalOpen, editModalOpen]);
 
@@ -82,6 +87,6 @@ function Preview() {
             {editModalOpen ? <Edit/> : null}
         </PreviewWrapper>
     );
-}
+})
 
 export default Preview;

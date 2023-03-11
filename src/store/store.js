@@ -7,6 +7,7 @@ export function createStore() {
             paid: true,
         },
         addModalOpen: false,
+        editModalOpen: false,
 
         themeSwitch() {
             this.theme === "dark" ? (this.theme = "light") : (this.theme = "dark");
@@ -18,6 +19,10 @@ export function createStore() {
 
         setAddModalOpen(s) {
             this.addModalOpen = s;
+        },
+
+        setEditModalOpen(s) {
+            this.editModalOpen = s;
         }
     };
 }

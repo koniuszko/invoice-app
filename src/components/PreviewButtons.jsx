@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom";
 import styled from "styled-components";
+import {useStore} from "../context/context";
 
 const PreviewButtonsWrapper = styled.div`
   width: 100%;
@@ -111,18 +112,19 @@ const PreviewButtonsWrapper = styled.div`
     }
   }
 `;
-export default function PreviewButtons({
-                                           id,
-                                           status,
-                                           setDeleteModalOpen,
-                                           markAsPaid,
-                                       }) {
+export default function PreviewButtons({id, status, setDeleteModalOpen, markAsPaid,}) {
+    const {setEditModalOpen} = useStore();
     return status === "paid" ? null : (
         <PreviewButtonsWrapper>
             <div className="buttons">
-                <Link to={`/invoices/edit/${id}`}>
-                    <button className="edit_btn">Edit</button>
-                </Link>
+                {/*<Link to={`/invoices/edit/${id}`}>*/}
+                <button
+                    onClick={(e) => {
+                        e.preventDefault();
+                        setEditModalOpen(true);
+                    }} className="edit_btn">Edit
+                </button>
+                {/*</Link>*/}
                 <button
                     onClick={() => setDeleteModalOpen(true)}
                     className="delete_btn"

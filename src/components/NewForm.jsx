@@ -84,6 +84,13 @@ const FormWrapper = styled.div`
     outline: 1px solid ${({theme}) => theme.colors.errorRed};
   }
 
+  input:disabled {
+    border: none;
+    background-color: ${({theme}) => theme.colors.background};
+    color: ${({theme}) => theme.colors.inputText};
+    border-radius: initial;
+  }
+
   .half {
     width: 152px;
   }
@@ -294,15 +301,15 @@ function NewForm() {
                     setItemListIsValid={setItemListIsValid}
                     isChecking={isChecking}
                 />
+                <Errors
+                    fieldsValid={fieldsValid}
+                    itemsValid={itemsValid}
+                />
                 <NewFormButtons
                     saveInvoice={saveInvoice}
                     saveAsDraft={saveAsDraft}
                 />
             </form>
-            <Errors
-                fieldsValid={fieldsValid}
-                itemsValid={itemsValid}
-            />
             <div className="gradient"></div>
         </FormWrapper>
     );

@@ -109,6 +109,15 @@ const EditFormWrapper = styled.div`
   .id-purple {
     color: #888eb0;
   }
+
+  @media (min-width: 768px) {
+    width: 616px;
+    background-color: ${({theme}) => theme.colors.background};
+    padding: 56px 56px 0;
+    margin-top: 0;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
 `;
 
 function EditForm() {
@@ -159,7 +168,7 @@ function EditForm() {
 
     useEffect(() => {
         axios
-            .get(`${url}/invoices/edit/${params.id}`)
+            .get(`${url}/invoices/preview/${params.id}`)
             .then((response) => {
                 setInvoice(response.data);
                 setIsLoading(false);
@@ -214,13 +223,14 @@ function EditForm() {
                     setItemListIsValid={setItemListIsValid}
                     isChecking={isChecking}
                 />
+                <Errors
+                    fieldsValid={fieldsValid}
+                    itemsValid={itemsValid}
+                />
                 <EditFormButtons saveChanges={saveChanges}/>
+                <div className="gradient"></div>
             </form>
-            <Errors
-                fieldsValid={fieldsValid}
-                itemsValid={itemsValid}
-            />
-            <div className="gradient"></div>
+
         </EditFormWrapper>
     );
 }

@@ -12,9 +12,8 @@ const AddWrapper = styled.div`
   top: 0;
   z-index: 999;
   background-color: ${({theme}) => theme.colors.background};
-  
+
   @media (min-width: 768px) {
-    //width: 616px;
     margin-top: 0;
     position: absolute;
     left: 0;
