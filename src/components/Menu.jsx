@@ -67,6 +67,30 @@ const Aside = styled.aside`
     height: 32px;
     border-radius: 16px;
   }
+
+  @media (min-width: 768px) {
+    height: 80px;
+
+    .bg {
+      width: 80px;
+      height: 80px;
+      cursor: pointer;
+    }
+
+    .bg::after {
+      width: 80px;
+      height: 80px;
+    }
+
+    .switcher {
+      margin-right: 32px;
+
+    }
+
+    .settings {
+      padding: 24px 32px;
+    }
+  }
 `;
 
 export function Menu() {

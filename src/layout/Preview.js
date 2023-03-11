@@ -9,13 +9,18 @@ import StatusBar from "../components/StatusBar";
 import PreviewInvoice from "../components/PreviewInvoice";
 import Loader from "../components/Loader";
 import DeleteModal from "../components/DeleteModal";
+import {useWindowWidth} from "@react-hook/window-size";
 
 const url = "http://localhost:3030";
 // const url = "https://invoice-backend.azurewebsites.net";
 
 const PreviewWrapper = styled.div`
-  width: 100%;
+  width: 330px;
   margin-top: 104px;
+  @media (min-width: 768px) {
+    width: 688px;
+    margin-top: 128px;
+  }
 `;
 
 function Preview() {
@@ -25,6 +30,7 @@ function Preview() {
     const [modalOpen, setModalOpen] = useState(false);
 
     const params = useParams();
+    const width = useWindowWidth();
     useEffect(() => {
         axios
             .get(`${url}/invoices/preview/${params.id}`)
@@ -63,12 +69,12 @@ function Preview() {
             <BackButton path={"/"}/>
             <StatusBar status={invoice.status}/>
             <PreviewInvoice invoice={invoice}/>
-            <PreviewButtons
+            {width >= 768 ? null : <PreviewButtons
                 setModalOpen={setModalOpen}
                 id={invoice._id}
                 status={invoice.status}
                 markAsPaid={markAsPaid}
-            />
+            />}
             {modalOpen ? <DeleteModal setModalOpen={setModalOpen}/> : null}
         </PreviewWrapper>
     );
