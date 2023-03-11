@@ -55,7 +55,7 @@ const PreviewButtonsWrapper = styled.div`
   }
 
   @media (min-width: 768px) {
-    width: 309px;
+    width: initial;
     height: 48px;
     padding: 0;
     position: absolute;
@@ -68,10 +68,11 @@ const PreviewButtonsWrapper = styled.div`
     justify-content: center;
     gap: 7px;
 
+
     .buttons {
       width: 330px;
       display: flex;
-      justify-content: flex-start;
+      justify-content: flex-end;
       gap: 7px;
     }
 
@@ -113,7 +114,7 @@ const PreviewButtonsWrapper = styled.div`
 export default function PreviewButtons({
                                            id,
                                            status,
-                                           setModalOpen,
+                                           setDeleteModalOpen,
                                            markAsPaid,
                                        }) {
     return status === "paid" ? null : (
@@ -123,7 +124,7 @@ export default function PreviewButtons({
                     <button className="edit_btn">Edit</button>
                 </Link>
                 <button
-                    onClick={() => setModalOpen(true)}
+                    onClick={() => setDeleteModalOpen(true)}
                     className="delete_btn"
                 >
                     Delete

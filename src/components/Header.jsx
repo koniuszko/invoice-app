@@ -6,6 +6,7 @@ import {useWindowWidth} from '@react-hook/window-size'
 import Filters from "./Filters";
 
 import addIcon from "../assets/icon-plus.svg";
+import {useStore} from "../context/context";
 
 const Wrapper = styled.header`
   margin-top: 104px;
@@ -92,27 +93,31 @@ const Wrapper = styled.header`
 
 function Header({counter}) {
     const width = useWindowWidth();
+    const {setAddModalOpen} = useStore();
     return (
         <Wrapper>
             <div className="title">
                 <h1>Invoices</h1>
                 {width >= 768 ? <p>{counter > 0 ? `There are ${counter} total invoices` : `No invoices`}</p> :
                     <p>{counter > 0 ? `${counter} invoices` : `No invoices`}</p>}
-
             </div>
             <Filters/>
-            <Link to={"/invoices/add"}>
-                <button className="new_btn">
-                    <div>
-                        <img
-                            className="plus_icon"
-                            src={addIcon}
-                            alt="plus-icon"
-                        />
-                    </div>
-                    {width >= 768 ? "New Invoice" : "New"}
-                </button>
-            </Link>
+            {/*<Link to={"/invoices/add"}>*/}
+            <button className="new_btn" onClick={(e) => {
+                e.preventDefault();
+                setAddModalOpen(true);
+            }
+            }>
+                <div>
+                    <img
+                        className="plus_icon"
+                        src={addIcon}
+                        alt="plus-icon"
+                    />
+                </div>
+                {width >= 768 ? "New Invoice" : "New"}
+            </button>
+            {/*</Link>*/}
         </Wrapper>
     );
 }

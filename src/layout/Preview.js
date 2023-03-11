@@ -10,6 +10,7 @@ import PreviewInvoice from "../components/PreviewInvoice";
 import Loader from "../components/Loader";
 import DeleteModal from "../components/DeleteModal";
 import {useWindowWidth} from "@react-hook/window-size";
+import Edit from "./Edit";
 
 const url = "http://localhost:3030";
 // const url = "https://invoice-backend.azurewebsites.net";
@@ -27,7 +28,8 @@ function Preview() {
     const [isLoading, setIsLoading] = useState(true);
     const [invoice, setInvoice] = useState();
 
-    const [modalOpen, setModalOpen] = useState(false);
+    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [editModalOpen, setEditModalOpen] = useState(false);
 
     const params = useParams();
     const width = useWindowWidth();
@@ -43,14 +45,14 @@ function Preview() {
 
     useEffect(() => {
         {
-            modalOpen
+            deleteModalOpen || editModalOpen
                 ? (document.body.style.height = "100vh")
                 : (document.body.style.height = "auto");
-            modalOpen
+            deleteModalOpen || editModalOpen
                 ? (document.body.style.overflow = " hidden")
                 : (document.body.style.overflow = " auto");
         }
-    }, [modalOpen]);
+    }, [deleteModalOpen, editModalOpen]);
 
     const markAsPaid = () => {
         axios
@@ -67,15 +69,17 @@ function Preview() {
     ) : (
         <PreviewWrapper>
             <BackButton path={"/"}/>
-            <StatusBar status={invoice.status}/>
+            <StatusBar id={invoice._id} status={invoice.status} markAsPaid={markAsPaid}
+                       setDeleteModalOpen={setDeleteModalOpen}/>
             <PreviewInvoice invoice={invoice}/>
             {width >= 768 ? null : <PreviewButtons
-                setModalOpen={setModalOpen}
+                setDeleteModalOpen={setDeleteModalOpen}
                 id={invoice._id}
                 status={invoice.status}
                 markAsPaid={markAsPaid}
             />}
-            {modalOpen ? <DeleteModal setModalOpen={setModalOpen}/> : null}
+            {deleteModalOpen ? <DeleteModal setDeleteModalOpen={setDeleteModalOpen}/> : null}
+            {editModalOpen ? <Edit/> : null}
         </PreviewWrapper>
     );
 }

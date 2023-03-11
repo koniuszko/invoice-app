@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import {useParams} from "react-router-dom";
 import styled from "styled-components";
 
 const url = "http://localhost:3030";
@@ -29,6 +29,7 @@ const DeleteModalWrapper = styled.div`
     margin: 8px 0 24px;
     color: #888eb0;
   }
+
   .delete-modal {
     position: fixed;
     top: 50%;
@@ -38,7 +39,7 @@ const DeleteModalWrapper = styled.div`
     width: 330px;
     height: 220px;
     padding: 32px;
-    background-color: ${({ theme }) => theme.colors.box};
+    background-color: ${({theme}) => theme.colors.box};
     border-radius: 8px;
   }
 
@@ -60,8 +61,8 @@ const DeleteModalWrapper = styled.div`
 
   .cancel_btn {
     width: 96px;
-    background-color: ${({ theme }) => theme.colors.discardBtn};
-    color: ${({ theme }) => theme.colors.discardText};
+    background-color: ${({theme}) => theme.colors.discardBtn};
+    color: ${({theme}) => theme.colors.discardText};
   }
 
   .delete_btn {
@@ -71,41 +72,41 @@ const DeleteModalWrapper = styled.div`
   }
 `;
 
-function DeleteModal({ setModalOpen }) {
-  const param = useParams();
+function DeleteModal({setDeleteModalOpen}) {
+    const param = useParams();
 
-  const deleteInvoice = () => {
-    axios
-      .delete(`${url}/invoices/preview/${param.id}`)
-      .then(() => (window.location = `/`));
-  };
+    const deleteInvoice = () => {
+        axios
+            .delete(`${url}/invoices/preview/${param.id}`)
+            .then(() => (window.location = `/`));
+    };
 
-  const params = useParams();
-  return (
-    <DeleteModalWrapper>
-      <div className="delete-modal">
-        <h2>Confirm Deletion</h2>
-        <p>
-          Are you sure you want to delete invoice #{params.id.slice(-6)}? This
-          action cannot be undone.
-        </p>
-        <div className="delete-modal-buttons">
-          <button
-            onClick={() => setModalOpen(false)}
-            className="cancel_btn"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={() => deleteInvoice()}
-            className="delete_btn"
-          >
-            Delete
-          </button>
-        </div>
-      </div>
-    </DeleteModalWrapper>
-  );
+    const params = useParams();
+    return (
+        <DeleteModalWrapper>
+            <div className="delete-modal">
+                <h2>Confirm Deletion</h2>
+                <p>
+                    Are you sure you want to delete invoice #{params.id.slice(-6)}? This
+                    action cannot be undone.
+                </p>
+                <div className="delete-modal-buttons">
+                    <button
+                        onClick={() => setDeleteModalOpen(false)}
+                        className="cancel_btn"
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        onClick={() => deleteInvoice()}
+                        className="delete_btn"
+                    >
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </DeleteModalWrapper>
+    );
 }
 
 export default DeleteModal;

@@ -18,6 +18,7 @@ const url = "http://localhost:3030";
 // const url = "https://invoice-backend.azurewebsites.net";
 
 const FormWrapper = styled.div`
+  width: 330px;
   margin-top: 24px;
 
   h1 {
@@ -95,6 +96,77 @@ const FormWrapper = styled.div`
     height: 64px;
     margin: 92px 0 0;
     box-shadow: 0 0 20px 5px rgb(0, 0, 0, 0.1);
+  }
+
+  @media (min-width: 768px) {
+    width: 616px;
+    background-color: ${({theme}) => theme.colors.background};
+    padding: 56px 56px 0;
+    margin-top: 0;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  .purple {
+    margin: 48px 0;
+  }
+
+  label {
+    color: ${({theme}) => theme.colors.inputText};
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 15px;
+    letter-spacing: -0.25px;
+    display: flex;
+    flex-direction: column;
+
+    .label-name {
+      &--error {
+        display: flex;
+        justify-content: space-between;
+        color: ${({theme}) => theme.colors.errorRed};
+      }
+    }
+
+    .error-message {
+      font-size: 10px;
+      line-height: 15px;
+      letter-spacing: -0.21px;
+    }
+  }
+
+  input {
+    margin: 10px 0 24px;
+    padding: 0 20px;
+    height: 48px;
+    width: 504px;
+    border: 1px solid ${({theme}) => theme.colors.inputBorder};
+    border-radius: 4px;
+    background-color: ${({theme}) => theme.colors.itemsBox};
+    color: ${({theme}) => theme.colors.primaryText};
+    font-size: 12px;
+    line-height: 15px;
+    font-weight: bold;
+    letter-spacing: -0.25px;
+  }
+
+  input:focus {
+    outline: 1px solid ${({theme}) => theme.colors.active};
+  }
+
+  input.error {
+    outline: 1px solid ${({theme}) => theme.colors.errorRed};
+  }
+
+
+  .half, .third {
+    width: 152px;
+  }
+
+  .gradient {
+    height: 10px;
+    margin: 0;
+
   }
 `;
 

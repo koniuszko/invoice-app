@@ -2,11 +2,13 @@ import styled from "styled-components";
 
 import {Link} from "react-router-dom";
 
+import {useStore} from "../../context/context";
+
 const NewFormButtonsWrapper = styled.div`
   width: 100%;
   height: 91px;
   padding: 22px 24px;
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 0;
   background-color: ${({theme}) => theme.colors.box};
@@ -41,13 +43,35 @@ const NewFormButtonsWrapper = styled.div`
     background-color: #7c5dfa;
     color: #fff;
   }
+
+  @media (min-width: 768px) {
+    margin-top: 48px;
+    width: 100%;
+    height: 48px;
+    padding: 0;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    background-color: transparent;
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+
+    .discard_btn {
+      margin-right: auto;
+    }
+  }
 `;
 export default function NewFormButtons({saveInvoice, saveAsDraft}) {
+    const {setAddModalOpen} = useStore();
+
     return (
         <NewFormButtonsWrapper>
-            <Link to={"/"}>
-                <button className="discard_btn">Discard</button>
-            </Link>
+            <button className="discard_btn" onClick={(e) => {
+                e.preventDefault();
+                setAddModalOpen(false)
+            }}>Discard
+            </button>
             <button
                 onClick={(e) => {
                     e.preventDefault();

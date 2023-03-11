@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import {useState, useEffect} from "react";
+import {useWindowWidth} from "@react-hook/window-size";
 
 const ToFormWrapper = styled.div`
   width: 330px;
@@ -33,6 +34,22 @@ const ToFormWrapper = styled.div`
   .country {
     grid-area: country;
   }
+
+  @media (min-width: 768px) {
+    width: 504px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-areas: "name name name""email email email""street street street" "city postcode country";
+
+    .postcode {
+      justify-self: center;
+    }
+
+    .country {
+      justify-self: flex-end;
+    }
+  }
 `;
 
 function ToForm({invoice, setInvoice, setToFormIsValid, isChecking}) {
@@ -42,6 +59,8 @@ function ToForm({invoice, setInvoice, setToFormIsValid, isChecking}) {
     const [clientCityError, setClientCityError] = useState(false);
     const [clientPostcodeError, setClientPostcodeError] = useState(false);
     const [clientCountryError, setClientCountryError] = useState(false);
+
+    const width = useWindowWidth();
 
     useEffect(() => {
         if (isChecking) {
@@ -174,7 +193,7 @@ function ToForm({invoice, setInvoice, setToFormIsValid, isChecking}) {
                     }
                 />
             </label>
-            <label className="country">
+            <label className={width >= 768 ? "country half" : "half"}>
                 <p className={clientCountryError ? "label-name--error" : "label-name"}>
                     Country
                     {clientCountryError ? (
@@ -182,7 +201,7 @@ function ToForm({invoice, setInvoice, setToFormIsValid, isChecking}) {
                     ) : null}
                 </p>
                 <input
-                    className={clientCountryError ? "error" : ""}
+                    className={clientCountryError ? "error third" : "third"}
                     type="text"
                     value={invoice.client_country}
                     onChange={(e) =>

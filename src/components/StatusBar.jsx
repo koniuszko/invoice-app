@@ -35,13 +35,15 @@ const StatusBarWrapper = styled.div`
   }
 `;
 
-function StatusBar({status}) {
+function StatusBar({status, markAsPaid, setDeleteModalOpen, id}) {
     const width = useWindowWidth();
     return (
         <StatusBarWrapper>
             <p className="status-title">Status</p>
             {statusIcon(status)}
-            {width >= 768 ? <PreviewButtons status={status}/> : null}
+            {width >= 768 ?
+                <PreviewButtons id={id} setDeleteModalOpen={setDeleteModalOpen} markAsPaid={markAsPaid}
+                                status={status}/> : null}
         </StatusBarWrapper>
     );
 }
