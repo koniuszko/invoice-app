@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import empty from "../assets/illustration-empty.svg";
+import {useWindowWidth} from "@react-hook/window-size";
 
 const EmptyWrapper = styled.div`
   width: 220px;
@@ -22,7 +23,7 @@ const EmptyWrapper = styled.div`
   }
 
   p {
-    color: ${({ theme }) => theme.colors.secondaryText};
+    color: ${({theme}) => theme.colors.secondaryText};
     padding: 0 24px;
     font-size: 12px;
     line-height: 15px;
@@ -33,22 +34,37 @@ const EmptyWrapper = styled.div`
       font-weight: bold;
     }
   }
+
+  @media (min-width: 768px) {
+    width: 242px;
+
+    img {
+      margin-left: 0;
+      margin-bottom: 64px;
+    }
+
+    p {
+      padding: 0 8px;
+      letter-spacing: 0.25px;
+    }
+  }
 `;
 
 function Empty() {
-  return (
-    <EmptyWrapper>
-      <img
-        src={empty}
-        alt="illustration-empty"
-      />
-      <h1>There is nothing here</h1>
-      <p>
-        Create an invoice by clicking the <span className="bold">New </span>
-        button and fet started.
-      </p>
-    </EmptyWrapper>
-  );
+    const width = useWindowWidth();
+    return (
+        <EmptyWrapper>
+            <img
+                src={empty}
+                alt="illustration-empty"
+            />
+            <h1>There is nothing here</h1>
+            <p>
+                Create an invoice by clicking the <span className="bold">{width >= 768 ? "New Invoice " : "New "}</span>
+                button and fet started.
+            </p>
+        </EmptyWrapper>
+    );
 }
 
 export default Empty;

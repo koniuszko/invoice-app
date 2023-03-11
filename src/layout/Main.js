@@ -40,7 +40,7 @@ function Main() {
     ) : (
         <MainWrapper>
             <Header counter={counter}/>
-            {true ? (
+            {invoices.length >= 1 ? (
                 <InvoicesList
                     invoices={invoices}
                     setCounter={setCounter}

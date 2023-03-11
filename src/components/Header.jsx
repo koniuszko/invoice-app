@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
+import {useWindowWidth} from '@react-hook/window-size'
 
 import Filters from "./Filters";
 
@@ -16,16 +17,17 @@ const Wrapper = styled.header`
     margin-right: auto;
 
     h1 {
-      color: ${({ theme }) => theme.colors.primaryText};
+      color: ${({theme}) => theme.colors.primaryText};
       font-size: 20px;
       line-height: 22px;
-      letter-spacing: -0.63px;
+      letter-spacing: 0.63px;
     }
+
     p {
-      color: ${({ theme }) => theme.colors.secondaryText};
+      color: ${({theme}) => theme.colors.secondaryText};
       font-size: 12px;
       line-height: 15px;
-      letter-spacing: -0.25px;
+      letter-spacing: 0.25px;
     }
   }
 
@@ -39,7 +41,7 @@ const Wrapper = styled.header`
     padding: 6px;
     font-size: 12px;
     font-weight: bold;
-    letter-spacing: -0.25px;
+    letter-spacing: 0.25px;
     color: #fff;
 
     div {
@@ -59,30 +61,60 @@ const Wrapper = styled.header`
       }
     }
   }
+
+  @media (min-width: 768px) {
+    margin-top: 136px;
+    width: 672px;
+
+    .title {
+
+      h1 {
+        font-size: 32px;
+        line-height: initial;
+        letter-spacing: 1px;
+      }
+    }
+
+    .new_btn {
+      width: 150px;
+      height: 48px;
+      border-radius: 24px;
+      padding: 8px;
+      letter-spacing: 0.25px;
+      margin-left: 40px;
+
+      div {
+        margin-right: 12px;
+      }
+    }
+  }
 `;
 
-function Header({ counter }) {
-  return (
-    <Wrapper>
-      <div className="title">
-        <h1>Invoices</h1>
-        <p>{counter > 0 ? `${counter} invoices` : `No invoices`}</p>
-      </div>
-      <Filters />
-      <Link to={"/invoices/add"}>
-        <button className="new_btn">
-          <div>
-            <img
-              className="plus_icon"
-              src={addIcon}
-              alt="plus-icon"
-            />
-          </div>
-          New
-        </button>
-      </Link>
-    </Wrapper>
-  );
+function Header({counter}) {
+    const width = useWindowWidth();
+    return (
+        <Wrapper>
+            <div className="title">
+                <h1>Invoices</h1>
+                {width >= 768 ? <p>{counter > 0 ? `There are ${counter} total invoices` : `No invoices`}</p> :
+                    <p>{counter > 0 ? `${counter} invoices` : `No invoices`}</p>}
+
+            </div>
+            <Filters/>
+            <Link to={"/invoices/add"}>
+                <button className="new_btn">
+                    <div>
+                        <img
+                            className="plus_icon"
+                            src={addIcon}
+                            alt="plus-icon"
+                        />
+                    </div>
+                    {width >= 768 ? "New Invoice" : "New"}
+                </button>
+            </Link>
+        </Wrapper>
+    );
 }
 
 export default Header;

@@ -4,7 +4,7 @@ import sun from "../assets/icon-sun.svg";
 import moon from "../assets/icon-moon.svg";
 import user from "../assets/image-avatar.jpg";
 
-import { useStore } from "../context/context";
+import {useStore} from "../context/context";
 
 const Aside = styled.aside`
   position: fixed;
@@ -31,6 +31,7 @@ const Aside = styled.aside`
     align-items: center;
     justify-content: center;
     margin-right: auto;
+    cursor: pointer;
   }
 
   .bg::after {
@@ -69,34 +70,34 @@ const Aside = styled.aside`
 `;
 
 export function Menu() {
-  const { theme, themeSwitch } = useStore();
-  return (
-    <Aside>
-      <div className="bg">
-        <img
-          src={logo}
-          alt="logo"
-        />
-      </div>
-      <div className="switcher">
-        <button onClick={() => themeSwitch()}>
-          <img
-            src={theme === "dark" ? sun : moon}
-            alt="theme-icon"
-          />
-        </button>
-      </div>
-      <div className="account">
-        <div className="settings">
-          <button>
-            <img
-              className="avatar"
-              src={user}
-              alt="user-portrait"
-            />
-          </button>
-        </div>
-      </div>
-    </Aside>
-  );
+    const {theme, themeSwitch} = useStore();
+    return (
+        <Aside>
+            <div onClick={() => window.location = '/'} className="bg">
+                <img
+                    src={logo}
+                    alt="logo"
+                />
+            </div>
+            <div className="switcher">
+                <button onClick={() => themeSwitch()}>
+                    <img
+                        src={theme === "dark" ? sun : moon}
+                        alt="theme-icon"
+                    />
+                </button>
+            </div>
+            <div className="account">
+                <div className="settings">
+                    <button>
+                        <img
+                            className="avatar"
+                            src={user}
+                            alt="user-portrait"
+                        />
+                    </button>
+                </div>
+            </div>
+        </Aside>
+    );
 }

@@ -1,8 +1,9 @@
-import { useState } from "react";
+import {useState} from "react";
 import styled from "styled-components";
+import {useWindowWidth} from "@react-hook/window-size";
 
-import { useStore } from "../context/context";
-import { observer } from "mobx-react-lite";
+import {useStore} from "../context/context";
+import {observer} from "mobx-react-lite";
 
 import arrow from "../assets/icon-arrow-down.svg";
 import check from "../assets/icon-check.svg";
@@ -12,10 +13,10 @@ const FiltersWrapper = styled.div`
   position: relative;
 
   button {
-    color: ${({ theme }) => theme.colors.primaryText};
+    color: ${({theme}) => theme.colors.primaryText};
     font-weight: bold;
     font-size: 12px;
-    letter-spacing: -0.25px;
+    letter-spacing: 0.25px;
 
     img {
       margin-left: 12px;
@@ -33,7 +34,7 @@ const FiltersWrapper = styled.div`
     border-radius: 8px;
     padding: 24px;
     z-index: 1;
-    background-color: ${({ theme }) => theme.colors.checkboxBox};
+    background-color: ${({theme}) => theme.colors.checkboxBox};
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -53,17 +54,17 @@ const FiltersWrapper = styled.div`
         height: 16px;
         border: solid 2px transparent;
         border-radius: 2px;
-        background-color: ${({ theme }) => theme.colors.checkbox};
+        background-color: ${({theme}) => theme.colors.checkbox};
         display: flex;
         justify-content: center;
         align-items: center;
-        overflow: hidden;
 
         &::before {
           content: "";
+          display: block;
           width: 1em;
           height: 1em;
-          border-radius: 1px;
+          border-radius: 2px;
           transform: scale(0);
           transition: 120ms transform ease-in-out;
           background: url(${check});
@@ -78,7 +79,7 @@ const FiltersWrapper = styled.div`
         }
 
         &:checked::before {
-          transform: scale(1);
+          transform: scale(1.1);
         }
 
         &:hover {
@@ -87,62 +88,97 @@ const FiltersWrapper = styled.div`
       }
     }
   }
+
+  @media (min-width: 768px) {
+
+    button {
+
+      img {
+        margin-left: 16px;
+      }
+    }
+
+    .filters {
+      position: absolute;
+      top: 36px;
+      left: 0;
+      transform: translateX(-20%);
+      width: 192px;
+      height: 128px;
+      border-radius: 8px;
+      padding: 24px;
+      z-index: 1;
+      background-color: ${({theme}) => theme.colors.checkboxBox};
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 4px 14px 4px rgb(0, 0, 0, 0.15);
+
+      label {
+        cursor: pointer;
+
+        input[type="checkbox"] {
+          cursor: pointer;
+        }
+      }
+    }
+  }
 `;
 
 const arrowRotate = {
-  transform: "rotate(180deg)",
+    transform: "rotate(180deg)",
 };
 
 const Filters = observer(function Filters() {
-  const [filtersOpen, setFiltersOpen] = useState(false);
+    const [filtersOpen, setFiltersOpen] = useState(false);
+    const {filters, filtersChange} = useStore();
+    const width = useWindowWidth();
 
-  const { filters, filtersChange } = useStore();
-
-  return (
-    <FiltersWrapper>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          setFiltersOpen(!filtersOpen);
-        }}
-      >
-        Filter
-        <img
-          src={arrow}
-          alt="arrow-icon"
-          style={filtersOpen ? arrowRotate : null}
-        />
-      </button>
-      {filtersOpen ? (
-        <div className="filters">
-          <label>
-            <input
-              type="checkbox"
-              checked={filters.draft}
-              onChange={() => filtersChange("draft")}
-            />
-            Draft
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              checked={filters.pending}
-              onChange={() => filtersChange("pending")}
-            />
-            Pending
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              checked={filters.paid}
-              onChange={() => filtersChange("paid")}
-            />
-            Paid
-          </label>
-        </div>
-      ) : null}
-    </FiltersWrapper>
-  );
+    return (
+        <FiltersWrapper>
+            <button
+                onClick={(e) => {
+                    e.preventDefault();
+                    setFiltersOpen(!filtersOpen);
+                }}
+            >
+                {width >= 768 ? "Filter by status" : "Filter"}
+                <img
+                    src={arrow}
+                    alt="arrow-icon"
+                    style={filtersOpen ? arrowRotate : null}
+                />
+            </button>
+            {filtersOpen ? (
+                <div className="filters">
+                    <label>
+                        <input
+                            type="checkbox"
+                            checked={filters.draft}
+                            onChange={() => filtersChange("draft")}
+                        />
+                        Draft
+                    </label>
+                    <label>
+                        <input
+                            type="checkbox"
+                            checked={filters.pending}
+                            onChange={() => filtersChange("pending")}
+                        />
+                        Pending
+                    </label>
+                    <label>
+                        <input
+                            type="checkbox"
+                            checked={filters.paid}
+                            onChange={() => filtersChange("paid")}
+                        />
+                        Paid
+                    </label>
+                </div>
+            ) : null}
+        </FiltersWrapper>
+    );
 });
 
 export default Filters;

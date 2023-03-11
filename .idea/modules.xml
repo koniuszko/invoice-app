@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/invoice-app.iml" filepath="$PROJECT_DIR$/.idea/invoice-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../invoice-app-server/.idea/invoice-app-server.iml" filepath="$PROJECT_DIR$/../invoice-app-server/.idea/invoice-app-server.iml" />
     </modules>
   </component>
 </project>
