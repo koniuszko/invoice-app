@@ -45,7 +45,7 @@ const NewFormButtonsWrapper = styled.div`
   }
 
   @media (min-width: 768px) {
-    margin-top: 48px;
+    margin: 48px 0 24px;
     width: 100%;
     height: 48px;
     padding: 0;

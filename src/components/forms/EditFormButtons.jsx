@@ -64,7 +64,6 @@ export default function EditFormButtons({saveChanges}) {
     return (
         <EditFormButtonsWrapper>
             <div className="buttons">
-                {/*<Link to={`/invoices/preview/${params.id}`}>*/}
                 <button
                     onClick={(e) => {
                         e.preventDefault();
@@ -72,7 +71,6 @@ export default function EditFormButtons({saveChanges}) {
                     }}
                     className="cancel_btn">Cancel
                 </button>
-                {/*</Link>*/}
                 <Link to={`/`}>
                     <button
                         onClick={(e) => {

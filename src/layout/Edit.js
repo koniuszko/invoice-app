@@ -5,15 +5,17 @@ import EditForm from "../components/EditForm";
 import BackButton from "../components/BackButton";
 import {useParams} from "react-router-dom";
 import {useWindowWidth} from "@react-hook/window-size";
+import {useStore} from "../context/context";
 
 const EditWrapper = styled.div`
   width: 100%;
-  margin-top: 104px;
+  margin-top: 72px;
+  padding: 24px;
   position: absolute;
   left: 0;
   top: 0;
   z-index: 999;
-  background-color: ${({theme}) => theme.colors.background};
+  background-color: ${({theme}) => theme.colors.formBackground};
 
   @media (min-width: 768px) {
     margin-top: 0;
@@ -88,11 +90,14 @@ const EditWrapper = styled.div`
 `;
 
 function Edit() {
+    const {setEditModalOpen} = useStore();
+
     const width = useWindowWidth();
     const params = useParams();
     return (
         <EditWrapper>
-            {width >= 768 ? null : <BackButton path={`/invoices/preview/${params.id}`}/>}
+            {width >= 768 ? null :
+                <BackButton setModalOpen={setEditModalOpen} path={`/invoices/preview/${params.id}`}/>}
             <EditForm/>
         </EditWrapper>
     );

@@ -73,7 +73,7 @@ const Preview = observer(function Preview() {
         <Loader/>
     ) : (
         <PreviewWrapper>
-            <BackButton path={"/"}/>
+            <BackButton setModalOpen={null}/>
             <StatusBar id={invoice._id} status={invoice.status} markAsPaid={markAsPaid}
                        setDeleteModalOpen={setDeleteModalOpen}/>
             <PreviewInvoice invoice={invoice}/>
