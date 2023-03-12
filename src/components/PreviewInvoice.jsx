@@ -140,7 +140,7 @@ const PreviewInvoiceWrapper = styled.div`
       font-size: 16px;
     }
 
-    .invoice-adress {
+    .invoice-address {
       text-align: right;
     }
 
@@ -227,12 +227,13 @@ const PreviewInvoiceWrapper = styled.div`
         grid-template-columns: 276px 30px 128px 137px;
       }
 
-      &-title {
-        grid-template-columns: 276px 30px 128px;
+      &-item {
+        &-title {
+          grid-template-columns: 276px 30px 128px;
+        }
       }
     }
   }
-}
 `;
 
 function PreviewInvoice({invoice}) {
