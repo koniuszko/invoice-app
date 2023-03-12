@@ -88,6 +88,11 @@ const EditWrapper = styled.div`
       margin: 0;
     }
   }
+  @media (min-width: 1440px) {
+    left: 83px;
+    top: 0;
+    z-index: 9;
+  }
 `;
 
 function Edit() {

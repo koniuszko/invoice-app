@@ -23,13 +23,8 @@ const AddWrapper = styled.div`
     background-color: rgb(0, 0, 0, 0.6);
   }
   @media (min-width: 1440px) {
-    margin-top: 0;
-    padding: 0;
-    position: absolute;
     left: 83px;
     top: 0;
-    width: 100vw;
-    background-color: rgb(0, 0, 0, 0.6);
     z-index: 9;
   }
 `;

@@ -216,6 +216,23 @@ const PreviewInvoiceWrapper = styled.div`
       }
     }
   }
+  @media (min-width: 1440px) {
+    width: 730px;
+    padding: 48px;
+
+    .invoice-items {
+      width: 634px;
+
+      &-header {
+        grid-template-columns: 276px 30px 128px 137px;
+      }
+
+      &-title {
+        grid-template-columns: 276px 30px 128px;
+      }
+    }
+  }
+}
 `;
 
 function PreviewInvoice({invoice}) {

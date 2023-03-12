@@ -106,9 +106,9 @@ const FormWrapper = styled.div`
   }
 
   @media (min-width: 768px) {
-    width: 616px;
+    width: 636px;
     background-color: ${({theme}) => theme.colors.formBackground};
-    padding: 56px 56px 0;
+    padding: 56px 56px 0 76px;
     margin-top: 0;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;

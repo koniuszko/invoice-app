@@ -33,6 +33,9 @@ const StatusBarWrapper = styled.div`
       margin-right: 16px;
     }
   }
+  @media (min-width: 768px) {
+    width: 730px;
+  }
 `;
 
 function StatusBar({status, markAsPaid, setDeleteModalOpen, id}) {

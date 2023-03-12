@@ -24,6 +24,10 @@ const PreviewWrapper = styled.div`
     width: 688px;
     margin-top: 128px;
   }
+  @media (min-width: 1440px) {
+    width: 730px;
+    margin-top: 64px;
+  }
 `;
 
 const Preview = observer(function Preview() {

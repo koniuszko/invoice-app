@@ -68,7 +68,6 @@ const Wrapper = styled.header`
     width: 672px;
 
     .title {
-
       h1 {
         font-size: 32px;
         line-height: initial;
@@ -106,7 +105,6 @@ function Header({counter}) {
                     <p>{counter > 0 ? `${counter} invoices` : `No invoices`}</p>}
             </div>
             <Filters/>
-            {/*<Link to={"/invoices/add"}>*/}
             <button className="new_btn" onClick={(e) => {
                 e.preventDefault();
                 setAddModalOpen(true);
@@ -121,7 +119,6 @@ function Header({counter}) {
                 </div>
                 {width >= 768 ? "New Invoice" : "New"}
             </button>
-            {/*</Link>*/}
         </Wrapper>
     );
 }
