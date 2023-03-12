@@ -21,6 +21,12 @@ const DateFormWrapper = styled.div`
     background-color: ${({theme}) => theme.colors.dateBox};
     box-shadow: 0 0 10px 2px rgb(0, 0, 0, 0.1);
 
+    &__input-container {
+      input {
+        cursor: pointer;
+      }
+    }
+
     &__triangle {
       display: none;
     }
@@ -119,6 +125,7 @@ const DateFormWrapper = styled.div`
     position: relative;
     display: flex;
     align-items: center;
+    cursor: pointer;
 
     &-value {
       margin-right: auto;
@@ -172,6 +179,7 @@ const DateFormWrapper = styled.div`
     .react-datepicker-wrapper {
       width: 240px;
 
+
       input {
         width: 240px;
       }
@@ -193,6 +201,7 @@ const DateFormWrapper = styled.div`
       }
     }
   }
+
 `;
 
 function DateForm({invoice, setInvoice, setDateFormIsValid, isChecking}) {
@@ -241,7 +250,7 @@ function DateForm({invoice, setInvoice, setDateFormIsValid, isChecking}) {
         <DateFormWrapper>
             <div className="flex_item">
                 <label className="date_label">Invoice Date</label>
-                <div className="containter">
+                <div className="container">
                     <div className="calendar"></div>
                 </div>
                 <DatePicker

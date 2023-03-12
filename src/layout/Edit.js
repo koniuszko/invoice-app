@@ -78,7 +78,6 @@ const EditWrapper = styled.div`
       outline: 1px solid ${({theme}) => theme.colors.errorRed};
     }
 
-
     .half, .third {
       width: 152px;
     }

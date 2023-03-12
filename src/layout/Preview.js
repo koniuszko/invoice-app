@@ -14,9 +14,6 @@ import Edit from "./Edit";
 import {useStore} from "../context/context";
 import {observer} from "mobx-react-lite";
 
-const url = "http://localhost:3030";
-// const url = "https://invoice-backend.azurewebsites.net";
-
 const PreviewWrapper = styled.div`
   width: 330px;
   margin-top: 104px;
@@ -38,7 +35,7 @@ const Preview = observer(function Preview() {
     const params = useParams();
     const width = useWindowWidth();
 
-    const {editModalOpen} = useStore();
+    const {editModalOpen, url} = useStore();
     useEffect(() => {
         axios
             .get(`${url}/invoices/preview/${params.id}`)

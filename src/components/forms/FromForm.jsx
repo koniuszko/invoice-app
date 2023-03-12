@@ -69,7 +69,7 @@ export default function FromForm({invoice, setInvoice, setFromFormIsValid}) {
         <FromFormWrapper>
             <label className="street">
                 <p className={streetError ? "label-name--error" : "label-name"}>
-                    Street Adress
+                    Street Address
                     {streetError ? (
                         <span className="error-message">can't be empty</span>
                     ) : null}

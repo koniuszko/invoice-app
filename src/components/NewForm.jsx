@@ -13,9 +13,7 @@ import Loader from "./Loader";
 
 import addDays from "date-fns/addDays";
 import Errors from "./forms/Errors";
-
-const url = "http://localhost:3030";
-// const url = "https://invoice-backend.azurewebsites.net";
+import {useStore} from "../context/context";
 
 const FormWrapper = styled.div`
   width: 330px;
@@ -203,7 +201,9 @@ function NewForm() {
         project_description: "",
         item_list: [],
     });
-    const [adress, setAdress] = useState();
+    const [address, setAddress] = useState();
+
+    const {url} = useStore();
 
     useEffect(() => {
         if (isChecking) {
@@ -235,9 +235,9 @@ function NewForm() {
 
     useEffect(() => {
         axios
-            .get(`${url}/adress/`)
+            .get(`${url}/address/`)
             .then((response) => {
-                setAdress({
+                setAddress({
                     city: response.data[0].city,
                     street: response.data[0].street,
                     postcode: response.data[0].postcode,
@@ -249,21 +249,21 @@ function NewForm() {
     }, []);
 
     const saveInvoice = () => {
-        setIsChecking(true);
         if (isNewFormValid) {
             axios
-                .post(`${url}/invoices/add/pending`, {...invoice, ...adress})
+                .post(`${url}/invoices/add/pending`, {...invoice, ...address})
                 .then((response) => {
                     console.log(response.data);
                     window.location = '/';
                 })
                 .catch((error) => console.log(error));
         }
+        setIsChecking(true);
     };
 
     const saveAsDraft = () => {
         axios
-            .post(`${url}/invoices/add/draft`, {...invoice, ...adress})
+            .post(`${url}/invoices/add/draft`, {...invoice, ...address})
             .then((response) => {
                 console.log(response.data);
                 window.location = "/"
@@ -279,8 +279,8 @@ function NewForm() {
             <form>
                 <p className="purple">Bill From</p>
                 <FromForm
-                    invoice={adress}
-                    setInvoice={setAdress}
+                    invoice={address}
+                    setInvoice={setAddress}
                     setFromFormIsValid={setFromFormIsValid}
                 />
                 <p className="purple">Bill To</p>

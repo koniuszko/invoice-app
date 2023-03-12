@@ -8,6 +8,8 @@ export function createStore() {
         },
         addModalOpen: false,
         editModalOpen: false,
+        url: "https://invoice-app-server-lnkr.onrender.com",
+        // url = "http://localhost:3030",
 
         themeSwitch() {
             this.theme = localStorage.getItem("theme");

@@ -12,9 +12,6 @@ import Add from "./Add";
 import {useStore} from "../context/context";
 import {observer} from "mobx-react-lite";
 
-const url = "http://localhost:3030";
-// const url = "https://invoice-backend.azurewebsites.net";
-
 const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -25,10 +22,9 @@ const Main = observer(function Main() {
     const [isLoading, setIsLoading] = useState(true);
     const [counter, setCounter] = useState(0);
     const [invoices, setInvoices] = useState([]);
-    // const [addModalOpen, setAddModalOpen] = useState(false)
 
-    const {addModalOpen, setAddModalOpen} = useStore();
-    
+    const {addModalOpen, setAddModalOpen, url} = useStore();
+
     useEffect(() => {
         axios
             .get(`${url}/invoices/`)

@@ -145,7 +145,7 @@ function ToForm({invoice, setInvoice, setToFormIsValid, isChecking}) {
             </label>
             <label className="street">
                 <p className={clientStreetError ? "label-name--error" : "label-name"}>
-                    Street Adress
+                    Street Address
                     {clientStreetError ? (
                         <span className="error-message">can't be empty</span>
                     ) : null}

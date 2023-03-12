@@ -253,7 +253,7 @@ function PreviewInvoice({invoice}) {
                 </h2>
                 <p>{invoice.project_description}</p>
             </div>
-            <div className="invoice-adress">
+            <div className="invoice-address">
                 <p>{invoice.street}</p>
                 <p>{invoice.city}</p>
                 <p>{invoice.postcode}</p>

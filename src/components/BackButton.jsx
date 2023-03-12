@@ -1,4 +1,3 @@
-import {Link} from "react-router-dom";
 import styled from "styled-components";
 import arrow from "../assets/icon-arrow-left.svg";
 

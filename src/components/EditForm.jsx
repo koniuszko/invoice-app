@@ -13,11 +13,7 @@ import FromForm from "./forms/FromForm";
 import ItemsList from "./forms/ItemsList";
 import Loader from "./Loader";
 import Errors from "./forms/Errors";
-import toForm from "./forms/ToForm";
 import {useStore} from "../context/context";
-
-const url = "http://localhost:3030";
-// const url = "https://invoice-backend.azurewebsites.net";
 
 const EditFormWrapper = styled.div`
   margin-top: 24px;
@@ -256,12 +252,11 @@ const EditFormWrapper = styled.div`
 function EditForm() {
     const [isLoading, setIsLoading] = useState(true);
     const [invoice, setInvoice] = useState();
-    const [modalOpen, setModalOpen] = useState(false);
 
     const [isEditFormValid, setIsEditFormValid] = useState(false);
     const [isChecking, setIsChecking] = useState(false);
 
-    const [fromFormIsValid, setFromFormIsValid] = useState(true);
+    const [fromFormIsValid, setFromFormIsValid] = useState(false);
     const [toFormIsValid, setToFormIsValid] = useState(false);
     const [dateFormIsValid, setDateFormIsValid] = useState(false);
     const [itemListIsValid, setItemListIsValid] = useState(false);
@@ -271,29 +266,30 @@ function EditForm() {
 
     const params = useParams();
 
-    const {setEditModalOpen} = useStore();
+    const {setEditModalOpen, url} = useStore();
 
     useEffect(() => {
-        if (isChecking) {
-            if (fromFormIsValid && toFormIsValid && dateFormIsValid) {
-                setFieldsValid(true);
-            } else {
-                setFieldsValid(false);
-            }
+
+        if (fromFormIsValid && toFormIsValid && dateFormIsValid) {
+            setFieldsValid(true);
+        } else {
+            setFieldsValid(false);
+
         }
     }, [fromFormIsValid, toFormIsValid, dateFormIsValid]);
 
     useEffect(() => {
-        if (isChecking) {
-            if (itemListIsValid) {
-                setItemsValid(true);
-            } else {
-                setItemsValid(false);
-            }
+
+        if (itemListIsValid) {
+            setItemsValid(true);
+        } else {
+            setItemsValid(false);
+
         }
     }, [itemListIsValid]);
 
     useEffect(() => {
+        setIsChecking(true)
         if (fromFormIsValid && toFormIsValid && dateFormIsValid && itemListIsValid) {
             setIsEditFormValid(true);
         } else {
@@ -312,7 +308,6 @@ function EditForm() {
     }, []);
 
     const saveChanges = () => {
-        setIsChecking(true);
         if (isEditFormValid) {
             axios
                 .put(`${url}/invoices/edit/${params.id}`, invoice)

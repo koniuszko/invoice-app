@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import React from "react";
-import {Link} from "react-router-dom";
 import {useWindowWidth} from '@react-hook/window-size'
 
 import Filters from "./Filters";
