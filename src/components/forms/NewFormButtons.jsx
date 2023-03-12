@@ -91,6 +91,7 @@ export default function NewFormButtons({saveInvoice, saveAsDraft}) {
             <button
                 onClick={(e) => {
                     e.preventDefault();
+
                     saveInvoice();
                 }}
                 className="send_btn"

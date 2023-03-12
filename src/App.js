@@ -38,18 +38,8 @@ const App = observer(function App() {
                             exact
                         />
                         <Route
-                            path={"/invoices/add"}
-                            element={<Add/>}
-                        />
-                        <Route
                             path={"/invoices/preview/:id"}
                             element={<Preview/>}
-                            exact
-                        />
-                        <Route
-                            path={"/invoices/edit/:id"}
-                            element={<Edit/>}
-                            exact
                         />
                     </Routes>
                 </Router>

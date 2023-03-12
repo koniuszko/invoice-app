@@ -177,7 +177,7 @@ const FormWrapper = styled.div`
 `;
 
 function NewForm() {
-    const [isNewFormValid, setIsNewFormValid] = useState(false);
+    const [isNewFormValid, setIsNewFormValid] = useState(true);
     const [isChecking, setIsChecking] = useState(false);
 
     const [fromFormIsValid, setFromFormIsValid] = useState(true);
@@ -248,6 +248,7 @@ function NewForm() {
             .catch((error) => console.log(error));
     }, []);
 
+
     const saveInvoice = () => {
         if (isNewFormValid) {
             axios
@@ -259,7 +260,8 @@ function NewForm() {
                 .catch((error) => console.log(error));
         }
         setIsChecking(true);
-    };
+    }
+
 
     const saveAsDraft = () => {
         axios

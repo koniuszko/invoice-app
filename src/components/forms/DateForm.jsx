@@ -71,7 +71,7 @@ const DateFormWrapper = styled.div`
 
   .container {
     position: relative;
-    width: 330px;
+    width: 100%;
   }
 
   .calendar {
