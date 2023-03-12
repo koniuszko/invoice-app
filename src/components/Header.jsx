@@ -89,6 +89,10 @@ const Wrapper = styled.header`
       }
     }
   }
+  @media (min-width: 1440px) {
+    margin-top: 72px;
+    width: 730px;
+  }
 `;
 
 function Header({counter}) {

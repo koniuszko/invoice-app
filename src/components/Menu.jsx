@@ -91,6 +91,59 @@ const Aside = styled.aside`
       padding: 24px 32px;
     }
   }
+  @media (min-width: 1440px) {
+    width: 103px;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+
+    .bg {
+      width: 103px;
+      height: 103px;
+      d
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: auto;
+
+    }
+
+    .bg::after {
+      width: 103px;
+      height: 103px;
+    }
+
+    img {
+      aspect-ratio: 1/0.9;
+      z-index: 1;
+    }
+
+    .logo {
+      width: 40px
+    }
+
+    .switcher {
+      margin-right: 0;
+      margin-bottom: 32px;
+      width: 20px;
+      height: 20px;
+      background-size: contain;
+    }
+
+    .settings {
+      padding: 24px 32px;
+      border-left: none;
+      border-top: 1px solid #494e6e;
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+    }
+  }
 `;
 
 export function Menu() {
@@ -99,6 +152,7 @@ export function Menu() {
         <Aside>
             <div onClick={() => window.location = '/'} className="bg">
                 <img
+                    className="logo"
                     src={logo}
                     alt="logo"
                 />

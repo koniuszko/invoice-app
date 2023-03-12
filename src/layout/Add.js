@@ -18,12 +18,19 @@ const AddWrapper = styled.div`
   @media (min-width: 768px) {
     margin-top: 0;
     padding: 0;
-    position: absolute;
-    left: 0;
     top: 80px;
     width: 100vw;
     background-color: rgb(0, 0, 0, 0.6);
-    z-index: 999;
+  }
+  @media (min-width: 1440px) {
+    margin-top: 0;
+    padding: 0;
+    position: absolute;
+    left: 83px;
+    top: 0;
+    width: 100vw;
+    background-color: rgb(0, 0, 0, 0.6);
+    z-index: 9;
   }
 `;
 

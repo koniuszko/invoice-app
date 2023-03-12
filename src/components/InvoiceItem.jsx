@@ -110,6 +110,18 @@ const InvoiceItemWrapper = styled.li`
       right: 20px;
     }
   }
+  @media (min-width: 1440px) {
+    width: 730px;
+
+    .item-name {
+      left: 286px;
+    }
+
+    .item-date {
+      left: 135px;
+    }
+  }
+}
 `;
 
 function InvoiceItem({id, client, date, list, status}) {
