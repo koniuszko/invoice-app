@@ -269,27 +269,27 @@ function EditForm() {
     const {setEditModalOpen, url} = useStore();
 
     useEffect(() => {
+        if (isChecking) {
+            if (fromFormIsValid && toFormIsValid && dateFormIsValid) {
+                setFieldsValid(true);
+            } else {
+                setFieldsValid(false);
 
-        if (fromFormIsValid && toFormIsValid && dateFormIsValid) {
-            setFieldsValid(true);
-        } else {
-            setFieldsValid(false);
-
+            }
         }
     }, [fromFormIsValid, toFormIsValid, dateFormIsValid]);
 
     useEffect(() => {
-
-        if (itemListIsValid) {
-            setItemsValid(true);
-        } else {
-            setItemsValid(false);
-
+        if (isChecking) {
+            if (itemListIsValid) {
+                setItemsValid(true);
+            } else {
+                setItemsValid(false);
+            }
         }
     }, [itemListIsValid]);
 
     useEffect(() => {
-        setIsChecking(true)
         if (fromFormIsValid && toFormIsValid && dateFormIsValid && itemListIsValid) {
             setIsEditFormValid(true);
         } else {
@@ -308,15 +308,18 @@ function EditForm() {
     }, []);
 
     const saveChanges = () => {
-        if (isEditFormValid) {
-            axios
-                .put(`${url}/invoices/edit/${params.id}`, invoice)
-                .then((response) => {
-                    console.log(response.data);
-                    window.location = `/invoices/preview/${params.id}`;
-                })
-                .catch((error) => console.log(error));
-        }
+        setIsChecking(true);
+        setTimeout(() => {
+            if (isEditFormValid) {
+                axios
+                    .put(`${url}/invoices/edit/${params.id}`, invoice)
+                    .then((response) => {
+                        console.log(response.data);
+                        window.location = `/invoices/preview/${params.id}`;
+                    })
+                    .catch((error) => console.log(error));
+            }
+        }, 500)
     };
 
     return isLoading ? (

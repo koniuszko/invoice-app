@@ -250,16 +250,22 @@ function NewForm() {
 
 
     const saveInvoice = () => {
-        if (isNewFormValid) {
-            axios
-                .post(`${url}/invoices/add/pending`, {...invoice, ...address})
-                .then((response) => {
-                    console.log(response.data);
-                    window.location = '/';
-                })
-                .catch((error) => console.log(error));
-        }
         setIsChecking(true);
+        console.log('sprawdzam')
+        setTimeout(() => {
+            if (isNewFormValid) {
+                console.log('idzie')
+                axios
+                    .post(`${url}/invoices/add/pending`, {...invoice, ...address})
+                    .then((response) => {
+                        console.log(response.data);
+                        window.location = '/';
+                    })
+                    .catch((error) => console.log(error));
+            }
+        }, 500)
+
+
     }
 
 
