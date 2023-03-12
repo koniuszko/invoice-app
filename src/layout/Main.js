@@ -28,7 +28,7 @@ const Main = observer(function Main() {
     // const [addModalOpen, setAddModalOpen] = useState(false)
 
     const {addModalOpen, setAddModalOpen} = useStore();
-
+    
     useEffect(() => {
         axios
             .get(`${url}/invoices/`)

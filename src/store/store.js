@@ -1,6 +1,6 @@
 export function createStore() {
     return {
-        theme: "dark",
+        theme: "",
         filters: {
             draft: true,
             pending: true,
@@ -10,7 +10,7 @@ export function createStore() {
         editModalOpen: false,
 
         themeSwitch() {
-            this.theme === "dark" ? (this.theme = "light") : (this.theme = "dark");
+            this.theme = localStorage.getItem("theme");
         },
 
         filtersChange(filter) {

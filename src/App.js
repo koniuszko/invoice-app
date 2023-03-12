@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useEffect} from "react";
+
 import {observer} from "mobx-react-lite";
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 
@@ -22,6 +23,7 @@ const Wrapper = styled.div`
 `;
 
 const App = observer(function App() {
+
     const {theme} = useStore();
     return (
         <ThemeProvider theme={theme === "dark" ? dark : light}>

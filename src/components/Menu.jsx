@@ -1,3 +1,4 @@
+import {useEffect} from "react";
 import styled from "styled-components";
 import logo from "../assets/logo.svg";
 import sun from "../assets/icon-sun.svg";
@@ -102,7 +103,6 @@ const Aside = styled.aside`
     .bg {
       width: 103px;
       height: 103px;
-      d
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -148,6 +148,20 @@ const Aside = styled.aside`
 
 export function Menu() {
     const {theme, themeSwitch} = useStore();
+    
+    useEffect(() => {
+        if (localStorage.getItem("theme") === null) {
+            localStorage.setItem("theme", "dark")
+            themeSwitch()
+        }
+        themeSwitch()
+    }, []);
+
+    const switcherFunc = () => {
+        localStorage.getItem("theme") === "dark" ? localStorage.setItem("theme", "light") : localStorage.setItem("theme", "dark");
+        themeSwitch()
+    }
+
     return (
         <Aside>
             <div onClick={() => window.location = '/'} className="bg">
@@ -158,7 +172,8 @@ export function Menu() {
                 />
             </div>
             <div className="switcher">
-                <button onClick={() => themeSwitch()}>
+                <button onClick={() => switcherFunc()
+                }>
                     <img
                         src={theme === "dark" ? sun : moon}
                         alt="theme-icon"
