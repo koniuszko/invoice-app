@@ -14,6 +14,7 @@ import ItemsList from "./forms/ItemsList";
 import Loader from "./Loader";
 import Errors from "./forms/Errors";
 import toForm from "./forms/ToForm";
+import {useStore} from "../context/context";
 
 const url = "http://localhost:3030";
 // const url = "https://invoice-backend.azurewebsites.net";
@@ -200,6 +201,8 @@ function EditForm() {
 
     const params = useParams();
 
+    const {setEditModalOpen} = useStore();
+
     useEffect(() => {
         if (isChecking) {
             if (fromFormIsValid && toFormIsValid && dateFormIsValid) {
@@ -226,7 +229,7 @@ function EditForm() {
         } else {
             setIsEditFormValid(false);
         }
-    }, [fromFormIsValid, toFormIsValid, dateFormIsValid, itemListIsValid]);
+    }, [invoice]);
 
     useEffect(() => {
         axios
@@ -254,7 +257,7 @@ function EditForm() {
     return isLoading ? (
         <Loader/>
     ) : (
-        <EditFormWrapper className={modalOpen ? "disabled" : ""}>
+        <EditFormWrapper>
             <h1>
                 Edit <span className="id-purple">#</span>
                 {invoice._id.slice(-6)}

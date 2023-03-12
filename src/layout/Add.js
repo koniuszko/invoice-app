@@ -17,6 +17,7 @@ const AddWrapper = styled.div`
 
   @media (min-width: 768px) {
     margin-top: 0;
+    padding: 0;
     position: absolute;
     left: 0;
     top: 80px;

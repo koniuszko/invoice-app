@@ -71,17 +71,15 @@ export default function EditFormButtons({saveChanges}) {
                     }}
                     className="cancel_btn">Cancel
                 </button>
-                <Link to={`/`}>
-                    <button
-                        onClick={(e) => {
-                            e.preventDefault();
-                            saveChanges();
-                        }}
-                        className="send_btn"
-                    >
-                        Save Changes
-                    </button>
-                </Link>
+                <button
+                    onClick={(e) => {
+                        e.preventDefault();
+                        saveChanges();
+                    }}
+                    className="send_btn"
+                >
+                    Save Changes
+                </button>
             </div>
         </EditFormButtonsWrapper>
     );

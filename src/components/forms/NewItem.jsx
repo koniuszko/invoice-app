@@ -45,7 +45,7 @@ const NewItemWrapper = styled.div`
 
     .name, .qty, .price, .total {
       input {
-        padding: 16px;
+        padding: 16px 10px;
         width: 100%;
       }
     }
